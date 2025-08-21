@@ -1,0 +1,74 @@
+---
+title: "Exercise Hierarchical models and testing"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+echo: false
+---
+
+## Format
+
+Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with. 
+
+## Time needed
+
+This exercise/computer lab is expected to **not** take more than eight hours to complete. We have given extra time for the handin since you are working with other things in parallel. Hand in your report on Monday Sept 16th the latest. If your report is not ready by Monday, send in what you have.
+
+## Peer-review
+
+You are to peer-review another student report. The purpose of this part is that you are to practice reading code made by someone else and practice giving constructive and helpful comments on code. 
+
+Limit your peer-review to comments on these four points: 
+
+1. the choice and justification of the model
+2. the method for estimation and its implementation
+3. the method for testing and the reliability of the results
+4. the readability of the report
+
+Which report to review is assigned by Ullrika. One report can receive several reviewers. You cannot do a review, until you submitted your own report. 
+
+## Grades
+
+Pass or Fail. To pass, the student must hand in their own report and provide a peer-review on another student report. Both reports must be of acceptable quality. 
+
+## Programming language
+
+You can use the language you prefer, but I recommend using *R* or *Python*. 
+
+## Problem: Evidence synthesis
+
+We are going to use a data set of a collection of randomised case-control studies of the effectiveness of descriptive social norms on hotel customers behavior to reuse their towels. 
+
+Read Scheibehenne et al. (2016) to understand why and how the studies were conducted. 
+
+Scheibehenne, B., Jamil, T., & Wagenmakers, E.-J. (2016). Bayesian Evidence Synthesis Can Reconcile Seemingly Inconsistent Results: The Case of Hotel Towel Reuse. Psychological Science, 27(7), 1043-1046. [https://journals.sagepub.com/doi/10.1177/0956797616644081](https://journals.sagepub.com/doi/10.1177/0956797616644081)
+
+You task is to formulate and justify a parametric model for testing the effectiveness of the intervention, estimate the model parameters and test if the intervention has an effect or not. 
+
+(@) The model should use an appropriate family distribution for the response variable, and
+
+(@) consider between study heterogeneity. 
+
+(@) Estimate parameters using maximum likelihood or Bayesian inference (choose of one them). Make a summary of the parameter values (no need to express variance of parameter estimates). 
+
+(@) Formulate hypotheses for the test of the effectiveness of the intervention referring to one or several parameters within the model. 
+
+(@) Test using maximum likelihood or Bayesian inference (the same framework you used for the estimation). You can write your own code **or use ready available functions in suitable packages**. 
+
+## Submit lab report on Canvas
+
+(1) Write your code so that it is clearly documented, and readable for someone else than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
+
+- Python in Jupyter Notebook on Google Colab 
+
+- R in Quarto on posit.cloud. 
+
+(2) Write your name and date in the heading of the report and, if applicable, the name of your collaborator. 
+
+(3) Upload the report in the assignment *Exercise: Hierarchical models and testing* on Canvas. 
+
+
+<!-- https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf?utm_source=web&utm_medium=web&utm_campaign=better_science -->

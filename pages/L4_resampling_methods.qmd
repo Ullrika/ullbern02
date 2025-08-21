@@ -1,0 +1,126 @@
+---
+title: "Lecture Resampling methods"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+    toc: true
+echo: false
+---
+
+```{r}
+#| message: false
+#| warning: false
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(latex2exp)
+library(lme4)
+library(ISLR2)
+```
+
+# Literature
+
+ISL: 5.1 and 5.2
+
+# Resampling methods
+
+Resampling involves fitting the same statistical method multiple times using different subsets of the training data. 
+
+Here we assume that predictions have the same variance (*homoscedasticity*), i.e. that $V(\hat{f}(x_0))$ is the same for all $x_0$.
+
+# Cross-validation 
+
+Cross-validation can be used to estimate the test error associated with a given statistical learning method in order to evaluate its performance, or to select the appropriate level of flexibility.
+
+The purpose is to estimate the variance of predictions for a new observation $\hat{V}(\hat{f}(x_0)) = \hat{V}(\hat{y}|x_0)$
+
+>Here, I focus on regression models. For classification models, the purpose is to estimate accuracy or other performance measures of classification models. 
+
+## Validation set
+
+Split data into a training set and a validation (or *hold-out* or *test*) set. Fit the model using the training set. Make predictions for the validation set and estimate the variance of a prediction as the Mean Square Error from the comparison between the predictions and observed values. 
+
+$$\hat{V}(\hat{f}(x_0)) = MSE_{test} = \frac{\sum_{i \in \text{test}} (y_i-\hat{y}_i)^2}{n_{test}}$$
+
+In general $MSE_{test} > MSE_{train}$
+
+A drawback with this method is that the model is trained on a smaller data set and the variance of predictions is derived from fewer values. 
+
+The estimated variance can change considerably for different splits into training and validation sets.
+
+## Leave-One-Out
+
+Hold out one observation $j$ from the data and fit the model on the remaining $n-1$ observations, and a prediction is made on the excluded observation, $\hat{y}_j$. The squared error for the hold-out observation is $MSE_j = (y_j-\hat{y}_j)^2$. 
+
+This can be repeated for all observations, where one is held out at a time. 
+
+We can estimate the variance of prediction for a data point not included in the training data set by taking the average of the errors from hold-out models, 
+
+$$\hat{V}(\hat{f}(x_0)) = \frac{\sum_{i = 1}^n MSE_i}{n}$$
+
+LOOCV is less biased compared to the validation set approach.
+
+An advantage is that it generates the same estimate of the variance in predictions.
+
+
+## K-fold cross validation
+
+The K-fold cross-validation approach is to split data into $K$ sets with equal sizes. Let the first set be the validation set, fit a model to the remaining data, and estimate the variance in predictions based on the hold-out set. 
+
+$$MSE_k = \frac{\sum_{i \in \text{set } k} (y_i-\hat{y}_i)^2}{n_{k}}$$
+
+Repeat for all $K$ sets. The average of the resulting $K$ estimates of the error is a good estimate of the variance of a new prediction
+
+$$\hat{V}(\hat{f}(x_0)) = \frac{\sum_{k = 1}^K MSE_k}{K}$$
+
+The Leave-K-Out has a computational advantage over Leave-One-Out. 
+
+# The bootstrap
+
+The bootstrap is often used to provide a measure of error for a quantity of interest, which could be a parameter or a model prediction. 
+
+The bootstrap emulates the process of obtaining new sample sets by sampling with replacement from the original data set. 
+
+The original data set (of size $n = 5$):
+
+$$\left(\{y_1,x_1\},\{y_2,x_2\},\{y_3,x_3\},\{y_4,x_4\},\{y_5,x_5\}\right)$$
+The *bootstrap* sample is a sample indexed with $b$
+
+$$z^{*b} =\left(\{y_2,x_2\},\{y_5,x_5\},\{y_3,x_3\},\{y_2,x_2\},\{y_3,x_3\}\right)$$
+
+For each bootstrap sample $b = 1,\ldots,B$, we fit a model and derive the quantity of interest. The result is a bootstrap sample of the quantity of interest $(q^{*1},q^{*2},\ldots,q^{*B})$
+
+The variance for the quantity of interest is estimated by the bootstrap sample variance 
+
+$$\hat{V}(\hat{q})^{*B} = \frac{\sum_{b = 1}^B (q^{*b}-\bar{q}^{*B})^2}{B-1}$$ 
+
+where $\bar{q}^{*B} = \frac{\sum_{b = 1}^B q^{*b}}{B}$ is the average of the bootstrap sample.
+
+The bootstrap estimated Standard Error for the quantity of interest is the square root of the bootstrap sample variance
+$$SE^{*B} = \sqrt{\hat{V}(\hat{q})^{*B}}$$
+
+::: {.callout-note}
+Since it can be computationally costly to perform bootstrapping, I recommend to start with a small number of samples, e.g. $B=100$ to test your code. Then choose a large number of B, e.g. 10 000, to get a good approximation of the variance. 
+:::
+
+> Note that cross-validation and bootstrapping can also be applied on classification models. 
+
+
+# Study questions
+
+(@) Give an example of a cross validation approach to estimate the variance of a prediction? 
+
+(@) Compare the advantages/disadvantages with the validation set approach, Leave-One-Out and K-fold cross validation. 
+
+(@) What is a bootstrap sample? 
+
+(@) Describe how to approximate the variance of a prediction using the bootstrap? 
+
+(@) Describe how to approximate the standard error of an estimated parameter using the bootstrap? 
+
+
+<!-- https://www.sumsar.net/blog/2015/04/the-non-parametric-bootstrap-as-a-bayesian-model/ -->

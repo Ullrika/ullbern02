@@ -1,0 +1,703 @@
+---
+title: "Lecture Generalised Linear Models"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+    toc: true
+echo: false
+---
+
+```{r}
+#| message: false
+#| warning: false
+library(readr)
+library(tidyr)
+library(ggplot2)
+library(latex2exp)
+library(rjags)
+library(bayesplot)
+library(gganimate)
+library(hexbin)
+```
+
+# Literature
+
+ISL: 4.2, 4.3, 4.6
+
+To learn more about maximum likelihood, generalised linear models and Bayesian inference, I recommend to consult 
+
+Extra material on maximum likelihood from [Taboga, Marco (2021). "Maximum likelihood estimation", Lectures on probability theory and mathematical statistics. Kindle Direct Publishing. Online appendix.](https://www.statlect.com/fundamentals-of-statistics/maximum-likelihood)
+
+Extra easy reading introducing GLM (although code is provided in R, the explanatory text is good)
+[Quebec Centre for Biodiversity Science Workshop Generalised linear models](https://r.qcbs.ca/workshop06/book-en/index.html)
+
+
+
+# Categorical predictors and interactions
+
+## Categorical independent variables or predictors
+
+A categorical predictor can be  treated as a factor (or dummy variable)
+
+$$X_1 = \left\{ \begin{array}{lr}
+        1 & \text{if category A}\\
+        0 & \text{if category not A}
+        \end{array}\right.$$
+
+A categorical predictor generates one regression model per level of the variable
+
+$$\beta_0+\beta_1x_{1} = \left\{ \begin{array}{lr}
+        \beta_0+\beta_1 & \text{if } x_1=1\\
+        \beta_0 & \text{if } x_1=0
+        \end{array}\right.$$
+
+## Interaction effects 
+
+An interaction between two independent variables can be modelled by adding a new variable which describes their interaction. 
+
+$$\beta_0+\beta_1x_{i1}+\beta_2x_{i2}+\beta_{12}x_{i1}x_{i2}$$
+
+> Interpreting the effect of an interaction must be done with care. As a general advice do it my comparing nested models, i.e. a model with (full model) and without (reduced model) the interaction term, instead of testing if the interaction term is different from zero in the full model. 
+
+# Generalising the linear model
+
+## The basic linear model
+
+The model 
+
+$$y_i=\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}+\varepsilon_i$$
+
+where $\varepsilon_i\sim N(0,\sigma^2)$
+
+can alternatively be written as
+
+$$Y|x_i\sim N(\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip},\sigma)$$
+
+or 
+
+$$Y|x_i\sim N(\mu(x_i|\beta_0,\beta_1,\ldots,\beta_p),\sigma)$$
+
+where $\mu(x_i|\beta_0,\beta_1,\ldots,\beta_p):=E(Y|x_i,\beta_0,\beta_1,\ldots,\beta_p)$ is the expected value of $Y$ for $x=x_i$ and parameters $\beta_0,\ldots,\beta_p$. 
+
+In this model, the response variable $Y$ is continuous and the model error is normally distributed with equal variance $\sigma^2$. 
+
+>For notation, I sometimes lump all parameters into one $\theta=(\beta_0,\beta_1,\ldots,\beta_p,\sigma)$. 
+
+::: {.callout-note}
+
+For certain statistical tests, one has to assume that errors/residuals are *independent*, i.e. that observations $(y_i,x_i)$ are independent of each other. 
+
+:::
+
+## From normal to any distribution family for the response variable
+
+What if the response variable is 
+
+- categorical, e.g. succeed/fail or gene expressions, or 
+
+- discrete, e.g. a count of the number of individuals,
+
+- or some other continuous distribution? 
+
+## Logistic regression
+
+Consider a response variable with two categories, success or failure. 
+
+$$Y = \left\{ \begin{array}{lr}
+        1 & \text{if success}\\
+        0 & \text{if failure}
+        \end{array}\right.$$
+        
+The probability model for the response variable for a given value on the predictor can be a Bernoulli distribution
+
+$$Y|x_i \sim Be(p(x_i))$$ 
+where the logarithm of the odds-ratio (*logodds* or *logit*) of the probability-parameter in the Bernoulli-distribution can be written as a linear function of the predictors 
+
+$$log\left(\frac{p(x_i)}{1-p(x_i)}\right) = \underbrace{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}}_{linear \ term}$$
+
+This relationship can be transformed into
+
+$$\frac{p(x_i)}{1-p(x_i)} = e^{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}}$$
+and finally into an expression where the probability-parameter is a *logistic function* of the linear term: 
+
+$$p(x_i)=\frac{e^{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}}}{1+e^{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}}}$$
+
+Note that $E(Y|x_i)=p(x_i)$ 
+
+> A *link function* is a function that transforms the linear term into the expected value for the response variable
+
+This model for binary response is therefore known as *logistic regression*.
+
+
+
+## GLM Binomial response variable
+
+Let the $i$th observation be the number of successful trials among $n_i$ independent trials. The response variable can be modelled by a Binomial distribution 
+
+$$Y|x_i\sim Bin(n_i,p(x_i))$$
+
+The expected value of the proportion of successes is $E(Y|x_i)=p(x_i)$
+
+A *Binomial GLM* is created by transforming the expected value with the logit link function as before into the linear model. 
+
+$$ logit(p(x_i)) = log(p(x_i) / (1 - p(x_i))) = \beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$$
+
+> A logistic regression is a special case of Binomial GLM when there is only one trial per observation, i.e. n_i = 1. 
+
+
+## GLM Poisson response variable 
+
+Consider a discrete response variable that is a count where the outcome space consists of natural numbers starting from 0, i.e. $0, 1, 2, \ldots$ with no upper bound.
+
+A Poisson distribution is a suitable probability distribution of this type of response variable if the counts come from an even process where events occur with a fixed intensity, $\lambda$, events are independent, and events cannot occur at the same time. 
+
+Let the expected value of the response $Y$ be a function of the linear model of predictors
+
+$$\lambda(x_i)=e^{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}}$$
+
+When we log the expected value we get 
+
+$$log(\lambda(x_i))=\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$$
+A Poisson GLM has log as the *link function*
+$$Y|x_i\sim Po(\lambda(x_i))$$
+
+
+
+# The likelihood function
+
+The likelihood is the probability for observations of the response variable $Y$ under a given model and observed independent variables $x$. Assuming independence between observations the likelihood functions is a product:
+
+$$l(y|model,x) = Pr(y_1|model,x_1)\cdot Pr(y_2|model,x_2)\cdots Pr(y_n|model,x_n)$$
+
+::: callout-note
+
+Notations for the likelihood varies. Here I follow the convention in the ISL book which is to denote the likelihood with a small $l$ and the log likelihood as $log\ l$.
+
+Another notation is to use capital $L$ for the likelihood and small $l$ for the likelihood.  
+
+Here $log$ is the natural logarithm. 
+
+:::
+
+## Likelihood function for the logistic regression
+
+The likelihood function for logistic regression is 
+
+$$l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \prod_{i=1}^n \left[ p(x_i)I\{y_i=1\}+(1-p(x_i))I\{y_i=0\}\right]$$
+
+where $I\{\text{logical expression}\}$ is an identify function taking the value 1 if the logical expression is true and 0 otherwise. 
+
+Alternative way of writing it 
+
+$$l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \prod_{i=1}^n  p(x_i)^{y_i}(1-p(x_i))^{1-y_i}$$
+
+The product of values close to zero is a very small number. Instead, the likelihood is handled on the log scale, as the *log likelihood*
+
+$$log \ l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \sum_{i=1}^n y_i log(p(x_i))+(1-y_i)log(1-p(x_i))$$
+
+## Likelihood function for the Binomial GLM
+
+$$l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \prod_{i=1}^n  \frac{n_i!}{y_i!(n_i-y_i)!}p(x_i)^{y_i}(1-p(x_i))^{n_i-y_i}$$
+
+::: {.callout-note title="Show it!"}
+
+Derive the expression for the log likelihood for the Binomal GLM
+
+:::
+
+## Likelihood function for the Poisson GLM
+
+$$l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \prod_{i=1}^n \frac{e^{-\lambda(x_i)}\lambda(x_i)^{y_i}}{y_i!}$$
+
+where $log(\lambda(x_i))=\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$. 
+
+The log likelihood for the Poisson GLM is
+
+$$\begin{split} & \\ log\ l(y|\beta_0,\beta_1,\ldots,\beta_p,x) =  \sum_{i=1}^n\left[ -\lambda(x_i) + y_ilog(\lambda(x_i)) - log(y_i!)\right]= & \\ \sum_{i=1}^n\left[ -e^{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}} + y_i(\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}) - log(y_i!)\right] \end{split}$$
+
+
+# Likelihood based estimation 
+
+The two dominating principles to estimate parameters using the likelihood function are 
+
+- Bayesian inference, and
+
+- Maximum likelihood estimation
+
+ 
+Let us introduce $\theta$ as the notation for all parameters (to not be limited to the parameters in the linear model)
+
+
+
+## Bayesian estimation
+
+- Treat parameters as uncertain and unknown and express their uncertainty before including information from data using probability distributions (so called *prior* distribution)
+
+- Think of the likelihood as a model to sample from the observations given values on parameters (*sampling distribution*)
+
+- Update probability distributions for the parameters using Bayes rule
+
+$$f(\theta|y) = \frac{l(y|\theta)f(\theta)}{f(y)} = \frac{l(y|\theta)f(\theta)}{\int_{-\infty}^{\infty} l(y|\theta)f(\theta)d\theta}$$
+
+$f(\theta|y)$ is the *posterior* distribution for the parameters. 
+
+Since the denominator $f(y)$ is a constant, Bayes rule can be written as 
+
+$$f(\theta|y) \propto l(y|\theta)f(\theta)$$
+
+
+### Prior
+
+A prior is a probability distribution specified for the parameters. The parameters of a prior are referred to as hyper-parameters, to distinguish them from parameters of the statistical model). 
+
+An example. Let $p=1$ in a linear regression model. The prior for the slope parameter $\beta_1$ is set to be
+
+$$\beta_1\sim N(0,10)$$
+Here 0 and 10 are the values on hyper-parameters. 
+
+An alternative way to specify it is to write 
+
+$$\beta_1\sim N(\mu_{\beta_1},\sigma_{\beta_1}^2)$$
+where $\mu_{\beta_1}=0$ and $\sigma_{\beta_1}^2=10$. 
+
+<!-- We can then specify the prior for the intercept as $\beta_0\sim N(0,10)$ and standard deviation $\sigma$ as a truncated normal distribution with expected value 0. -->
+
+### Bayesian updating 
+
+Solving the equation for Bayes rule analytically quickly gets cumbersome. There are alternatives. 
+
+- Conjugate Bayesian models
+
+Simple statistical models have conjugate properties, where the posterior and prior are from the same family of distributions and updating is done by deriving new hyper-parameters for the posterior as a function of the hyper-parameters for the prior and summary statistics from data. [Wiki page on conjugate] priors(https://en.wikipedia.org/wiki/Conjugate_prior)
+
+::: {.callout-note title="The Beta-Binomial model"}
+The Beta-Binomial model is a good illustration of a Bayesian model with a conjugate prior.
+
+Prior: $p\sim Beta(\alpha,\beta)$
+
+Likelihood: $Y\sim Bin(n,p)$
+
+Posterior: $p|y\sim Beta(y+\alpha,n-y+\beta)$
+
+:::
+
+- Approximate Bayesian inference
+
+> There is no time to go through Approximate methods in this course.  
+
+Bayesian estimation can alternative be peformed by approximation of the posterior, examples of this are Variational Bayesian methods and Integrated Nested Laplace Approximation (INLA), or Approximate Bayesian Computation.
+
+- Markov Chain Monte Carlo (MCMC) sampling
+
+The simplest MCMC sampling is Bayesian updating performed by sampling from the posterior using Metropolis algorithm. 
+
+::: {.callout-note title="Metropolis algorithm"}
+
+0. Start with an arbitrary initial value of the parameter, and denote it $\theta_{current}$
+
+1. Randomly generate a proposed jump, $\Delta\theta \sim N(0,\sigma^2)$ and derive the proposed parameter as $\theta_{proposed} = \theta_{current}+\Delta\theta$. 
+
+2. Compute the probability of moving to the proposed value as 
+$$\begin{split} & \\ p_{move}=min\left(1,\frac{f(\theta_{proposed}|y)}{f(\theta_{current}|y)}\right) =& \\min\left(1,\frac{l(y|\theta_{proposed})f(\theta_{proposed})}{l(y|\theta_{current})f(\theta_{current})}\right) \end{split}$$
+
+3. Accept the proposed parameter value if a random value sampled from a [0,1] uniform distribution is less than $p_{move}$
+
+Repeat steps 1 to 3 until a sufficiently representative sample of the posterior has been generated. 
+
+Throw away a *burn-in* period of the sampling and keep the part where the algorithm has converged.
+:::
+
+
+The Metropolis algorithm (is a type of importance sampling) which can be combined with ways to generate proposals make the sampling more efficient, including Gibbs sampling and Hamiltonian Markov Chain (HMC).  
+
+It is useful to be able to program an MCMC. There has throughout the years been a range of software and platforms to support MCMC-sampling, such as BUGS, [JAGS](https://mcmc-jags.sourceforge.io/) and [stan](https://mc-stan.org/) (the latter being the most used today). 
+
+
+### A demonstration of Bayesian updating using MCMC sampling 
+
+```{r}
+df <- read_csv("../data/pollution_cleaneddata.csv")
+```
+
+```{r}
+jagsdata <- list(y = df$MORT, x = df$POOR-mean(df$POOR), n = nrow(df))
+```
+
+
+```{r}
+init_values <- function(){
+	list(beta0 = rnorm(1,0,100), beta1 = rnorm(1,0,10), sigma = abs(rnorm(1,0,10)))
+}
+
+params <- c("beta0", "beta1", "sigma")
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+#| output: false
+fit_lm1 <- jags.model(file="../data/lm.txt", data = jagsdata, inits = init_values, n.chains = 3, n.adapt = 1)
+```
+
+Trace plot showing how the convergence of the chains.
+
+```{r}
+#| message: false
+#| warning: false
+
+short.iter = 50
+model.samples <- coda.samples(fit_lm1, params, n.iter=short.iter)
+mcmc_trace(model.samples)
+
+```
+
+
+```{r}
+df_sam <- as.data.frame(model.samples[[1]][,c("beta0","beta1")])
+df_sam$iter=1:short.iter
+```
+
+
+Illustration of sampling of $\beta_1$ from one of the chains.
+
+```{r}
+ggplot(df_sam, aes(y=beta1,x=iter,colour="darkred")) + 
+  geom_point() + 
+  # Here comes the gganimate code
+  transition_states(
+    iter,
+    transition_length = 2,
+    state_length = 1
+  ) +
+  enter_fade() + 
+  exit_shrink() +
+  ease_aes('sine-in-out') +
+  shadow_mark(colour = 'darkgray') +
+  ylab(TeX("$\\beta_1$")) +
+  theme(legend.position = "none")
+```
+
+
+```{r}
+model.samples <- coda.samples(fit_lm1, params, n.iter=1e4)
+```
+Traceplot for $\beta_1$ showing convergence of the MCMC-chains.
+
+```{r}
+mcmc_trace(model.samples,pars = "beta1")
+```
+
+
+A scatter plot of the sampling $\beta_0$ and $\beta_1$ from one chain.
+
+```{r}
+ggplot(df_sam, aes(x=beta0,y=beta1,colour="darkred")) + 
+  geom_point() + 
+  # Here comes the gganimate code
+  transition_states(
+    iter,
+    transition_length = 2,
+    state_length = 1
+  ) +
+  enter_fade() + 
+  exit_shrink() +
+  ease_aes('sine-in-out') +
+  shadow_mark(colour = 'darkgray') +
+  xlab(TeX("$\\beta_0$")) +
+  ylab(TeX("$\\beta_1$")) +
+  theme(legend.position = "none")
+```
+
+
+A scatter plot of the sampling of $\beta_0$ and $\beta_1$ from one chain with density curves.
+
+```{r}
+
+ggplot(as.data.frame(model.samples[[1]]), aes(x=beta0, y=beta1) ) +
+#  stat_bin_hex(bins = 20) +
+#  scale_fill_continuous(type = "gradient") #+
+  geom_density_2d() +
+  geom_point(data=df_sam, aes(x=beta0, y=beta1), colour="lightgray") +
+  xlab(TeX("$\\beta_0$")) +
+  ylab(TeX("$\\beta_1$")) 
+```
+
+### Two versions of Bayesian inference
+
+The use and perception of prior divide Bayesian community of modellers into two groups. Those that would like their model to be 
+
+- Robust from choice of prior - "prior should not matter or at least not damage anything" 
+
+and those with the view that 
+
+- Prior contains useful information - "prior can matter and can be used to capture expert knowledge" 
+
+## Maximum likelihood estimation
+
+- Treat parameters as unknown for which there is a true value.
+
+- Think of the likelihood as a function of the parameters, where observations are fixed, e.g. $l(\theta)$
+
+- Find the parameter values that maximises the log of the likelihood function, i.e. that *makes the data as likely as possible*.
+
+$$\hat{\theta} = \underset{\theta}{\mathrm{argmax}} \ log \ l(\theta)$$
+
+# Parametric inference - estimating parameters
+
+## Parameters and variables
+
+Variables are quantities taking different values. A variable can describe 
+
+- the state of a dynamic system
+
+- variability within a statistical population
+
+A parameter is a quantity defined within a model. A parameter has a true fixed value, but it is usually unknown to us. 
+
+- In Bayesian inference, uncertainty about a parameter is modelled by a probability distribution. It is therefore, technically modelled as random variable.
+
+## Parametric inference - understanding associations
+
+Is there an influence from dependent variable $x_1$? 
+
+See if $\beta_1$ is different from 0? 
+
+## Bayesian estimation of parameters
+
+From the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept $\beta_0$ and $\beta_1$, the probability that the slope is greater than 0. 
+
+
+- Summary of the posteriors 
+
+e.g. posterior means and posterior standard deviations
+
+
+```{r}
+#| echo: true
+summary(model.samples)[[1]]
+```
+
+- Posterior for $\beta_1$
+
+```{r}
+posterior <- as.matrix(model.samples)
+
+plot_title <- ggtitle("Posterior distributions",
+                      "with medians and 95% intervals")
+mcmc_areas(posterior,
+           pars = "beta1",
+           prob = 0.95) + plot_title
+```
+
+Summary of the posterior for $\beta_1$: 
+
+- 95% (Bayesian) probability interval (alt credible interval)
+
+```{r}
+#| echo: true
+quantile(posterior[,"beta1"],prob=c(0.025,0.975))
+```
+
+- Probability $\beta_1 > 0$ is obviously close to 1
+
+```{r}
+#| echo: true
+mean(posterior[,"beta1"]>0)
+```
+
+
+## Maximum likelihood estimation of parameters
+
+How to get uncertainty estimates when using maximum likelihood to estimate parameters? 
+
+One approach is to look at the profile likelihood function.
+
+Let $\theta_0$ be the true parameter value. The ratio of the likelihoods $\frac{L(\hat{\theta})}{L(\theta_0)}$ should be close to 1. 
+
+Wilk's theorem states that the difference in the log likelihoods is $\chi2$-distributed with one degrees of freedom: 
+
+$$2\left( log\ l(\hat{\theta}) - log\ l(\theta_0)\right) \sim \chi2(1)$$
+
+An approximate $(1-\alpha)$% *confidence region* for parameter (vector) $\theta$ is the set of values satisfying 
+
+$$\left[ \theta: 2 \left( log\ l(\hat{\theta}) - log\ l(\theta_0)\right) \leq \chi2_{\alpha}(1)\right]$$
+where $\chi2_{\alpha}(1)$ is a quantile with $\alpha$ probability above the value. 
+
+This can be expanded to a region for $k$ parameters, for which the degrees of freedom is $k$.
+
+
+Density function for a normal distribution 
+
+$$f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
+
+
+
+$$\begin{split}  log\ l(\beta_0,\beta_1,\sigma) = log\ \left( \frac{1}{\sqrt{(2\pi \sigma^2)^n}}e^{-\frac{\sum_{i=1}^n (y_i-\beta_0-\beta_1x_{i1})^2}{2\sigma^2}}\right) =  & \\ -\frac{n}{2}log(2\pi) - \frac{n}{2}log(\sigma^2)- \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i-\beta_0-\beta_1x_{i1})^2\end{split}$$
+
+
+```{r}
+calc_loglik <- function(beta1){
+beta0 = mean(df$MORT) - beta1*mean(df$POOR)
+sigma = sqrt(sum((df$MORT-(beta0+beta1*df$POOR))^2)/(nrow(df)-2))
+sum(dnorm(df$MORT,beta0+beta1*df$POOR,sigma,log=TRUE))
+}
+```
+
+```{r}
+mod <- lm(MORT~POOR,df)
+```
+
+
+```{r}
+nn = 200
+loglik <- beta1_val <- seq(6-5,6+5,length.out=nn)
+for(j in 1:nn){
+  loglik[j] <- calc_loglik(beta1_val[j])
+}
+
+hat_beta1 <- optimize(f=calc_loglik,c(0,10),maximum=TRUE)$maximum
+df_ml <- data.frame(loglik=loglik,beta1=beta1_val)
+alpha = 0.05
+q = qchisq(1-alpha/2,1)/2
+ci <- confint(mod)
+```
+
+
+
+```{r}
+ci_lm <- beta1_val[range(which( (2*(max(loglik)-loglik)) <= q))]
+```
+
+
+```{r}
+ggplot(df_ml,aes(x=beta1,y=loglik)) +
+geom_line() +
+annotate("point",x=hat_beta1,y=calc_loglik(hat_beta1),colour="darkred") +
+geom_hline(yintercept = calc_loglik(hat_beta1)-q/2,linetype = "dashed", colour="#3366FF") + 
+annotate("segment",x=ci_lm[1],y=min(loglik),yend=calc_loglik(ci_lm[1]),colour="lightgreen",linetype="dashed",linewidth=2) +
+annotate("segment",x=ci_lm[2],y=min(loglik),yend=calc_loglik(ci_lm[2]),colour="lightgreen",linetype="dashed",linewidth=2) +
+xlab(TeX("$\\beta_1$")) +
+ylab("log likelihood") +
+ggtitle("log likelihood function")
+```
+
+
+- 95%th confidence interval 
+
+```{r}
+ci_lm 
+```
+
+# Predictive inference - making predictions
+
+## With and without parameter uncertainty
+
+Predictions of new observations of the response variable can be made *with* or *without* consideration of uncertainty in parameters. 
+
+### With uncertainty about a parameter can be provided by 
+
+  - the posterior probability distribution $f(\theta|data)$ (when using Bayesian estimation). The resulting distribution for a new observation is the *predictive posterior* $f(y_0|data)=\int f(y_0|\theta)f(\theta|data)d\theta$ 
+
+  - a confidence region $LB<\theta<UB$ (when using maximum likelihood estimation)
+
+Propagation of uncertainty expressed by probability distribution to the prediction can be made by *Monte Carlo simulation*. 
+
+Propagating bounds on intervals representing uncertainty about parameters is **NOT** recommended since there is no guarantee that the bounds of the prediction has the same meaning, probability, or level of confidence as the bounds for the parameters. Therefore, confidence regions are often transformed into probability distributions before propagation. An alternative is to use *bootstrap* to generate samples of the quantity of interest (I will go through bootstrap in the resampling lecture).  
+
+### Without parameter uncertainty 
+
+A point estimate $\hat{\theta}$ is a single value for the estimate of parameter $\theta$, which can be derived as 
+
+  - the posterior mean $E(\theta|data)$ (when using Bayesian estimation)
+
+  - the maximum likelihood estimate $\hat{\theta}$ (when using maximum likelihood estimation)
+
+## Predicting from a logistic regression
+
+Here, I describe making predictions given a point estimate of each parameter. 
+
+$$\hat{p}(x_0) = \frac{e^{\hat{\beta}_0+\hat{\beta}_1x_{01}+\ldots+\hat{\beta}_px_{0p}}}{1+e^{\hat{\beta}_0+\hat{\beta}_1x_{01}+\ldots+\hat{\beta}_px_{0p}}}$$
+
+$$\hat{y}|x_0 \sim Be(\hat{p}(x_0))$$
+
+::: {.callout-note}
+
+We can sample from a Bernoulli distribution using the quantile method:
+
+1. Draw a value $t$ from a [0,1] uniform distribution 
+
+2. Let $\hat{y}|x_0=1$ if $t \leq \hat{p}(x_0)$ and zero otherwise. 
+
+> Note that this is not the same as making a classification (compare to the ROC-methodology in lecture 1)
+
+:::
+
+## Predicting from a GLM Binomial 
+
+The same probability as for logistic regression but where a prediction is generated by
+
+$$\hat{y}|x_0 \sim Bin(n_i,\hat{p}(x_i))$$
+
+## Predicting from a GLM Poisson
+
+$$\hat{\lambda}(x_0)=e^{\hat{\beta}_0+\hat{\beta}_1x_{01}+\ldots+\hat{\beta}_px_{0p}}$$
+
+$$\hat{y}|x_0 \sim Po(\hat{\lambda}(x_0))$$
+
+
+# Bayesian vs Frequentist
+
+This section is inspired by Efron and Hastie's book Computer age statistical inference - algorithms, evidence, and data science
+
+- Bayesian inference requires a prior distribution, and the choice of prior is therefore important and sometimes challenging.
+
+- Frequentism replaces the choice of a prior with the choice of a method or algorithm designed for the quantity of interest. 
+
+- Bayesian inference answers all possible questions at once.
+
+- Frequentism requires different methods/algorithms for different questions. 
+
+- Bayesian inference is open for sequential updating, e.g. when data are to be integrated to the model over time. 
+
+> The authors say "Computer-age statistical inference at its most successful combines elements of the two philosophies"
+
+# Study questions
+
+(@) Specify a linear model with a categorical predictor and use OLS to estimate the coefficient for the linear predictor. 
+
+(@) Specify a linear model with interaction between the two predictors $X_1$ and $X_2$!
+
+(@) Specify the model for logistic regression!
+
+(@) What is a Generalised Linear Model? Explain the terms link function and family distribution for the response variable. 
+
+(@) Specify a GLM Binomial regression model! 
+
+(@) Specify a GLM Poisson regression model! 
+
+(@) Define the likelihood function for a model given to you!
+
+(@) Bayesian modelling and maximum likelihood are two methods for estimating parameters based on the likelihood function. Explain the main differences between these two principles of inference!
+
+(@) Explain MCMC-sampling using the Metropolis algorithm!
+
+(@) What is a conjugate Bayesian model?
+
+(@) The view on the prior divides Bayesian modellers into different groups. Mention at least two different views on the prior! 
+
+(@) *Given a parametric model $f$, statistical learning (estimating the function $f$) is about estimating the parameters within the model. When that is done, one can answer questions about parameters and use the estimed model $\hat{f}$ to make predictions of new observations.* What is meant by a parameter? Give an example of something that is not a parameter! 
+
+(@) What is a *memory based method*?
+
+(@) How is uncertainty in a parameter estimate expressed when using Bayesian estimation? Describe the process of constructing a $(1-\alpha)$% uncertainty interval. What is the Bayesian term for the uncertainty interval? 
+
+(@) How is uncertainty in a parameter estimate expressed when using maximum likelihood estimation? Describe a process of constructing a $(1-\alpha)$% uncertainty interval. What is the maximum likelihood estimation term for the uncertainty interval? 
+
+(@) What is the so called predictive distribution? 
+
+(@) Explain how to generate a prediction from a model given to you! 
+

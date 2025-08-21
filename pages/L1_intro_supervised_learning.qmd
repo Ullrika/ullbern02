@@ -1,0 +1,322 @@
+---
+title: "Lecture Introduction to statistical and supervised learning"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+    tic: true
+echo: false
+---
+
+```{r}
+#| message: false
+#| warning: false
+library(readr)
+library(tidyr)
+library(ggplot2)
+library(pROC)
+library(splines)
+```
+
+# Literature
+
+ISL: 1, 2.1, 2.2, 4.1
+
+# Statistical learning
+
+Term used by the ISL book authors 
+
+> Statistical learning refers to a vast set of tools for understanding data. These tools can be classified as supervised or unsupervised. Broadly speaking, supervised statistical learning involves building a statistical model for predicting, or estimating, an output based on one or more inputs.
+
+- prediction or estimation
+
+- statistical modelling
+
+- machine learning
+
+- parametric and non-parametric methods
+
+- data analysis: analysis using computational methods of existing data from databases or from designed experiments
+
+## Supervised learning - general form
+
+Consider $$y = f(x) + \varepsilon$$ $y$ is observed response from the response (or dependent) random variable $Y$
+
+$x=(x_1,\ldots,x_p)$ is a vector of observations of $p$ different predictors (or independent variables) $X=(X_1,\ldots,X_p)$
+
+$\varepsilon$ is a random error term where we usually assume that the expected value is zero and does not depend on the predictors, i.e. $E(\varepsilon) = 0$
+
+$f$ is an unknown function representing the systematic information that $X$ provides about $Y$
+
+Statistical learning consists of a set of approaches for estimating the function $f$ for the purpose of predictive or parametric inference.
+
+## Predictive inference
+
+The goal is to make predictions.
+
+The *quantity of interest* is a prediction of $Y$, $\hat{Y}$, for the predictors $X$, the estimate of the function $f$ with the argument $X$ is $\hat{Y}$
+
+$$\hat{Y} = \hat{f}(X)$$
+
+Assume that the estimated function $\hat{f}$ and the predictors $X$ is fixed. Then the only source of variation comes from the random errors $\varepsilon$.
+
+The variance of a prediction is
+
+$$V(\hat{Y}) = E\left( (\hat{Y}-Y)^2 \right) = \underbrace{\left( \hat{f}(X)-f(X)\right)^2}_{Reducible\ error} + \underbrace{V(\varepsilon)}_{Irreducible\ error}$$
+
+::: {.callout-note title="Show it!"}
+Prove the equality!
+
+$$E\left( (Y-\hat{Y})^2 \right) = E\left( f(X) + \varepsilon -\hat{f}(X)\right) = \left( f(X)-\hat{f}(X)\right)^2 + V(\varepsilon)$$
+:::
+
+Supervised learning offers techniques for estimating the function $f$ with the aim of minimising the reducible error.
+
+## Parametric inference
+
+The goal is to understand the association between $Y$ and $X_1,\ldots,X_p$, e.g.
+
+-   Which predictors have a strong association with $Y$?
+
+-   What relationship describes this association (increasing/decreasing, linear/nonlinear)?
+
+In parametric inference, the *quantity of interest* can be a parameter within a function, or a function among a set of candidate functions.
+
+::: callout-note
+The ISL book uses:
+
+**Prediction** - Statistical learning is applied to build a model for making predictions.
+
+**Inference** - Statistical learning is applied to learn something about the world.
+
+I use *predictive inference* vs *parametric inference* because inference is required for both goals.
+
+According to the Cambridge dictionary, *inference* is a guess that you make or an opinion that you form based on the information that you have.
+:::
+
+# General approach for supervised learning
+
+## Training data
+
+We learn about the unknown function $f$ from our *training data*: where $x_{ij}$ is the observed value of predictor $j$ for the $i$th observation, $i=1,\ldots,n$ and $j=1,\ldots,p$, and $y_i$ is the observed response value for the $i$th observation.
+
+## Notations
+
+For a vector, I write $x_i = (x_{i1},\ldots,x_{ip})$
+
+$x_i$ is an observation of $X$.
+
+$X$ is usually treated as a fixed variable (the alternative would be to treat it as a random variable), or a random variable with negligible error.
+
+$y_i|x_i$ is an observation of the random variable $Y|X$.
+
+It is common to drop the conditioning notation (assuming it is understood by the reader), and write $Y$ instead of $Y|X$ and $y_i$ instead of $y_i|x_i$
+
+## Objective
+
+Find a function $\hat{f}$ such that $Y\approx \hat{f}(X)$ for any observation $(X,Y)$
+
+## Residual Sum of Squares
+
+The variance of predictions of observed data $(y_1,x_1),\ldots,(y_i,x_i)$, where $i=1,\ldots,n$ can be estimated from the *Residual Sum of Squares*
+
+$$RSS = \sum_{i=1}^{n} \left(y_i-\hat{f}(x_i)\right)^2 = \sum_{i=1}^{n} e_i^2$$
+
+::: callout-note
+Note that the **RSS** must be divided by a suitable factor to become an estimate of the prediction variance. What is a suitable factor depends on the *degrees of freedom* associated with the algorithm used.
+:::
+
+# Regression versus Classification
+
+In general, variables are
+
+-   Quantitative (continuous, discrete)
+
+-   Categorical (qualitative)
+
+Statistical learning about the unknown function $f$ is termed
+
+-   *regression*, when the response variable $Y$ is quantitative
+
+and
+
+-   *classification*, when the response variable $Y$ is categorical
+
+The design of algorithms for statistical learning and ways to measure performance differ between regression and classification models.
+
+# Model accuracy for regression
+
+For regression the quality of a fitted model can be measured by the variance of predictions.
+
+Assuming equal variance for all predictions, this variance can be estimated by the Mean Squared Error (MSE)
+
+$$MSE = \frac{1}{n} \sum_{i=1}^{n}\left( y_i-\hat{f}(x_i)\right)^2$$
+
+This can be done based on the
+
+-   *training data*, i.e. the data that were used to estimate the function, or
+
+-   *test data*, i.e. a data set held out from the start and not used for the estimation.
+
+In general, $MSE_{train} < MSE_{test}$
+
+Therefore, using the $MSE_{test}$ will reduce the risk of being over-confident in the model's performance or, if the $MSE$ is used for model selection, the risk of over fitting the model.
+
+*Cross-validation* is a method for estimating the $MSE_{test}$ using the training data. We go through this in a later lecture.
+
+## Predictive variance
+
+The variance of the difference between the actual value $Y|x_0$ and the prediction at point $x_0$, i.e. the predictive (or prediction) error, is
+
+$$V\left(\hat{f}(x_0)-Y|x_0\right):=E\left( (\hat{f}(x_0)-Y|x_0)^2\right) = \underbrace{V\left(\hat{f}(x_0)\right)}_A + \underbrace{\left( \hat{f}(x_0)-f(x_0) \right)^2 }_B+ \underbrace{V(\varepsilon)}_C $$
+
+**A** is the variance of the estimated function. It indicates how much the estimated function would vary if we had selected a different training data set.
+
+**B** is the squared bias of the estimated function. It indicates if there is any systematic error in the prediction at point $x_0$
+
+**C** is the variance of the random error and has an expected value of zero.
+
+## Bias-Variance trade-off
+
+In statistical learning, one must find a balance between low predictive variance and low biases. This trade-off is well illustrated by Figure 2.9 in ISL. 
+
+![Figure 2.9 from ISL](../img/fig2_9.png)
+
+
+# Model accuracy for classifications
+
+There are several types of errors in classification models.
+
+## Sensitivity and specificity 
+
+Assume a binary classification model, where the true states are $Y\in \{True,False\}$ and the predicted states are $\hat{f} \in \{+,-\}$. The two types of errors can be summarised in a confusion matrix:
+
+|     |FALSE|TRUE |
+|-----|-----|-----|
+| -   | TN  | FN  |
+| +   | FP  | TP  |
+
+-  Erroneous predictions
+FP: frequency of False Positives
+
+FN: frequency of False Negatives 
+
+- Correct predictions
+TN: frequency of True Negatives
+
+TP: frequency of True Positives
+
+Let $n$ be the total number of observations in the data set. Useful performance metrics: 
+
+- *Accuracy* is $\frac{TN+TP}{n}$
+
+If we want to distinguish and find a balance between the two types of errors we can use: 
+
+- *Sensitivity* is $\frac{TP}{TP + FN}$ 
+
+- *Specificity* is $\frac{TN}{TN + FP}$ 
+
+## Receiver Operating Characteristic (ROC) curve
+
+A classification model makes the classification by comparing a scoring variable $S(X)$ to a threshold, $t$. The ROC-methodology can help modellers to choose a threshold taking into account a trade-off between two types of errors, or to compare classifiers without choosing a threshold.
+
+
+1. For each choice of $t$ derive specificity and sensitivity.
+
+2. The ROC-curve is sensitivity against 1-specificity over different values on the threshold. 
+
+Here we exemplify the ROC methodology with the data set [Binary Classification Prediction for type of Breast Cancer](https://www.kaggle.com/datasets/yasserh/breast-cancer-dataset?resource=download) downloaded from Kaggle. The response variable *diagnosis* describes a cancer as Malignant or Benign. We illustrate using the mean radius and the mean compactness as predictors, one per classifier. 
+
+
+```{r}
+#| message: false
+df <- as_tibble(read_csv("../data/breast-cancer.csv"))
+```
+
+- Mean radius as predictor 
+
+```{r}
+mod_radius <- roc(diagnosis ~ radius_mean, data=df)
+head(coords(mod_radius))
+```
+
+- Mean compactness as predictor 
+
+
+```{r}
+mod_compactness <- roc(diagnosis ~ compactness_mean, data=df)
+head(coords(mod_compactness))
+```
+
+
+- ROC plot with both classifiers
+
+```{r}
+list(radius=mod_radius,compactness=mod_compactness) %>% 
+ggroc(legacy.axes=TRUE) +
+  annotate("text", x = 0.5, y = 0.105, label = paste0("AUC radius = ", round(auc(mod_radius), 2))) +
+  annotate("text", x = 0.5, y = 0.05, label = paste0("AUC compactness = ", round(auc(mod_compactness), 2))) +
+geom_abline(slope=1,intercept=0,linetype = "dashed") +
+  ggtitle("ROC curves ")
+```
+
+
+- A model above the 50:50 line is better than tossing a coin. 
+
+- The closer to the upper left, the better classification model. 
+
+- The measure Area Under the Curve (AUC) offers a way to compare the performance of classifiers without selecting a value on the cutoff. 
+
+
+## Parametric vs non-parametric approaches
+
+Models for statistical learning can be 
+
+- parametric, where prediction boils down to estimating parameters within a defined model structure, or 
+
+- non-parametric, where the model predicts by an algorithm responding to training data, without any estimation of specific parameters. 
+
+> It is useful to discuss the advantages and disadvantages of the two approaches. 
+
+## Comparison to unsupervised learning
+
+In principle, unsupervised learning has 
+
+-   No response variable
+
+-   Only a multivariate data set of variables
+
+The goals of unsupervised learning can be to
+
+-   Find patterns in data
+
+-   Reduce dimensions of data
+
+# Study questions
+
+(@) What is the quantity of interest in predictive inference? 
+
+(@) What are the quantities of interest in parametric inference?
+
+(@) Is there a difference between estimation and prediction? If so, what is the difference? 
+
+(@) What is meant by training data in statistical learning?
+
+(@) Break the expression for the predictive variance $V(\hat{Y}|x_0)$ into parts and describe what source of variation that are represented by the different parts?
+
+(@) What is the Residual Sum of Squares and what is it used for? 
+
+(@) What are the differences between regression and classification when it comes to response variable and how predictive errors are expressed quantitatively. 
+
+(@) Explain the differences between categorical, continuous and discrete variables!
+
+(@) What is sensitivity and specificity, and what is it used for? 
+
+(@) How can a ROC curve analysis be used to compare the performance of two classifiers? 
+
+(@) What is the main difference between a parametric and non-parametric model for supervised learning? 
+
+(@) Account for the differences between supervised and unsupervised statistical learning. 
+

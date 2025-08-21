@@ -2,12 +2,18 @@ project:
   type: website
 
 website:
-  title: "ullbern02"
+  title: "Ullrika's course material for BERN02"
+#  subtitle: "Computational Science: Reproducible Data Science and Statistical Learning"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: pages/L1_intro_supervised_learning.qmd
+        text: Introduction 
+      - href: pages/L1_linear_regression.qmd
+        text: Linear regression
+        
 
 format:
   html:

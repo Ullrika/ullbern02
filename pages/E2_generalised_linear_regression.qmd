@@ -1,0 +1,42 @@
+---
+title: "Exercise Generalised Linear Regression"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+echo: false
+---
+
+## Format
+
+Work individually or in pairs. If you work in a pair, each hand in individually, but write in the beginning of the text file whom you have been working with. 
+
+## Grades
+
+Pass or Fail
+
+## Programming language
+
+You can use the language you prefer, but I recommend using *R* or *Python*. 
+
+## Poisson regression
+
+The data file bird_count.csv contains bird counts from one site from the years 1999 to 2012.
+
+Formulate a model for Poisson regression with year as predictor. 
+
+Write **your own code** to estimate the parameters using maximum likelihood. You are not allowed to use ready available functions. 
+
+Use the model with the point estimates of the parameters to generate a three samples of data (hypothetical observations) from the time period.
+
+Save the samples as a csv file, with a column indicating which sample it is. 
+
+## Submit lab report on Canvas
+
+Upload the csv file with the samples and the code to estimate the model and generate samples in the assignment *Exercise: Generalised Linear Models* on Canvas. 
+
+Write your name and date in the beginning of code and, if applicable, the name of your collaborator. 
+
+The exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest. 

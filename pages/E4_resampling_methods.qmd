@@ -1,0 +1,217 @@
+---
+title: "Exercise Model selection"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+echo: false
+---
+
+```{r}
+#| message: false
+#| warning: false
+library(readr)
+library(ISLR2)
+library(ggplot2)
+library(boot)
+library(dplyr)
+```
+
+## Format
+
+Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with. 
+
+## Time needed
+
+2 hours
+
+## Grades
+
+Pass or Fail
+
+## Programming language
+
+You can use the language you prefer, but I recommend using *R* or *Python*. 
+Create a report using Jupyter Notebook notebook or Quarto. 
+
+## Cross validation
+
+We are going to work with the air pollution data set ´pollution_cleaneddata.csv´ and use resampling methods to evaluate the predictive performance of alternative model choices.
+
+(@) Load the data ´pollution_cleaneddata.csv´
+
+(@) Specify a polynomial regression model with degree $p$ that predicts mortality as a function of the average July temperature in degrees F.
+
+$$y_i = \beta_0 + \beta_1x_{i}+ \beta_2x_{i}^2 + \ldots + \beta_px_{i}^p+\varepsilon_i$$
+
+```{r}
+#| message: false
+#| warning: false
+
+df <- read_csv("../data/pollution_cleaneddata.csv")
+```
+
+
+```{r}
+df %>%  ggplot(aes(x=JULT,y=MORT)) +
+geom_point() +
+ylab("Total age-adjusted mortality rate per 100 000") +
+xlab("Average July temperature in degrees F") +
+geom_smooth(method = "lm", formula = y~poly(x,4)) +
+labs(title="Polynomial with degree 4")
+
+```
+
+
+
+## Validation set approach
+
+(@) Set a seed for the random number generator.
+
+(@) Split data into two equal sized sets, one for training and one for testing.
+
+(@) For polynomial models with degree 1 up to 4, derive the mean square error of prediction for the training and testing data sets, respectively. 
+
+Present the results in a plot with polynomial degree on the x-axis and Mean Square Error on the y-axis (example provided below).
+
+```{r}
+#| output: false
+set.seed(2)
+polydeg = 3
+K = 3
+set_id <- sample.int(K,nrow(df),replace = TRUE)
+MSE_k <- unlist(lapply(1:K,function(k){
+mod <- lm(MORT ~ poly(JULT,polydeg), data = df, subset = set_id!=k)
+mean((df$MORT[set_id==k] - predict(mod,newdata=df[set_id==k,]))^2)
+}))
+mean(MSE_k)
+```
+
+
+```{r}
+#| output: false
+set.seed(2)
+polydeg = 3
+mod <- glm(MORT ~ poly(JULT,polydeg), data = df)
+cv.glm(df,mod,K=3)$delta[1]
+```
+
+
+```{r}
+#| output: false
+polydeg = 3
+K = 3
+set_id <- sample.int(K,nrow(df),replace = TRUE)
+MSE_k <- unlist(lapply(1:K,function(k){
+mod <- lm(MORT ~ poly(JULT,polydeg), data = df, subset = set_id!=k)
+mean((df$MORT[set_id==k] - predict(mod,newdata=df[set_id==k,]))^2)
+}))
+mean(MSE_k)
+```
+
+
+```{r}
+#| output: false
+polydeg = 3
+K = 3
+set_id <- sample.int(K,nrow(df),replace = TRUE)
+MSE_k <- unlist(lapply(1:K,function(k){
+mod <- lm(MORT ~ poly(JULT,polydeg), data = df, subset = set_id!=k)
+mean((df$MORT[set_id==k] - predict(mod,newdata=df[set_id==k,]))^2)
+}))
+mean(MSE_k)
+```
+
+
+```{r}
+#| output: false
+polydeg = 3
+mod <- glm(MORT ~ poly(JULT,polydeg), data = df)
+cv.glm(df,mod,K=3)$delta[1]
+
+```
+
+
+(@) Judging from the graph **you** just generated, which degree of the polynomial would you recommend if the goal is to have a small variance of new predictions.
+
+(@) Repeat the procedure ten times but with other random seeds. Do you get similar results for other seeds?
+
+## K-fold cross-validation
+
+(@) Select a polynomial degree, e.g. $p=2$. Estimate the variance of predictions using the K-fold cross-validation approach where you hold out $K=3$ sets.
+ 
+(@) Repeat the procedure ten times but with other random seeds. Do you get similar results for other seeds?
+
+## The Bootstrap 
+
+Use the bootstrap to estimate the standard error of the slope of the line in the Poisson regression of the birds over time
+
+(@) Load the data set ‘bird_count.csv’
+
+```{r}
+#| message: false
+#| warning: false
+df <- read_csv("../data/bird_count.csv",show_col_types = FALSE)
+
+```
+
+```{r}
+df %>%
+ggplot(aes(x = yr, y = count)) +
+  geom_point() +
+  geom_line(colour="#52b36c") +
+  xlab("Year") +
+  ylab("Bird count")
+```
+
+
+(@) Retrieve the Poisson model fitted with maximum likelihood that you did earlier in the course.
+
+Let $Y|x$ be the counted number of birds at year $x$
+
+$$Y|x_i \sim Po(\lambda(x_i))$$
+
+The $log$ of the intensity is a linear model with an intercept $\beta_0$ and a slope $\beta_1$ parameter for year as the predictor $x$ 
+
+$$log(\lambda(x_i)) = \beta_0 + \beta_1x_i$$
+(@) Use the bootstrap to approximate the standard error of the estimate of the slope parameter.
+
+
+```{r}
+mod_pois <- glm(count ~ yr, data = df, family = poisson)
+summary(mod_pois)
+```
+
+
+```{r}
+n = nrow(df)
+b.iter = 1000
+boot <- function(index){
+mod_pois <- glm(count ~ yr, data = df, family = poisson, subset = index)
+coef(mod_pois)[2]
+}
+bootstrap_sample <- replicate(b.iter,boot(sample(n, n, replace = TRUE)))
+hist(bootstrap_sample)
+```
+
+
+
+When taking the standard deviation of the bootstrap sample of the slope parameter I get `r sd(bootstrap_sample)`.
+
+## Submit lab report on Canvas
+
+(1) Write your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
+
+- Python in Jupiter Notebook on Google Colab (or installed on your own computer)
+
+- R in Quarto on posit.cloud (or with R and RStudio installed on your computer)
+
+(2) Write your name and date in the heading of the report and, if applicable, the name of your collaborator. 
+
+(3) Save your report as pdf
+
+(4) Upload the report in the assignment *Exercise: Resampling* on Canvas. 
+
+

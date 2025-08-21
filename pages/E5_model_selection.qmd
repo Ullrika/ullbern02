@@ -1,0 +1,172 @@
+---
+title: "Exercise Model selection and Shrinkage"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+echo: false
+eval: false
+---
+
+```{r}
+#| warning: false
+#| message: false
+library(readr)
+library(ggplot2)
+library(dplyr)
+```
+
+## Format
+
+Work individually or in pairs. If you work in a pair, each person hands in individually, but write at the beginning of the file who you have been working with. 
+
+## Time needed
+
+3 hours
+
+## Grades
+
+Pass or Fail
+
+## Programming language
+
+You can use the language you prefer, but I recommend using *R* or *Python*. 
+
+Create a report using Jupyter Notebook or Quarto. 
+
+## Model selection competition
+
+You have access to a dataset for **Fathead Minnow Acute Aquatic Toxicity** compiled and described by He and Jurs (2005). The data set consists of 322 compounds that were experimentally assessed for toxicity. The outcome is the negative log of activity (labeled as "activity"). 
+
+The data set contains 50 molecular QuickProp descriptors (http://www.schrodinger.com/products/14/17/). Ullrika has removed missing values.
+
+Your task is to build a model that predict Acute Aquatic Toxicity from the molecular descriptors. 
+
+Ullrika has taken out a randomly selected validation set of 90 compounds from the original dataset. You have access to the remaining 229 data points as training dataset to build the model. You are to build at least one predictive model. When that is done, you get access to the validation set and you are without altering your model derive the $MSE_{test}$ and $R^2$ (or $\text{Adjusted }R^2$). From the submitted reports, we will later identify a winner.
+
+You can choose which of the two alternatives you would like to start with. If you have time, then make a model for both of them. 
+
+- Build a predictive model using best subset selection, forward or backward selection using the full data set. 
+
+- Build a predictive model using shrinkage methods. I recommend you select a smaller subset of the predictors and use the Lasso. Note if the functions that come with the ISL book automatically standardise the predictors, otherwise you must also remember to standardise the predictors. 
+
+
+
+```{r}
+## Prepare data
+library(QSARdata)
+
+# Download packages for model selection
+library(leaps) #for subset selection
+library(glmnet) #for shrinkage
+```
+
+
+```{r}
+data(AquaticTox)
+
+id_remove <- which(rowSums(is.na(AquaticTox_QuickProp))!=0)
+AquaticTox_QuickProp_nomissing <- AquaticTox_QuickProp[-id_remove,]
+AquaticTox_Outcome_nomissing <- AquaticTox_Outcome[-id_remove,]
+
+n = nrow(AquaticTox_QuickProp_nomissing)
+
+set.seed(1975)
+index = sample(n, n, replace = FALSE)
+
+test_x <- AquaticTox_QuickProp_nomissing[index[1:90],]
+test_y <- AquaticTox_Outcome[index[1:90],]
+
+train_x <- AquaticTox_QuickProp_nomissing[index[91:n],]
+train_y <- AquaticTox_Outcome[index[91:n],]
+
+
+write_csv(test_x,file="../data/AquaticTox_test_x.csv")
+write_csv(test_y,file="../data/AquaticTox_test_y.csv")
+
+write_csv(train_x,file="../data/AquaticTox_train_x.csv")
+write_csv(train_y,file="../data/AquaticTox_train_y.csv")
+```
+
+
+
+```{r}
+df <- train_x %>% 
+mutate(Activity = train_y$Activity) %>% 
+  select(-Molecule)
+cor_df <- cor(df)
+diag(cor_df) <- 0
+sel <- which(abs(cor_df[,"Activity"]) > 0.3)
+df_red <- df[,sel]
+```
+
+```{r}
+index_train <- sample(nrow(df),round(nrow(df)/2),replace = FALSE)
+```
+
+
+```{r}
+regfit.full <- regsubsets(Activity ~ ., data = df, nvmax = 8, really.big=TRUE)
+reg.summary <- summary(regfit.full)
+```
+
+
+```{r}
+par(mfrow = c(2, 2))
+plot(reg.summary$rss , xlab = "Number of Variables",
+ylab = "RSS", type = "l")
+plot(reg.summary$adjr2 , xlab = "Number of Variables",
+ylab = "Adjusted RSq", type = "l")
+```
+
+
+```{r}
+plot(regfit.full , scale = "r2")
+```
+
+
+
+```{r}
+ridge.mod <- glmnet(x=df_red[index_train,], y=df[index_train,"Activity"], alpha = 0)
+print(ridge.mod)
+```
+```{r}
+plot(ridge.mod)
+```
+
+
+
+```{r}
+ridge.pred <- predict(ridge.mod, s = 4.27, newx = df_red[index_train,])
+mean((ridge.pred - df[-index_train,"Activity"])^2)
+```
+
+```{r}
+lasso.mod <- glmnet(x=df_red, y=df[,"Activity"], alpha = 1)
+print(lasso.mod)
+```
+
+
+```{r}
+plot(lasso.mod)
+```
+
+
+
+## Submit lab report on Canvas
+
+(1) Write your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
+
+- Python in Jupyter Notebook on Google Colab (or installed on your own computer)
+
+- R in Quarto on posit.cloud (or with R and RStudio installed on your computer)
+
+(2) Write your name and date in the heading of the report and, if applicable, the name of your collaborator. 
+
+(3) Upload the report as the jypiter notebook, quarto or rmd file. This is to allow me to rerun the code on my computer.
+
+(4) Upload the report in the assignment *Exercise: Model selection and shrinkage* on Canvas. 
+
+

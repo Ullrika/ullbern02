@@ -1,0 +1,505 @@
+---
+title: "Lecture Hierarchical Models and Testing"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+    toc: true
+echo: false
+---
+
+```{r}
+#| message: false
+#| warning: false
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(latex2exp)
+library(lme4)
+
+```
+
+# Literature
+
+ISL: Hypothesis testing is covered in 13.1, 13.2 and 3.3
+
+<!-- Multiple linear regression and testing I recommend  -->
+<!-- https://online.stat.psu.edu/stat462/node/83/ -->
+
+Hierarchical models are not covered in ISL. 
+
+# Testing associations 
+
+Testing the association of an independent variable could be to test if the parameter (coefficient) for the effect of the independent variable is different from zero. 
+
+::: {.callout-note}
+Hypothesis testing is developed within frequentist statistics. The corresponding in Bayesian inference would be to make conclusions based on summaries of the marginal posterior distribution for the quantity of interest. 
+:::
+
+
+A hypothesis test is constructed by formulating a null hypothesis $H_0$ and a complementary hypothesis $H_1$. The null hypothesis may well be true, but we might hope that our data will tell us otherwise. The complementary hypothesis includes what we would like to show with the test. 
+
+Consider the linear model 
+
+$$y_i = \beta_0 + \beta_1 x_i $$
+
+Suitable hypotheses to test if there is a linear association are 
+
+$H_0: \beta_1=0$ against $H_1:\beta_1\neq 0$
+
+The first thing we do when constructing a hypothesis test is to fix the probability of making an error of type I $P(\text{rejecting } H_0|H_0 \text{ is true}) = \alpha$. This so called level of significance $\alpha$ is here chosen to be 5%. 
+
+The probability of making an error of type II $P(\text{not rejecting } H_0|H_0 \text{ is false}) = \beta$ is "1 - the power of the test" and is a function of model parameters, sample variation and sample size. We cannot fix this, but we can design a test that has a small probability of making an error of type II.
+
+### Testing using a confidence interval
+
+One way to test these hypotheses is to derive a $(1-\alpha)$ confidence interval for the quantity of interest $CI_{\beta_1}$. The null hypothesis is rejected if it the value the parameter takes under $H_0$ is not included in the confidence interval. That is to reject $H_0$ if $0 \notin CI_{\beta_1}$
+
+### Testing with a test statistic (and p-value)
+
+Assuming that $H_0$ is true, the sampling distribution for the test statistic 
+
+$$t=\frac{\hat{\beta}_1}{\sqrt{\hat{V}(\hat{\beta}_1)}}$$ 
+
+is a t-distribution. 
+
+We can then derive a *p-value*, which is the probability for "what we have and worse" given that $H_0$ is true. 
+
+$$\text{p-value} = P(t>|t_{obs}||H_0)$$
+
+> The distribution of the test statistic under $H_0$ (also known as the test statistic’s null distribution) will depend on the details of what type of null hypothesis is being tested, and what type of test statistic is used. In distribution general, most commonly-used test statistics follow a well-known statistical distribution under the null hypothesis — such as a normal distribution, a t-distribution, a $\chi^2$-distribution, or an F-distribution — provided that the sample size is sufficiently large and that some other assumptions hold. [ISL]
+
+Statistical software generate output including the mean and standard error of each estimated parameter, but very often, also a *test statistic* and a *p-value*.
+
+## Hypothesis test - example
+
+Let us go back to the mortality due to air pollution data, and fit a linear regression. 
+
+```{r}
+#| messages: false
+#| warning: false
+df_air <- read_csv("../data/pollution_cleaneddata.csv")
+```
+
+
+```{r}
+mod_ols <- lm(MORT~POOR,data=df_air)
+summary(mod_ols)
+```
+::: {.callout-note}
+When there are several independent variables, testing the the coefficients (parameters) individually is not recommended because their parameters can be correlated. To what extent, depends on how correlation there is between the independent variables, but also if there are interaction effects between pairs or combinations of x-variables. In this situation it is better to test by comparing a **full** with a **reduced** model.
+:::
+
+## Likelihood ratio test 
+
+Apply maximum likelihood on a full (unrestricted) model and on a reduced (restricted) model, the later where null hypothesis is seen as true. 
+
+For example, we want to test if the slope is different from zero and use 
+
+- Hypothesis: $H_0: \beta_1 = 0$ against $H_1: \beta_1 \neq 0$
+
+- full model: $y_i=\beta_0+\beta_1 x_i+\varepsilon$
+
+- reduced model: $y_i=\beta_0+\varepsilon$
+
+Let $\theta$ be all parameters in the full model, and $\theta_{red}$ be the subset of parameters in the reduced model. Define the likelihood ratio statistic as 
+
+$$LR_n = 2\left[ log\ l_{full}(\hat{\theta}) - log\ l_{red}(\hat{\theta}_{red})\right]$$
+
+
+If the null hypothesis is true, sample size $n$ is large and the likelihood functions have good properties (such as being differentiable on $\theta$), then the likelihood ratio statistic $LR_n$ converges in distribution to a $\chi^2$ (Chi-square) distribution with $r$ degrees of freedom, where $r$ is can be thought of as the number of independent parameters that are tested.
+
+The rule is to reject the null hypothesis if $LR_n > \chi^2_{\alpha/2}(r)$, where the latter is a quantile from the $\chi^2$-distribution with $r$ degrees of freedom. 
+
+The likelihood ratio statistic can be derived from calculated deviances, which is an information theoretic measure that is usually calculated in generic functions for generalised regression.  
+
+The *deviance* is negative two times the maximized log-likelihood and a constant, $D(\theta)=-2log\ l(\hat{\theta}) + C$. The smaller the deviance, the better the fit.
+
+<!-- https://www.statlect.com/fundamentals-of-statistics/likelihood-ratio-test -->
+
+```{r}
+mod_glm <- glm(MORT~POOR,data=df_air)
+summary(mod_glm)
+#LR <- mod_glm$null.deviance-mod_glm$deviance
+#anova(mod_glm)
+```
+
+In this example, the likelihood ratio statistic $LR_n = `r mod_glm$null.deviance-mod_glm$deviance`$ which is much larger than the quantile $\chi^2_{\alpha/2}(r)=\chi^2_{0.025}(1) = `r qchisq(1-0.025,1)`$. Thus, the null hypothesis is rejected. 
+
+# Hierarchical modelling 
+
+So far the regression and classification models has operated under the assumption of independence. That is, they assume that our data on the response and predictor variables $(Y,X)$ is a random sample meaning that 
+>the observed values for any one subject in the sample are independent of those for any other subject. 
+
+::: {.callout-caution}
+What if we can divide our data material into groups, where observations within a group are expected to be more similar compared to observations in other groups? 
+
+The assumption of independence is often violated in practice! 
+:::
+
+When this happens, it is useful to be able to specify statistical models for *hierarchical* (*grouped*) data. 
+
+## Why is hierarchical modelling important? 
+
+Ignoring dependencies, result in underestimation of standard error and possible lower p-values in frequentist hypothesis testing. 
+
+An appropriate implementation of the hierarchical structures in data can reduce error in predictions, and increase the ability for the model to estimate and test associations. 
+
+An alternative would be to estimate one function per group of independent samples, but that leaves us with several models with possible poorer performances per model. With this in mind, hierarchical modeling can be used to build one model estimated from all data, and allow for sharing information between groups of data.
+
+When basic assumptions are not met, there is something wrong with the model. Adding a hierarhical structe is one way to improve a model for inference. 
+
+## Example Penguins
+
+Here is an example of results will drastically change when groups are considered in an analysis. 
+
+```{r}
+library(palmerpenguins)
+db <- penguins %>% 
+  filter(!is.na(flipper_length_mm), !is.na(bill_length_mm), !is.na(body_mass_g))
+```
+
+### The palmerpenguins data
+
+The palmerpenguins data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica. This data set is being used for education of statistics and data science. 
+
+![](../img/culmen_depth.png)
+
+
+### Association between bill length and bill depth
+
+Let $y=\text{"Bill depth in mm"}$ and $x=\text{"Bill length in mm"}$
+
+We model their linear association by a simple linear regression
+
+$$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$
+
+where $\varepsilon_i \sim N(0,\sigma)$ for all pairs of observations $i=1,\ldots,n$
+
+::: {.callout-caution}
+
+What could be a potential weakness in choosing a linear regression model for testing the association between the two variables? 
+
+In this course, we expect that you can account for the assumptions behind a linear regression model. 
+
+:::
+
+```{r}
+ggplot2::theme_set(ggplot2::theme_minimal())
+```
+
+```{r}
+ggplot(data = db,
+                         aes(x = bill_length_mm,
+                             y = bill_depth_mm)) +
+  geom_point() +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(title = "Penguin bill dimensions",
+       subtitle = "at Palmer Station LTER",
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)") +
+  theme(plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot") +
+  geom_smooth(method = "lm", formula = 'y ~ x', se = FALSE, color = "gray50")
+
+```
+
+```{r}
+mod <- lm(bill_depth_mm ~ bill_length_mm,data = db)
+s <- summary(mod)
+```
+
+The linear association (the slope parameter) is estimated to be negative (-0.085) and significantly different from zero (95th $CI_{\beta_1} = (`r confint(mod)[2,1]`,`r confint(mod)[2,2]`)$, p-value < 0.05). 
+
+```{r}
+s$coefficients
+```
+
+```{r}
+ggplot(mod, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, col = 'darkred', linetype = "dashed")
+```
+
+### Residual analysis
+
+- Check assumption of independence and equal variance of residuals
+
+```{r}
+ggplot(mod, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, col = 'darkred', linetype = "dashed")
+```
+
+- Check assumption of normally distributed residuals 
+
+```{r}
+ggplot(mod, aes(sample = .resid)) +
+stat_qq() + stat_qq_line(col='darkred',linetype='dashed') +
+  xlab('theoretical quantiles') +
+  ylab('empirical (sample) quantiles') +
+  ggtitle("Quantile-Quantile plot for the Normal distribution")
+
+```
+
+::: {.callout-warning}
+
+Is it justified to make the assumptions that the residuals are independent identically and normally distributed?  
+
+:::
+
+
+## A hierarhical model considering groups in data
+
+From the analysis above, we conclude that there is something odd with the model. It odd that there should be a negative association between the length and depth of a bill, and the residual analysis induces some discomfort in making conclusions from the model.
+
+The data material consists of observations from three species, which constitute three groups where one can expect that the variation between groups is larger than the variation within groups. What if the relationship between bill length and bill depth looks different for different species? 
+
+![](../img/penguins.png)
+
+Let us investigate by visualising the data where we separate the observations from the three groups. Here the visualisation is made by fitting a linear model per group. 
+
+```{r}
+#| warning: false 
+#| message: false 
+
+bill_len_dep <- ggplot(data = db,
+                         aes(x = bill_length_mm,
+                             y = bill_depth_mm,
+                             group = species)) +
+  geom_point(aes(color = species, 
+                 shape = species),
+             size = 3,
+             alpha = 0.8) +
+  geom_smooth(method = "lm", formula = 'y ~ x',se = FALSE, aes(color = species)) +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(title = "Penguin bill dimensions",
+       subtitle = "Bill length and depth for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER",
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)",
+       color = "Penguin species",
+       shape = "Penguin species") +
+  theme(legend.position = c(0.85, 0.15),
+        plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot")
+
+bill_len_dep
+```
+
+Here we can note that within each group now  there is a positive linear association between bill length and bill depth. 
+
+> Simpson’s paradox, or the Yule–Simpson effect, is a phenomenon in probability and statistics, in which a trend appears in several different groups of data but disappears or reverses when these groups are combined. It is sometimes given the descriptive title reversal paradox or amalgamation paradox. [data-to-viz.com](
+https://www.data-to-viz.com/caveat/simpson.html)
+
+## A linear model with random and fixed effects 
+ 
+Here is one way to model hierarchies in data. 
+
+Let $y_{ij}$ be the $i$th observation from species $j$ given a fixed $x_{ij}$, where $i=1,\ldots,n$ and $j=1,2,3$.
+
+$$y_{ij} = \beta_{0j} + \beta_1 x_{ij} + \varepsilon_{ij}$$
+
+where $E(\varepsilon_{ij})=0$ and $V(\varepsilon_{ij})=\sigma^2$
+
+The variance parameter $\sigma^2$ is the variation in the model residuals. 
+
+$$y_{ij} = \beta_{0} + u_{j} + \beta_1 x_{ij} + \varepsilon_{ij}$$
+
+where $E(u_j)=0$ and $V(u_j)=\tau^2$. 
+
+Now we have a model where we divide the variance into variance due to random error for the model and variance due to variation between groups. 
+
+The parameter $\beta_1$ is a *fixed effect* because the slope is the same for all groups.
+
+The term $u_j$ is called a *random effect* because it takes different values for different groups $j = 1,2,3$ (we have three species of penguins). 
+
+We can also assume the $u_j \sim N(0,\tau^2)$
+
+The variance parameter $\tau^2$ is between-group heterogeneity. Here it denotes the variance in the random intercepts.   
+
+A model with fixed and random effects (a.k.a a *linear mixed model*) can be estimated by maximum likelihood or Bayesian inference. 
+
+::: {.callout-note}
+
+In some cases, it can be justified to consider that the slope might differ between groups. If so, a random effect on the slope can be added. 
+
+:::
+
+### Maximum likelihood estimation
+
+Here I have applied REstricted Maximum Likelihood (REML). The way of specifying the models are   
+
+```{r}
+rmod <- lme4::lmer(bill_depth_mm~bill_length_mm + (1|species), data = db)
+```
+
+```{r}
+summary(rmod)
+```
+
+### Residual analysis
+
+- Check assumption of independence and equal variance of residuals
+
+```{r}
+df_res <- data.frame(.fitted=fitted(rmod),.resid = resid(rmod), species = db$species)
+ggplot(df_res, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, col = 'darkred', linetype = "dashed")
+```
+
+- Check assumption of normally distributed residuals 
+
+```{r}
+ggplot(df_res, aes(sample = .resid)) + 
+stat_qq() + stat_qq_line(col='darkred',linetype='dashed') +
+  xlab('theoretical quantiles') +
+  ylab('empirical (sample) quantiles') +
+  ggtitle("Quantile-Quantile plot for the Normal distribution")
+
+```
+
+::: {.callout-note}
+
+Now it looks better !
+
+:::
+
+
+### Testing the fixed effect in the hierarhical model
+
+I am interested in testing if there is a linear association. 
+
+I can test using a confidence interval
+
+```{r}
+#| message: false
+ci <- confint(rmod)
+```
+
+A 95th confidence interval of the slope parameter based on the profile likelihood mehtod is derived to be $CI_{\beta_1}= (`r ci[4,1]`,`r ci[4,2]`)$, i.e. a positive linear association that is statistically different from zero at the 5%'s significance level. 
+
+- When my model is estimated with a restricted maximum likelihood, using a likelihood ratio test can be wrong since the likelihoods are conditional on different values of a so called nuisance parameter. 
+
+- Then I can implement the maximum likelihood without a restriction (which can be problematic for the optimisation), or 
+
+- implement the hierarchical model in a Bayesian framework and test using suitable methods therein
+
+# Bayesian estimation
+
+Here I will say something more about how a hierarchical model can look like when using Bayesian inference. ¨
+
+::: {.callout-note}
+In general, maximum likelihood estimation is simple to implement in functions as it does not require a specification of the prior, nor advanced sampling. This is one reason that there are functions for maximum likelihood but not for Bayesian inference. The [BRMS](https://cran.r-project.org/web/packages/brms/index.html) R-package is today the most complete support for Bayesian statistical regression models which generates model code via functions that look similar to other ways of specifying models in OLS and GLM with maximum likelihood based inference. 
+:::
+
+## Bayesian model specification 
+
+A Bayesian specification of the model made in "tilde"-format can be
+
+- Likelihood
+
+$$Y_{ij}|\beta_{0},\beta_1,\sigma,\tau \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma^2)$$
+
+
+$$u_j|\tau \sim N(0,\tau)$$
+
+- The prior is derived based on the following marginal distributions
+
+$$\beta_0\sim N(\mu_{\beta_0},\sigma_{\beta_0}^2)$$
+$$\beta_1\sim N(\mu_{\beta_1},\sigma_{\beta_1}^2)$$
+
+$$\tau \sim \Gamma(a_{\tau},b_{\tau})$$
+
+$$\sigma \sim \Gamma(a_{\sigma},b_{\sigma})$$
+
+where $\mu_{\beta_0},\sigma_{\beta_0},\mu_{\beta_1},\sigma_{\beta_1},a_{\tau},b_{\tau},a_{\sigma},b_{\sigma}$ are hyper-parameters.
+
+## Directed Acyclic Graph
+
+Draw on the board if there is time 
+
+## Testing in Bayesian inference 
+
+Inference about parameters can be made by summarising the posterior for the quantity of interest. 
+
+Bayesian testing is more about comparing model. A suggested approach is to comparing deviances based on the posterior.  
+
+The deviance information criterion (DIC) can be defined as
+
+$$DIC = D(\bar{\theta})+2p_D$$
+
+where $\bar{\theta}$ is the posterior mean and $p_D$ the effective number of parameters of the model.
+
+The DIC for the full and reduced model can be used to see if there is added value in the difference in the two specifications of the model. 
+
+Another approach is to use **Bayes factor** to compare two models, $M_1$ and $M_2$:   
+
+$$BF = \frac{P(data|M_1)}{P(data|M_2)}$$
+<!-- =\ldots=\frac{P(M_1|data)P(M_2)}{P(M_2|data)P(M_1)}  -->
+<!-- If the priors are equal, the Bayes factor is the ratio between the posterior for  -->
+
+A Bayes factor much greater than 1 gives high evidence to the model in the nominator, $M_1$.
+
+Bayes factor has resemblances with the likelihood ratio statistic, but it has a wider application and does not require that the models to be nested.
+
+## Bayesian vs Frequentist
+
+This section is inspired by Efron and Hastie's book Computer age statistical inference - algorithms, evidence, and data science
+
+- Bayesian inference requires a prior distribution, and the choice of prior is therefore important and sometimes challenging.
+
+- Frequentism replaces the choice of a prior with the choice of a method or algorithm designed for the quantity of interest. 
+
+- Bayesian inference answers all possible questions at once.
+
+- Frequentism requires different methods/algorithms for different questions. 
+
+- Bayesian inference is open for sequential updating, e.g. when data are to be integrated to the model over time. 
+
+> The authors say "Computer-age statistical inference at its most successful combines elements of the two philosophies"
+
+
+
+# Study questions
+
+<!-- Exercise simulate their own data -->
+
+<!-- (@) What is the difference between Bayes factors och  -->
+
+(@) Explain how to set up a frequentist hypothesis test!
+
+(@) How can one perform a hypothesis test using confidence intervals? 
+
+(@) What is a test statistic?
+
+(@) What is a p-value?
+
+(@) What assumptions are checked in a residual analysis of a simple linear regression? 
+
+(@) What is the meaning of a nested model, i.e. full versus reduced? 
+
+(@) What is a likelihood ratio test and how is the null hypothesis used in such a test? 
+
+(@) Describe alternatives to hypothesis testing under Bayesian inference! 
+
+(@) What assumption might be violated when there are groups in data? 
+
+(@) Explain the difference between adding group as a covariate versus adding group as a random effect? 
+
+(@) What is Simpson’s paradox?
+
+(@) What is a random intercept? 
+
+(@) What is a random slope? 
+
+(@) What is a linear mixed model? 
+
+(@) Compare the challenges with estimating parameters in a hierarchical model using maximum likelihood and using Bayesian estimation. 
+
+(@) What is the model deviance
