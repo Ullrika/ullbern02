@@ -298,7 +298,7 @@
     "href": "index.html",
     "title": "Lectures and Exercises",
     "section": "",
-    "text": "Lecture 1\nIntroduction to supervised learning\nLinear Regression Exercise 1\n\n\nLecture 2\nGeneralised Linear Models\nExercise 2\n\n\nLecture 3\nHierarchical Models and Testing Exercise 3\n\n\nLecture 4\nResampling Methods Exercise 4\n\n\nLecture 5\nModel Selection Exercise 5"
+    "text": "Lecture 1\nIntroduction to supervised learning\nLinear Regression\nExercise 1\n\n\nLecture 2\nGeneralised Linear Models\nExercise 2\n\n\nLecture 3\nHierarchical Models and Testing\nExercise 3\n\n\nLecture 4\nResampling Methods\nExercise 4\n\n\nLecture 5\nModel Selection\nExercise 5"
   },
   {
     "objectID": "about.html",
@@ -690,7 +690,7 @@
     "href": "pages/L2_generalised_linear_models.html#bayesian-estimation-of-parameters",
     "title": "Lecture Generalised Linear Models",
     "section": "Bayesian estimation of parameters",
-    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.572461 0.85684423 0.0049469925   0.0050000571\nbeta1   6.136896 0.20680461 0.0011939870   0.0011763733\nsigma   6.602917 0.05041536 0.0002910732   0.0003039644\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.730448 6.543146 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
+    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.577552 0.85224455 0.0049204362   0.0050475024\nbeta1   6.133896 0.20749727 0.0011979861   0.0012098001\nsigma   6.603346 0.05014351 0.0002895037   0.0002985137\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.726313 6.543289 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
   },
   {
     "objectID": "pages/L2_generalised_linear_models.html#maximum-likelihood-estimation-of-parameters",
