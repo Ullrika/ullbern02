@@ -2,8 +2,6 @@
 title: "About"
 ---
 
-About this site
-
 MIT Licence
 
 2025
