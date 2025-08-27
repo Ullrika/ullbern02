@@ -84,7 +84,7 @@ where $\mu(x_i|\beta_0,\beta_1,\ldots,\beta_p):=E(Y|x_i,\beta_0,\beta_1,\ldots,\
 
 In this model, the response variable $Y$ is continuous and the model error is normally distributed with equal variance $\sigma^2$. 
 
->For notation, I sometimes lump all parameters into one $\theta=(\beta_0,\beta_1,\ldots,\beta_p,\sigma)$. 
+> For notation, I sometimes lump all parameters into one $\theta=(\beta_0,\beta_1,\ldots,\beta_p,\sigma)$. 
 
 ::: {.callout-note}
 
@@ -143,7 +143,7 @@ The expected value of the proportion of successes is $E(Y|x_i)=p(x_i)$
 
 A *Binomial GLM* is created by transforming the expected value with the logit link function as before into the linear model. 
 
-$$ logit(p(x_i)) = log(p(x_i) / (1 - p(x_i))) = \beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$$
+$$ \text{logit}(p(x_i)) = \log(p(x_i) / (1 - p(x_i))) = \beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$$
 
 > A logistic regression is a special case of Binomial GLM when there is only one trial per observation, i.e. n_i = 1. 
 
@@ -160,7 +160,7 @@ $$\lambda(x_i)=e^{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}}$$
 
 When we log the expected value we get 
 
-$$log(\lambda(x_i))=\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$$
+$$\log(\lambda(x_i))=\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$$
 A Poisson GLM has log as the *link function*
 $$Y|x_i\sim Po(\lambda(x_i))$$
 
@@ -196,7 +196,7 @@ $$l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \prod_{i=1}^n  p(x_i)^{y_i}(1-p(x_i))^
 
 The product of values close to zero is a very small number. Instead, the likelihood is handled on the log scale, as the *log likelihood*
 
-$$log \ l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \sum_{i=1}^n y_i log(p(x_i))+(1-y_i)log(1-p(x_i))$$
+$$\log \ l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \sum_{i=1}^n y_i \log(p(x_i))+(1-y_i)log(1-p(x_i))$$
 
 ## Likelihood function for the Binomial GLM
 
@@ -212,11 +212,11 @@ Derive the expression for the log likelihood for the Binomal GLM
 
 $$l(y|\beta_0,\beta_1,\ldots,\beta_p,x) = \prod_{i=1}^n \frac{e^{-\lambda(x_i)}\lambda(x_i)^{y_i}}{y_i!}$$
 
-where $log(\lambda(x_i))=\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$. 
+where $\log(\lambda(x_i))=\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}$. 
 
 The log likelihood for the Poisson GLM is
 
-$$\begin{split} & \\ log\ l(y|\beta_0,\beta_1,\ldots,\beta_p,x) =  \sum_{i=1}^n\left[ -\lambda(x_i) + y_ilog(\lambda(x_i)) - log(y_i!)\right]= & \\ \sum_{i=1}^n\left[ -e^{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}} + y_i(\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}) - log(y_i!)\right] \end{split}$$
+$$\begin{split} & \\ \log\ l(y|\beta_0,\beta_1,\ldots,\beta_p,x) =  \sum_{i=1}^n\left[ -\lambda(x_i) + y_i\log(\lambda(x_i)) - \log(y_i!)\right]= & \\ \sum_{i=1}^n\left[ -e^{\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}} + y_i(\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}) - \log(y_i!)\right] \end{split}$$
 
 
 # Likelihood based estimation 
@@ -319,6 +319,8 @@ It is useful to be able to program an MCMC. There has throughout the years been 
 ### A demonstration of Bayesian updating using MCMC sampling 
 
 ```{r}
+#| warning: false
+#| message: false
 df <- read_csv("../data/pollution_cleaneddata.csv")
 ```
 

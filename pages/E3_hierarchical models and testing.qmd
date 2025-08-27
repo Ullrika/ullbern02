@@ -15,7 +15,7 @@ Work individually or in pairs. If you work in a pair, each person hand in indivi
 
 ## Time needed
 
-This exercise/computer lab is expected to **not** take more than eight hours to complete. We have given extra time for the handin since you are working with other things in parallel. Hand in your report on Monday Sept 16th the latest. If your report is not ready by Monday, send in what you have.
+This exercise/computer lab is expected to **not** take more than eight hours to complete. 
 
 ## Peer-review
 

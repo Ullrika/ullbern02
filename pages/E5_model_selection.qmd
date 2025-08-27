@@ -24,7 +24,7 @@ Work individually or in pairs. If you work in a pair, each person hands in indiv
 
 ## Time needed
 
-3 hours
+4 hours
 
 ## Grades
 
@@ -38,19 +38,21 @@ Create a report using Jupyter Notebook or Quarto.
 
 ## Model selection competition
 
-You have access to a dataset for **Fathead Minnow Acute Aquatic Toxicity** compiled and described by He and Jurs (2005). The data set consists of 322 compounds that were experimentally assessed for toxicity. The outcome is the negative log of activity (labeled as "activity"). 
+You will be given a data set, with a test data set. Your task is to build a predictive model. We the evaluate the models predictability using the test data set. 
 
-The data set contains 50 molecular QuickProp descriptors (http://www.schrodinger.com/products/14/17/). Ullrika has removed missing values.
+<!-- You have access to a dataset for **Fathead Minnow Acute Aquatic Toxicity** compiled and described by He and Jurs (2005). The data set consists of 322 compounds that were experimentally assessed for toxicity. The outcome is the negative log of activity (labeled as "activity").  -->
 
-Your task is to build a model that predict Acute Aquatic Toxicity from the molecular descriptors. 
+<!-- The data set contains 50 molecular QuickProp descriptors (http://www.schrodinger.com/products/14/17/). Ullrika has removed missing values. -->
 
-Ullrika has taken out a randomly selected validation set of 90 compounds from the original dataset. You have access to the remaining 229 data points as training dataset to build the model. You are to build at least one predictive model. When that is done, you get access to the validation set and you are without altering your model derive the $MSE_{test}$ and $R^2$ (or $\text{Adjusted }R^2$). From the submitted reports, we will later identify a winner.
+<!-- Your task is to build a model that predict Acute Aquatic Toxicity from the molecular descriptors.  -->
 
-You can choose which of the two alternatives you would like to start with. If you have time, then make a model for both of them. 
+<!-- Ullrika has taken out a randomly selected validation set of 90 compounds from the original dataset. You have access to the remaining 229 data points as training dataset to build the model. You are to build at least one predictive model. When that is done, you get access to the validation set and you are without altering your model derive the $MSE_{test}$ and $R^2$ (or $\text{Adjusted }R^2$). From the submitted reports, we will later identify a winner. -->
 
-- Build a predictive model using best subset selection, forward or backward selection using the full data set. 
+<!-- You can choose which of the two alternatives you would like to start with. If you have time, then make a model for both of them.  -->
 
-- Build a predictive model using shrinkage methods. I recommend you select a smaller subset of the predictors and use the Lasso. Note if the functions that come with the ISL book automatically standardise the predictors, otherwise you must also remember to standardise the predictors. 
+<!-- - Build a predictive model using best subset selection, forward or backward selection using the full data set.  -->
+
+<!-- - Build a predictive model using shrinkage methods. I recommend you select a smaller subset of the predictors and use the Lasso. Note if the functions that come with the ISL book automatically standardise the predictors, otherwise you must also remember to standardise the predictors.  -->
 
 
 

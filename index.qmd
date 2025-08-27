@@ -8,9 +8,9 @@ subtitle: "Computational Science: Reproducible Data Science and Statistical Lear
 
 [Introduction to supervised learning](pages/L1_intro_supervised_learning.qmd)
 
-[Linear Regression](pages/L1_linear_regression.qmd)
+[Regression](pages/L1_regression.qmd)
 
-[Exercise 1](pages/E1_linear_regression.qmd)
+[Exercise 1](pages/E1_regression.qmd)
 
 # Lecture 2
 
@@ -19,16 +19,19 @@ subtitle: "Computational Science: Reproducible Data Science and Statistical Lear
 [Exercise 2](pages/E2_generalised_linear_regression.qmd)
 
 # Lecture 3
+
 [Hierarchical Models and Testing](pages/L3_hierarchical_models_and_testing.qmd)
 
 [Exercise 3](pages/E3_hierarchical_models_and_testing.qmd)
 
 # Lecture 4
+
 [Resampling Methods](pages/L4_resampling_methods.qmd)
 
 [Exercise 4](pages/E4_resampling_methods.qmd)
 
 # Lecture 5
+
 [Model Selection](pages/L5_model_selection.qmd)
 
 [Exercise 5](pages/E5_model_selection.qmd)
