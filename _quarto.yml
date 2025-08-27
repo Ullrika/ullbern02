@@ -9,11 +9,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      #- href: pages/L1_intro_supervised_learning.qmd
-      #  text: Introduction 
-     # - href: pages/L1_linear_regression.qmd
-      #  text: Linear regression
-      - about.qmd
+      - href: about.qmd
+
       
 format:
   html:
