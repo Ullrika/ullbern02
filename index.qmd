@@ -22,7 +22,7 @@ subtitle: "Computational Science: Reproducible Data Science and Statistical Lear
 
 [Hierarchical Models and Testing](pages/L3_hierarchical_models_and_testing.qmd)
 
-[Exercise 3](pages/E3_hierarchical_models_and_testing.qmd)
+[Exercise 3](pages/E3_hierarchical models and testing.qmd)
 
 # Lecture 4
 
