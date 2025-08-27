@@ -1,13 +1,6 @@
-model{
-    # Priors:
-    beta0 ~ dnorm(0, 0.01) # intercept
-    beta1 ~ dnorm(0, 0.01) # slope
-    sigma ~ dnorm(0, 100)I(0,) # standard deviation
-    tau <- 1 / (sigma * sigma) # tau is precision (1 / variance)
-    
-    # Likelihood:
-    for (i in 1:n){
-      y[i] ~ dnorm(mu[i], tau) 
-      mu[i] <- beta0 + beta1 * x[i]
-    }
-}
+Title: A Probabilistic Network Approach to Optimize In vitro Standard Battery for Genotoxicity Testing
+
+Zheng Zhou
+
+Abstract: Genotoxicity assessment employs a battery of in vitro and in vivo assays to examine three endpoints- gene mutation, clastogenicity, and aneuploidy. Characterization of the dependencies among in vitro and in vivo assays and the dependencies between the assays and the three endpoints facilitates the interpretation of conflicting assay results and optimization of testing battery. The primary objective of this study is to model these dependencies with a probabilistic network and suggest an optimal battery of in vitro assays for endpoint prediction.
+The network was calibrated using existing genotoxicity testing data and information from the Transgenic Rodent Assay Information Database (TRAID). Since the three endpoints are not directly observable, data for the endpoints were estimated using a Bayesian latent class analysis. Comparative analysis of in vitro assay combinations for predicting gene mutation and chromosome aberration revealed that endpoint predictions depend on both assay selection and prior probability of rodent carcinogenicity. The mouse lymphoma tk mutation test contributed significantly to gene mutation prediction when performed alone or first in sequence. Conversely, the bacterial reverse mutation (Ames) test provided minimal incremental information when combined with other in vitro assays. This framework enables development of efficient, predictive genotoxicity testing paradigms that reduce animal testing while maintaining regulatory confidence.
