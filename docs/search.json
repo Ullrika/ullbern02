@@ -1,0 +1,758 @@
+[
+  {
+    "objectID": "pages/L5_model_selection.html",
+    "href": "pages/L5_model_selection.html",
+    "title": "Lecture Model selection and Shrinkage methods",
+    "section": "",
+    "text": "ISL: 6.1 and 5.2\n\n\n\n\n\n\nResidual Sum of Squares\n\\[RSS = \\sum_{i=1}^{n} \\left( y_i-\\beta_0 - \\sum_{j=1}^{p}\\beta_j x_{ij}\\right)^2 \\]\nTotal Sum of Squares\n\\[TSS = \\sum_{i=1}^{n}  (y_i - \\bar{y})^2\\]\nCoefficient of determination (“R squared”) \\(R^2\\)\n\\[R^2 = 1-\\frac{RSS}{TSS}\\]\n\\(R^2\\) will increase with the number of parameters \\(d\\). When comparing models we can introduce a penalty for the number of parameters and instead derive an Adjusted \\(R_2\\)\n\\[\\text{Adjusted } R^2 = 1-\\frac{RSS/(n-d-1)}{TSS/(n-1)}\\]\nAkaike’s Information Criterion\n\\[AIC = -2 \\ln(L)+2d\\]\nValidation set error \\(MSE_{test}\\) or Cross-validation error \\(MSE_{CV}\\)\nOther measures mentioned in the ISL book but that we will not dive more into:\nMallow’s \\(C_p\\)\n\\[C_p = \\frac{1}{n}(RSS+2d\\hat{\\sigma}^2)\\]\nBayesian Information Criterion\n\\[BIC = \\frac{1}{n}(RSS + log(n)d\\hat{\\sigma}^2)\\]"
+  },
+  {
+    "objectID": "pages/L5_model_selection.html#performance-metrics",
+    "href": "pages/L5_model_selection.html#performance-metrics",
+    "title": "Lecture Model selection and Shrinkage methods",
+    "section": "",
+    "text": "Residual Sum of Squares\n\\[RSS = \\sum_{i=1}^{n} \\left( y_i-\\beta_0 - \\sum_{j=1}^{p}\\beta_j x_{ij}\\right)^2 \\]\nTotal Sum of Squares\n\\[TSS = \\sum_{i=1}^{n}  (y_i - \\bar{y})^2\\]\nCoefficient of determination (“R squared”) \\(R^2\\)\n\\[R^2 = 1-\\frac{RSS}{TSS}\\]\n\\(R^2\\) will increase with the number of parameters \\(d\\). When comparing models we can introduce a penalty for the number of parameters and instead derive an Adjusted \\(R_2\\)\n\\[\\text{Adjusted } R^2 = 1-\\frac{RSS/(n-d-1)}{TSS/(n-1)}\\]\nAkaike’s Information Criterion\n\\[AIC = -2 \\ln(L)+2d\\]\nValidation set error \\(MSE_{test}\\) or Cross-validation error \\(MSE_{CV}\\)\nOther measures mentioned in the ISL book but that we will not dive more into:\nMallow’s \\(C_p\\)\n\\[C_p = \\frac{1}{n}(RSS+2d\\hat{\\sigma}^2)\\]\nBayesian Information Criterion\n\\[BIC = \\frac{1}{n}(RSS + log(n)d\\hat{\\sigma}^2)\\]"
+  },
+  {
+    "objectID": "pages/L5_model_selection.html#model-selection",
+    "href": "pages/L5_model_selection.html#model-selection",
+    "title": "Lecture Model selection and Shrinkage methods",
+    "section": "Model selection",
+    "text": "Model selection\n\nBest subset selection\nForward selection\n\n\n\nBackward selection"
+  },
+  {
+    "objectID": "pages/L5_model_selection.html#shrinkage-methods",
+    "href": "pages/L5_model_selection.html#shrinkage-methods",
+    "title": "Lecture Model selection and Shrinkage methods",
+    "section": "Shrinkage methods",
+    "text": "Shrinkage methods\n\nAdding penalties for higher parameter values in the objective function\n\n\nRidge regression\nThe objective function is the RSS with the L2-norm as a basis for the shrinkage penalty\n\\[\\sum_{i=1}^{n} \\left( y_i-\\beta_0 - \\sum_{j=1}^{p}\\beta_j x_{ij}\\right)^2 + \\lambda\\sum_{j=1}^{p}\\beta_j^2 = RSS + \\lambda \\sum_{j=1}^{p}\\beta_j^2\\]\nL2 norm\n\\[|| \\beta_1,\\ldots,\\beta_p|| = \\sqrt{\\sum_{j=1}^p\\beta_j^2}\\] \\(\\lambda\\) is a tuning parameter. One can select lambda by using cross validation.\nHere it is important to standardise independent variables using this formula\n\\[\\tilde{x}_{ij} = \\frac{x_{ij}}{\\sqrt{\\frac{1}{n}\\sum_{i=1}^n(x_{ij}-\\bar{x}_j)^2}}\\]\n\n\nLasso regression\nSame as Ridge regression, but the objective function is the RSS with the L1-norm as a basis for the shrinkage penalty.\n\\[\\sum_{i=1}^{n} \\left( y_i-\\beta_0 - \\sum_{j=1}^{p}\\beta_j x_{ij}\\right)^2 + \\lambda\\sum_{j=1}^{p}|\\beta_j| = RSS + \\lambda \\sum_{j=1}^{p}|\\beta_j|\\]\nL1 norm\n\\[| \\beta_1,\\ldots,\\beta_p| = \\sum_{j=1}^p|\\beta_j|\\]"
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html",
+    "href": "pages/L3_hierarchical_models_and_testing.html",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "",
+    "text": "ISL: Hypothesis testing is covered in 13.1, 13.2 and 3.3\n\n\nHierarchical models are not covered in ISL."
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#hypothesis-test---example",
+    "href": "pages/L3_hierarchical_models_and_testing.html#hypothesis-test---example",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "Hypothesis test - example",
+    "text": "Hypothesis test - example\nLet us go back to the mortality due to air pollution data, and fit a linear regression.\n\n\n\nCall:\nlm(formula = MORT ~ POOR, data = df_air)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-128.188  -31.752    1.504   31.331  131.381 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  852.134     26.773  31.828  &lt; 2e-16 ***\nPOOR           6.138      1.790   3.428  0.00112 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 57.21 on 58 degrees of freedom\nMultiple R-squared:  0.1685,    Adjusted R-squared:  0.1542 \nF-statistic: 11.75 on 1 and 58 DF,  p-value: 0.001124\n\n\n\n\n\n\n\n\nNote\n\n\n\nWhen there are several independent variables, testing the the coefficients (parameters) individually is not recommended because their parameters can be correlated. To what extent, depends on how correlation there is between the independent variables, but also if there are interaction effects between pairs or combinations of x-variables. In this situation it is better to test by comparing a full with a reduced model."
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#likelihood-ratio-test",
+    "href": "pages/L3_hierarchical_models_and_testing.html#likelihood-ratio-test",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "Likelihood ratio test",
+    "text": "Likelihood ratio test\nApply maximum likelihood on a full (unrestricted) model and on a reduced (restricted) model, the later where null hypothesis is seen as true.\nFor example, we want to test if the slope is different from zero and use\n\nHypothesis: \\(H_0: \\beta_1 = 0\\) against \\(H_1: \\beta_1 \\neq 0\\)\nfull model: \\(y_i=\\beta_0+\\beta_1 x_i+\\varepsilon\\)\nreduced model: \\(y_i=\\beta_0+\\varepsilon\\)\n\nLet \\(\\theta\\) be all parameters in the full model, and \\(\\theta_{red}\\) be the subset of parameters in the reduced model. Define the likelihood ratio statistic as\n\\[LR_n = 2\\left[ log\\ l_{full}(\\hat{\\theta}) - log\\ l_{red}(\\hat{\\theta}_{red})\\right]\\]\nIf the null hypothesis is true, sample size \\(n\\) is large and the likelihood functions have good properties (such as being differentiable on \\(\\theta\\)), then the likelihood ratio statistic \\(LR_n\\) converges in distribution to a \\(\\chi^2\\) (Chi-square) distribution with \\(r\\) degrees of freedom, where \\(r\\) is can be thought of as the number of independent parameters that are tested.\nThe rule is to reject the null hypothesis if \\(LR_n &gt; \\chi^2_{\\alpha/2}(r)\\), where the latter is a quantile from the \\(\\chi^2\\)-distribution with \\(r\\) degrees of freedom.\nThe likelihood ratio statistic can be derived from calculated deviances, which is an information theoretic measure that is usually calculated in generic functions for generalised regression.\nThe deviance is negative two times the maximized log-likelihood and a constant, \\(D(\\theta)=-2log\\ l(\\hat{\\theta}) + C\\). The smaller the deviance, the better the fit.\n\n\n\n\nCall:\nglm(formula = MORT ~ POOR, data = df_air)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  852.134     26.773  31.828  &lt; 2e-16 ***\nPOOR           6.138      1.790   3.428  0.00112 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 3273.066)\n\n    Null deviance: 228308  on 59  degrees of freedom\nResidual deviance: 189838  on 58  degrees of freedom\nAIC: 659.85\n\nNumber of Fisher Scoring iterations: 2\n\n\nIn this example, the likelihood ratio statistic \\(LR_n = 3.8469795\\times 10^{4}\\) which is much larger than the quantile \\(\\chi^2_{\\alpha/2}(r)=\\chi^2_{0.025}(1) = 5.0238862\\). Thus, the null hypothesis is rejected."
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#why-is-hierarchical-modelling-important",
+    "href": "pages/L3_hierarchical_models_and_testing.html#why-is-hierarchical-modelling-important",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "Why is hierarchical modelling important?",
+    "text": "Why is hierarchical modelling important?\nIgnoring dependencies, result in underestimation of standard error and possible lower p-values in frequentist hypothesis testing.\nAn appropriate implementation of the hierarchical structures in data can reduce error in predictions, and increase the ability for the model to estimate and test associations.\nAn alternative would be to estimate one function per group of independent samples, but that leaves us with several models with possible poorer performances per model. With this in mind, hierarchical modeling can be used to build one model estimated from all data, and allow for sharing information between groups of data.\nWhen basic assumptions are not met, there is something wrong with the model. Adding a hierarhical structe is one way to improve a model for inference."
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#example-penguins",
+    "href": "pages/L3_hierarchical_models_and_testing.html#example-penguins",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "Example Penguins",
+    "text": "Example Penguins\nHere is an example of results will drastically change when groups are considered in an analysis.\n\n\nWarning: package 'palmerpenguins' was built under R version 4.4.3\n\n\n\nThe palmerpenguins data\nThe palmerpenguins data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica. This data set is being used for education of statistics and data science.\n\n\n\nAssociation between bill length and bill depth\nLet \\(y=\\text{\"Bill depth in mm\"}\\) and \\(x=\\text{\"Bill length in mm\"}\\)\nWe model their linear association by a simple linear regression\n\\[y_i = \\beta_0 + \\beta_1 x_i + \\varepsilon_i\\]\nwhere \\(\\varepsilon_i \\sim N(0,\\sigma)\\) for all pairs of observations \\(i=1,\\ldots,n\\)\n\n\n\n\n\n\nCaution\n\n\n\nWhat could be a potential weakness in choosing a linear regression model for testing the association between the two variables?\nIn this course, we expect that you can account for the assumptions behind a linear regression model.\n\n\n\n\n\n\n\nThe linear association (the slope parameter) is estimated to be negative (-0.085) and significantly different from zero (95th \\(CI_{\\beta_1} = (-0.1225253,-0.0475173)\\), p-value &lt; 0.05).\n\n\n                  Estimate Std. Error   t value     Pr(&gt;|t|)\n(Intercept)    20.88546832 0.84388321 24.749240 4.715137e-78\nbill_length_mm -0.08502128 0.01906694 -4.459093 1.119662e-05\n\n\n\n\n\n\n\n\n\nResidual analysis\n\nCheck assumption of independence and equal variance of residuals\n\n\n\n\n\n\n\nCheck assumption of normally distributed residuals\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nIs it justified to make the assumptions that the residuals are independent identically and normally distributed?"
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#a-hierarhical-model-considering-groups-in-data",
+    "href": "pages/L3_hierarchical_models_and_testing.html#a-hierarhical-model-considering-groups-in-data",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "A hierarhical model considering groups in data",
+    "text": "A hierarhical model considering groups in data\nFrom the analysis above, we conclude that there is something odd with the model. It odd that there should be a negative association between the length and depth of a bill, and the residual analysis induces some discomfort in making conclusions from the model.\nThe data material consists of observations from three species, which constitute three groups where one can expect that the variation between groups is larger than the variation within groups. What if the relationship between bill length and bill depth looks different for different species?\n\nLet us investigate by visualising the data where we separate the observations from the three groups. Here the visualisation is made by fitting a linear model per group.\n\n\n\n\n\nHere we can note that within each group now there is a positive linear association between bill length and bill depth.\n\nSimpson’s paradox, or the Yule–Simpson effect, is a phenomenon in probability and statistics, in which a trend appears in several different groups of data but disappears or reverses when these groups are combined. It is sometimes given the descriptive title reversal paradox or amalgamation paradox. data-to-viz.com"
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#a-linear-model-with-random-and-fixed-effects",
+    "href": "pages/L3_hierarchical_models_and_testing.html#a-linear-model-with-random-and-fixed-effects",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "A linear model with random and fixed effects",
+    "text": "A linear model with random and fixed effects\nHere is one way to model hierarchies in data.\nLet \\(y_{ij}\\) be the \\(i\\)th observation from species \\(j\\) given a fixed \\(x_{ij}\\), where \\(i=1,\\ldots,n\\) and \\(j=1,2,3\\).\n\\[y_{ij} = \\beta_{0j} + \\beta_1 x_{ij} + \\varepsilon_{ij}\\]\nwhere \\(E(\\varepsilon_{ij})=0\\) and \\(V(\\varepsilon_{ij})=\\sigma^2\\)\nThe variance parameter \\(\\sigma^2\\) is the variation in the model residuals.\n\\[y_{ij} = \\beta_{0} + u_{j} + \\beta_1 x_{ij} + \\varepsilon_{ij}\\]\nwhere \\(E(u_j)=0\\) and \\(V(u_j)=\\tau^2\\).\nNow we have a model where we divide the variance into variance due to random error for the model and variance due to variation between groups.\nThe parameter \\(\\beta_1\\) is a fixed effect because the slope is the same for all groups.\nThe term \\(u_j\\) is called a random effect because it takes different values for different groups \\(j = 1,2,3\\) (we have three species of penguins).\nWe can also assume the \\(u_j \\sim N(0,\\tau^2)\\)\nThe variance parameter \\(\\tau^2\\) is between-group heterogeneity. Here it denotes the variance in the random intercepts.\nA model with fixed and random effects (a.k.a a linear mixed model) can be estimated by maximum likelihood or Bayesian inference.\n\n\n\n\n\n\nNote\n\n\n\nIn some cases, it can be justified to consider that the slope might differ between groups. If so, a random effect on the slope can be added.\n\n\n\nMaximum likelihood estimation\nHere I have applied REstricted Maximum Likelihood (REML). The way of specifying the models are\n\n\nLinear mixed model fit by REML ['lmerMod']\nFormula: bill_depth_mm ~ bill_length_mm + (1 | species)\n   Data: db\n\nREML criterion at convergence: 959.5\n\nScaled residuals: \n    Min      1Q  Median      3Q     Max \n-2.5632 -0.7210 -0.0507  0.5814  3.7654 \n\nRandom effects:\n Groups   Name        Variance Std.Dev.\n species  (Intercept) 6.6319   2.5753  \n Residual             0.9089   0.9533  \nNumber of obs: 342, groups:  species, 3\n\nFixed effects:\n               Estimate Std. Error t value\n(Intercept)     8.28702    1.68309   4.924\nbill_length_mm  0.19898    0.01747  11.390\n\nCorrelation of Fixed Effects:\n            (Intr)\nbll_lngth_m -0.468\n\n\n\n\nResidual analysis\n\nCheck assumption of independence and equal variance of residuals\n\n\n\n\n\n\n\nCheck assumption of normally distributed residuals\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nNow it looks better !\n\n\n\n\nTesting the fixed effect in the hierarhical model\nI am interested in testing if there is a linear association.\nI can test using a confidence interval\nA 95th confidence interval of the slope parameter based on the profile likelihood mehtod is derived to be \\(CI_{\\beta_1}= (0.1641772,0.2328453)\\), i.e. a positive linear association that is statistically different from zero at the 5%’s significance level.\n\nWhen my model is estimated with a restricted maximum likelihood, using a likelihood ratio test can be wrong since the likelihoods are conditional on different values of a so called nuisance parameter.\nThen I can implement the maximum likelihood without a restriction (which can be problematic for the optimisation), or\nimplement the hierarchical model in a Bayesian framework and test using suitable methods therein"
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#bayesian-model-specification",
+    "href": "pages/L3_hierarchical_models_and_testing.html#bayesian-model-specification",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "Bayesian model specification",
+    "text": "Bayesian model specification\nA Bayesian specification of the model made in “tilde”-format can be\n\nLikelihood\n\n\\[Y_{ij}|\\beta_{0},\\beta_1,\\sigma,\\tau \\sim N(\\beta_{0} + u_j + \\beta_1 x_{ij},\\sigma^2)\\]\n\\[u_j|\\tau \\sim N(0,\\tau)\\]\n\nThe prior is derived based on the following marginal distributions\n\n\\[\\beta_0\\sim N(\\mu_{\\beta_0},\\sigma_{\\beta_0}^2)\\] \\[\\beta_1\\sim N(\\mu_{\\beta_1},\\sigma_{\\beta_1}^2)\\]\n\\[\\tau \\sim \\Gamma(a_{\\tau},b_{\\tau})\\]\n\\[\\sigma \\sim \\Gamma(a_{\\sigma},b_{\\sigma})\\]\nwhere \\(\\mu_{\\beta_0},\\sigma_{\\beta_0},\\mu_{\\beta_1},\\sigma_{\\beta_1},a_{\\tau},b_{\\tau},a_{\\sigma},b_{\\sigma}\\) are hyper-parameters."
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#directed-acyclic-graph",
+    "href": "pages/L3_hierarchical_models_and_testing.html#directed-acyclic-graph",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "Directed Acyclic Graph",
+    "text": "Directed Acyclic Graph\nDraw on the board if there is time"
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#testing-in-bayesian-inference",
+    "href": "pages/L3_hierarchical_models_and_testing.html#testing-in-bayesian-inference",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "Testing in Bayesian inference",
+    "text": "Testing in Bayesian inference\nInference about parameters can be made by summarising the posterior for the quantity of interest.\nBayesian testing is more about comparing model. A suggested approach is to comparing deviances based on the posterior.\nThe deviance information criterion (DIC) can be defined as\n\\[DIC = D(\\bar{\\theta})+2p_D\\]\nwhere \\(\\bar{\\theta}\\) is the posterior mean and \\(p_D\\) the effective number of parameters of the model.\nThe DIC for the full and reduced model can be used to see if there is added value in the difference in the two specifications of the model.\nAnother approach is to use Bayes factor to compare two models, \\(M_1\\) and \\(M_2\\):\n\\[BF = \\frac{P(data|M_1)}{P(data|M_2)}\\]  \nA Bayes factor much greater than 1 gives high evidence to the model in the nominator, \\(M_1\\).\nBayes factor has resemblances with the likelihood ratio statistic, but it has a wider application and does not require that the models to be nested."
+  },
+  {
+    "objectID": "pages/L3_hierarchical_models_and_testing.html#bayesian-vs-frequentist",
+    "href": "pages/L3_hierarchical_models_and_testing.html#bayesian-vs-frequentist",
+    "title": "Lecture Hierarchical Models and Testing",
+    "section": "Bayesian vs Frequentist",
+    "text": "Bayesian vs Frequentist\nThis section is inspired by Efron and Hastie’s book Computer age statistical inference - algorithms, evidence, and data science\n\nBayesian inference requires a prior distribution, and the choice of prior is therefore important and sometimes challenging.\nFrequentism replaces the choice of a prior with the choice of a method or algorithm designed for the quantity of interest.\nBayesian inference answers all possible questions at once.\nFrequentism requires different methods/algorithms for different questions.\nBayesian inference is open for sequential updating, e.g. when data are to be integrated to the model over time.\n\n\nThe authors say “Computer-age statistical inference at its most successful combines elements of the two philosophies”"
+  },
+  {
+    "objectID": "pages/L1_linear_regression.html",
+    "href": "pages/L1_linear_regression.html",
+    "title": "Lecture Linear regression and other alternatives",
+    "section": "",
+    "text": "ISL: 3.1, 3.2, 3.3, 7.6, 7.3, 7.4"
+  },
+  {
+    "objectID": "pages/L1_linear_regression.html#ordinary-least-squares-ols-regression",
+    "href": "pages/L1_linear_regression.html#ordinary-least-squares-ols-regression",
+    "title": "Lecture Linear regression and other alternatives",
+    "section": "Ordinary Least Squares (OLS) regression",
+    "text": "Ordinary Least Squares (OLS) regression\n\nWe select a linear model\n\n\\[f(x)=\\beta_0+\\beta_1 x_1 + \\ldots + \\beta_p x_p\\] 2. We estimate the parameters as those minimising the RSS.\nLet \\(\\beta=(\\beta_0,\\ldots,\\beta_p)\\) and\n\\[Q(\\beta):= Q(\\beta_0,\\ldots,\\beta_p) = \\sum_{i=1}^{n} \\left(y_i - (\\beta_0+\\beta_1 x_{i1} + \\ldots + \\beta_p x_{ip})\\right)^2\\] then\n\\[\\hat{\\beta} = \\underset{\\beta}{\\mathrm{argmin}} \\ Q(\\beta)\\]\n\n\n\n\n\n\nNote\n\n\n\nSimple regression - a model with one independent variable, i.e. \\(p=1\\)\n\\[\\hat{\\beta}_1 = \\frac{\\sum_{i=1}^n (x_i-\\bar{x})(y_i-\\bar{y})}{\\sum_{i=1}^n (x_i-\\bar{x})^2}\\]\n\\[\\hat{\\beta}_0 = \\bar{y}-\\hat{\\beta}_1\\bar{x}\\]\nMultiple regression - a model with several independent variables, i.e. \\(p&gt;1\\)\n\nParameters estimated by matrix calculations, not shown here"
+  },
+  {
+    "objectID": "pages/L1_linear_regression.html#airpollution-data-set",
+    "href": "pages/L1_linear_regression.html#airpollution-data-set",
+    "title": "Lecture Linear regression and other alternatives",
+    "section": "Airpollution data set",
+    "text": "Airpollution data set\nHere we illustrate regression with an air pollution data set from a paper on ridge regression. Source: McDonald, G.C. and Schwing, R.C. (1973) ‘Instabilities of regression estimates relating air pollution to mortality’, Technometrics, vol.15, 463-482.\nhttps://lib.stat.cmu.edu/datasets/pollution\nVariables in order: PREC Average annual precipitation in inches JANT Average January temperature in degrees F JULT Same for July OVR65 % of 1960 SMSA population aged 65 or older POPN Average household size EDUC Median school years completed by those over 22 HOUS % of housing units which are sound & with all facilities DENS Population per sq. mile in urbanized areas, 1960 NONW % non-white population in urbanized areas, 1960 WWDRK % employed in white collar occupations POOR % of families with income &lt; $3000 HC Relative hydrocarbon pollution potential NOX Same for nitric oxides SO2 Same for sulphur dioxide HUMID Annual average % relative humidity at 1pm MORT Total age-adjusted mortality rate per 100,000\n\n\nRows: 60 Columns: 16\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\ndbl (16): PREC, JANT, JULT, OVR65, POPN, EDUC, HOUS, DENS, NONW, WWDRK, POOR...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nA simple linear regression on the association between proportion of poor families and mortality, together with a 95% confidence region for the line.\n\n\n                 2.5 %     97.5 %\n(Intercept) 798.542504 905.725804\nPOOR          2.554194   9.721911"
+  },
+  {
+    "objectID": "pages/L1_linear_regression.html#statistical-errors-in-simple-linear-regression",
+    "href": "pages/L1_linear_regression.html#statistical-errors-in-simple-linear-regression",
+    "title": "Lecture Linear regression and other alternatives",
+    "section": "Statistical errors in simple linear regression",
+    "text": "Statistical errors in simple linear regression\nUnder the assumptions of independent and identically distributed model errors, \\(\\varepsilon_i\\), the variance of the errors can be estimated as\n\\[\\hat{\\sigma}^2 = \\frac{\\sum_{i=1}^n e_i^2}{n-2}\\] where \\(e_i=y_i-\\beta_0-\\beta_1x_{i1}\\).\nThe variance of the slope is\n\\[V(\\hat{\\beta}_1) = \\frac{\\sigma^2}{\\sum_{i=1}^n (x_i-\\bar{x})^2}\\] If the sample size \\(n\\) is sufficiently large and using the estimate for the variance \\(\\sigma^2\\) we can derive a frequentist \\((1-\\alpha)\\) two-sided confidence interval as\n\\[I_{\\beta_1}: \\hat{\\beta}_1 \\pm \\lambda_{\\alpha}\\cdot \\sqrt{\\hat{V}(\\hat{\\beta}_1)}\\]\nThe value of the quantile \\(\\lambda_{\\alpha}\\) is chosen based on what level of confidence that is asked for. In the book, they use 2 and refer to this as a 95%th confidence interval.\n\nQuantiles from a normal distribution for a two-sided confidence interval\n\n\nConfidence level\n\\(\\alpha\\)\n\\(\\lambda_{\\alpha}\\)\n\n\n\n\n99%\n0.5%\n2.58\n\n\n95%\n2.5%\n1.96\n\n\n90%\n5%\n1.64\n\n\n80%\n10%\n1.28\n\n\n\nThe variance for the intercept is\n\\[V(\\hat{\\beta}_0) = \\sigma^2\\left[ \\frac{1}{n} + \\frac{\\bar{x}^2}{\\sum_{i=1}^n (x_i-\\bar{x})^2} \\right]\\]\nThe variance of the expected value of the response variable given that \\(x=x_0\\) is\n\\[\\begin{split}  V(\\hat{\\mu}(x_0)) = V(\\hat{\\beta}_0+\\hat{\\beta}_1x_0) = &  & \\\\ \\sigma^2\\left[ \\frac{1}{n} + \\frac{(x_0-\\bar{x})^2}{\\sum_{i=1}^n (x_i-\\bar{x})^2} \\right] \\end{split}\\]\nA two-sided confidence interval for the expected value of the response given that \\(x=x_0\\) is\n\\[\\hat{\\mu}(x_0) \\pm \\lambda_{\\alpha}\\cdot \\sqrt{V(\\hat{\\mu}(x_0))}\\]\nThe variance of a predicted value of the response variable given that \\(x=x_0\\) is\n\\[V(\\hat{y}(x_0)) = V(\\beta_0+\\beta_1x_0+\\varepsilon) = \\sigma^2\\left[ \\frac{1}{n} + \\frac{(x_0-\\bar{x})^2}{\\sum_{i=1}^n (x_i-\\bar{x})^2} +1\\right] \\]\nA two-sided confidence interval for a predicted value of the response given that \\(x=x_0\\) is\n\\[\\hat{y}(x_0) \\pm \\lambda_{\\alpha}\\cdot \\sqrt{\\hat{V}(\\hat{y}(x_0))}\\]\n\nMake sure you understand the difference between variance in the estimate of an expected value and variance in a predition of a new observation."
+  },
+  {
+    "objectID": "pages/L1_linear_regression.html#local-regression-loess",
+    "href": "pages/L1_linear_regression.html#local-regression-loess",
+    "title": "Lecture Linear regression and other alternatives",
+    "section": "Local regression (LOESS)",
+    "text": "Local regression (LOESS)\nLocal regression is a non-parametric method that fit a local regression at each point (over a grid of points) in predictor space.\n\nSelect a value on the x-variable \\(x=x_0\\)\nSelect the \\(k\\) nearest points to \\(x_0\\)\nAssign a weight to each point \\(K_{i0}\\)\nFit a weighted simple OLS regression by minimising\n\n\\[\\sum_{i=1}^{n} K_{i0} (y_i-\\beta_0-\\beta_1x_{i})^2\\]\n\nThe fitted value at \\(x_0\\) is \\[\\hat{y}|x_0 = \\hat{f}(x_0) = \\hat{\\beta_0} + \\hat{\\beta_1}x_0\\]\nRepeat for different values on \\(x_0\\)\n\n\n\n\nFigure 7.9 from ISL"
+  },
+  {
+    "objectID": "pages/L1_linear_regression.html#spline-regression",
+    "href": "pages/L1_linear_regression.html#spline-regression",
+    "title": "Lecture Linear regression and other alternatives",
+    "section": "Spline regression",
+    "text": "Spline regression\nFit a line in each region of the predictor space defined by knots, requiring continuity of each knot."
+  },
+  {
+    "objectID": "pages/E5_model_selection.html",
+    "href": "pages/E5_model_selection.html",
+    "title": "Exercise Model selection and Shrinkage",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write at the beginning of the file who you have been working with."
+  },
+  {
+    "objectID": "pages/E5_model_selection.html#format",
+    "href": "pages/E5_model_selection.html#format",
+    "title": "Exercise Model selection and Shrinkage",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write at the beginning of the file who you have been working with."
+  },
+  {
+    "objectID": "pages/E5_model_selection.html#time-needed",
+    "href": "pages/E5_model_selection.html#time-needed",
+    "title": "Exercise Model selection and Shrinkage",
+    "section": "Time needed",
+    "text": "Time needed\n3 hours"
+  },
+  {
+    "objectID": "pages/E5_model_selection.html#grades",
+    "href": "pages/E5_model_selection.html#grades",
+    "title": "Exercise Model selection and Shrinkage",
+    "section": "Grades",
+    "text": "Grades\nPass or Fail"
+  },
+  {
+    "objectID": "pages/E5_model_selection.html#programming-language",
+    "href": "pages/E5_model_selection.html#programming-language",
+    "title": "Exercise Model selection and Shrinkage",
+    "section": "Programming language",
+    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python.\nCreate a report using Jupyter Notebook or Quarto."
+  },
+  {
+    "objectID": "pages/E5_model_selection.html#model-selection-competition",
+    "href": "pages/E5_model_selection.html#model-selection-competition",
+    "title": "Exercise Model selection and Shrinkage",
+    "section": "Model selection competition",
+    "text": "Model selection competition\nYou have access to a dataset for Fathead Minnow Acute Aquatic Toxicity compiled and described by He and Jurs (2005). The data set consists of 322 compounds that were experimentally assessed for toxicity. The outcome is the negative log of activity (labeled as “activity”).\nThe data set contains 50 molecular QuickProp descriptors (http://www.schrodinger.com/products/14/17/). Ullrika has removed missing values.\nYour task is to build a model that predict Acute Aquatic Toxicity from the molecular descriptors.\nUllrika has taken out a randomly selected validation set of 90 compounds from the original dataset. You have access to the remaining 229 data points as training dataset to build the model. You are to build at least one predictive model. When that is done, you get access to the validation set and you are without altering your model derive the \\(MSE_{test}\\) and \\(R^2\\) (or \\(\\text{Adjusted }R^2\\)). From the submitted reports, we will later identify a winner.\nYou can choose which of the two alternatives you would like to start with. If you have time, then make a model for both of them.\n\nBuild a predictive model using best subset selection, forward or backward selection using the full data set.\nBuild a predictive model using shrinkage methods. I recommend you select a smaller subset of the predictors and use the Lasso. Note if the functions that come with the ISL book automatically standardise the predictors, otherwise you must also remember to standardise the predictors."
+  },
+  {
+    "objectID": "pages/E5_model_selection.html#submit-lab-report-on-canvas",
+    "href": "pages/E5_model_selection.html#submit-lab-report-on-canvas",
+    "title": "Exercise Model selection and Shrinkage",
+    "section": "Submit lab report on Canvas",
+    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupyter Notebook on Google Colab (or installed on your own computer)\nR in Quarto on posit.cloud (or with R and RStudio installed on your computer)\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nUpload the report as the jypiter notebook, quarto or rmd file. This is to allow me to rerun the code on my computer.\nUpload the report in the assignment Exercise: Model selection and shrinkage on Canvas."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html",
+    "href": "pages/E3_hierarchical models and testing.html",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#format",
+    "href": "pages/E3_hierarchical models and testing.html#format",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#time-needed",
+    "href": "pages/E3_hierarchical models and testing.html#time-needed",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Time needed",
+    "text": "Time needed\nThis exercise/computer lab is expected to not take more than eight hours to complete. We have given extra time for the handin since you are working with other things in parallel. Hand in your report on Monday Sept 16th the latest. If your report is not ready by Monday, send in what you have."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#peer-review",
+    "href": "pages/E3_hierarchical models and testing.html#peer-review",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Peer-review",
+    "text": "Peer-review\nYou are to peer-review another student report. The purpose of this part is that you are to practice reading code made by someone else and practice giving constructive and helpful comments on code.\nLimit your peer-review to comments on these four points:\n\nthe choice and justification of the model\nthe method for estimation and its implementation\nthe method for testing and the reliability of the results\nthe readability of the report\n\nWhich report to review is assigned by Ullrika. One report can receive several reviewers. You cannot do a review, until you submitted your own report."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#grades",
+    "href": "pages/E3_hierarchical models and testing.html#grades",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Grades",
+    "text": "Grades\nPass or Fail. To pass, the student must hand in their own report and provide a peer-review on another student report. Both reports must be of acceptable quality."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#programming-language",
+    "href": "pages/E3_hierarchical models and testing.html#programming-language",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Programming language",
+    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#problem-evidence-synthesis",
+    "href": "pages/E3_hierarchical models and testing.html#problem-evidence-synthesis",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Problem: Evidence synthesis",
+    "text": "Problem: Evidence synthesis\nWe are going to use a data set of a collection of randomised case-control studies of the effectiveness of descriptive social norms on hotel customers behavior to reuse their towels.\nRead Scheibehenne et al. (2016) to understand why and how the studies were conducted.\nScheibehenne, B., Jamil, T., & Wagenmakers, E.-J. (2016). Bayesian Evidence Synthesis Can Reconcile Seemingly Inconsistent Results: The Case of Hotel Towel Reuse. Psychological Science, 27(7), 1043-1046. https://journals.sagepub.com/doi/10.1177/0956797616644081\nYou task is to formulate and justify a parametric model for testing the effectiveness of the intervention, estimate the model parameters and test if the intervention has an effect or not.\n\nThe model should use an appropriate family distribution for the response variable, and\nconsider between study heterogeneity.\nEstimate parameters using maximum likelihood or Bayesian inference (choose of one them). Make a summary of the parameter values (no need to express variance of parameter estimates).\nFormulate hypotheses for the test of the effectiveness of the intervention referring to one or several parameters within the model.\nTest using maximum likelihood or Bayesian inference (the same framework you used for the estimation). You can write your own code or use ready available functions in suitable packages."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#submit-lab-report-on-canvas",
+    "href": "pages/E3_hierarchical models and testing.html#submit-lab-report-on-canvas",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Submit lab report on Canvas",
+    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone else than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupyter Notebook on Google Colab\nR in Quarto on posit.cloud.\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nUpload the report in the assignment Exercise: Hierarchical models and testing on Canvas."
+  },
+  {
+    "objectID": "pages/E1_linear_regression_discussion.html#visualise-data",
+    "href": "pages/E1_linear_regression_discussion.html#visualise-data",
+    "title": "Exercise 1 Linear Regression Discussion",
+    "section": "Visualise data",
+    "text": "Visualise data"
+  },
+  {
+    "objectID": "pages/E1_linear_regression_discussion.html#what-weight-to-choose",
+    "href": "pages/E1_linear_regression_discussion.html#what-weight-to-choose",
+    "title": "Exercise 1 Linear Regression Discussion",
+    "section": "What weight to choose?",
+    "text": "What weight to choose?\nThe function for LOESS that comes with the ISL book use the tricube function to determine weights\n\\[Y = \\left\\{ \\begin{array}{lr}\n        1 & \\text{if success}\\\\\n        0 & \\text{if failure}\n        \\end{array}\\right.\\]\n\\[W(u) = \\left\\{ \\begin{array}{lr}\n1-(1-u^3)^3 & \\text{for } 0&lt;u&lt;1 \\\\\n0 & \\text{otherwise} \\end{array}\\right.\\]\nwhere \\(u\\) is the euclidean distance divided by the maximum distance among the locally selected points."
+  },
+  {
+    "objectID": "pages/E1_linear_regression_discussion.html#predictions-when-using-10-nearest-neighbors",
+    "href": "pages/E1_linear_regression_discussion.html#predictions-when-using-10-nearest-neighbors",
+    "title": "Exercise 1 Linear Regression Discussion",
+    "section": "Predictions when using 10 nearest neighbors",
+    "text": "Predictions when using 10 nearest neighbors\n\n\n\n\n\nx0\ny\nse\n\n\n\n\n10\n908.60\n17.33\n\n\n18\n957.75\n13.77\n\n\n25\n1006.38\n23.62"
+  },
+  {
+    "objectID": "pages/E1_linear_regression_discussion.html#weighted-ols",
+    "href": "pages/E1_linear_regression_discussion.html#weighted-ols",
+    "title": "Exercise 1 Linear Regression Discussion",
+    "section": "Weighted OLS",
+    "text": "Weighted OLS\nThe intercept and slope parameter is estimated by minimising the weighted sum of squares"
+  },
+  {
+    "objectID": "pages/E1_linear_regression_discussion.html#how-to-estimate-prediction-error-from-a-weighted-ols",
+    "href": "pages/E1_linear_regression_discussion.html#how-to-estimate-prediction-error-from-a-weighted-ols",
+    "title": "Exercise 1 Linear Regression Discussion",
+    "section": "How to estimate prediction error from a Weighted OLS",
+    "text": "How to estimate prediction error from a Weighted OLS\nAssume constant variance for the errors. Estimate the variance for the error \\(V(\\varepsilon)\\) from the residual sum of squares RSS, where we divide by the number of data points minus the number of estimated parameters, i.e. \\(k-2\\)\n\\[\\frac{\\sum_{i=1}^{k}(y_i-\\hat{y}_i)^2}{k-2}\\]\nRepetition: We assume the errors have the same variance (homoscedastic), and can therefore estimate the variance of the error from the sum of squares (non-weighted)\n\\[\\hat{\\sigma}^2 = \\frac{\\sum_{i=1}^{k}(y_i-(\\hat{\\beta}_0+\\hat{\\beta}_1x_i))^2}{k-2}\\]\nThe variance for the estimate of the expected value of the reponse given \\(x_0\\) is\n\\[V(\\hat{\\mu}(x_0)) = \\sigma^2 \\left( \\frac{1}{k}  + \\frac{(x_0-\\bar{x})^2}{\\sum_{i=1}^k (x_i-\\bar{x})^2} \\right)\\]\nwhere we plug in the estimated variance to get the standard error for the prediction \\(\\hat{V}(\\hat{\\mu}(x_0))\\)."
+  },
+  {
+    "objectID": "pages/E1_linear_regression_discussion.html#linear-regression-with-matrices",
+    "href": "pages/E1_linear_regression_discussion.html#linear-regression-with-matrices",
+    "title": "Exercise 1 Linear Regression Discussion",
+    "section": "Linear regression with matrices",
+    "text": "Linear regression with matrices\nA matrix specification of the linear regression model (can easily be expanded to \\(p\\) predictors)\n\\[y = X\\beta + e\\]\n\\[Y = \\left( \\begin{array}{c}\n        y_1 \\\\\n        y_2 \\\\\n        \\vdots \\\\\n        y_n\n        \\end{array}\\right)\\]\n\\[X = \\left( \\begin{array}{l,c}\n        1 & x_1 \\\\\n        1 & x_2 \\\\\n        \\vdots & \\vdots \\\\\n        1 & x_n\n        \\end{array}\\right)\\]\n\\[\\beta = \\left( \\begin{array}{c}\n        \\beta_0 \\\\\n        \\beta_1 \\\\\n        \\end{array}\\right)\\]\n\\[e = \\left( \\begin{array}{c}\n        \\varepsilon_1 \\\\\n        \\varepsilon_2 \\\\\n        \\vdots \\\\\n        \\varepsilon_n\n        \\end{array}\\right)\\]\nThe OLS estimate of the parameters are\n\\[\\hat{\\beta} = (X^TX)^{-1}X^Ty\\] The estimate of the variance is\n\\[\\hat{\\sigma}^2 = \\frac{y^Ty-\\hat{\\beta}^TX^Ty}{n-(p+1)}\\] A point prediction of \\(Y\\) for \\(X_0=\\left(1 \\ x_0\\right)\\) (here we have only one predictor, \\(p = 1\\)) is\n\\[\\hat{\\mu}(x_0) = X_0\\hat{\\beta}\\]\nThe variance of the estimated expected value of \\(Y|x_0\\) is\n\\[V(\\hat{\\mu}(x_0)) = \\sigma^2\\left( X_0 (X^TX)^{-1}X_0^T \\right)\\]\n\n\n   [,1]     [,2]     [,3]    \nx0 10       18       25      \ny  892.222  957.6639 1014.919\nse 21.47555 16.66762 28.93332"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Lectures and Exercises",
+    "section": "",
+    "text": "Lecture 1\nIntroduction to supervised learning\nLinear Regression\nExercise 1\n\n\nLecture 2\nGeneralised Linear Models\nExercise 2\n\n\nLecture 3\nHierarchical Models and Testing\nExercise 3\n\n\nLecture 4\nResampling Methods\nExercise 4\n\n\nLecture 5\nModel Selection\nExercise 5"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "MIT Licence\n2025\nUllrika Sahlin Lund University, Sweden"
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html",
+    "href": "pages/E1_linear_regression.html",
+    "title": "Exercise Linear Regression",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write in the beginning of the text file whom you have been working with."
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html#format",
+    "href": "pages/E1_linear_regression.html#format",
+    "title": "Exercise Linear Regression",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write in the beginning of the text file whom you have been working with."
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html#grades",
+    "href": "pages/E1_linear_regression.html#grades",
+    "title": "Exercise Linear Regression",
+    "section": "Grades",
+    "text": "Grades\nPass or Fail"
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html#programming-language",
+    "href": "pages/E1_linear_regression.html#programming-language",
+    "title": "Exercise Linear Regression",
+    "section": "Programming language",
+    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python.\nYou are all familiar with Python, and some of you have worked with R before.\nA skill for a computational scientist is to master different programming languages. R has a friendly environment for data analysis, so take the opportunity to explore that as well.\nTo get started with R, I recommend\n\nuse it via Posit Cloud (no installation needed, just create an account) and create reports (notebooks) using Quarto\nuse it on your desktop by installing R and RStudio on your computer, or\nuse Google Colab. The default in Google Colab is Python. If you want to use R in Google Colab, open a new notebook, go to edit-&gt;Notebook settings, select R as runtime type and save."
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html#material",
+    "href": "pages/E1_linear_regression.html#material",
+    "title": "Exercise Linear Regression",
+    "section": "Material",
+    "text": "Material\nThe data file for this exercise is available on the git repository github.com/luchem/bern02\nURL to the data file https://github.com/luchem/bern02/blob/main/Labs/data/pollution_metadata.txt"
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html#local-simple-regression",
+    "href": "pages/E1_linear_regression.html#local-simple-regression",
+    "title": "Exercise Linear Regression",
+    "section": "Local simple regression",
+    "text": "Local simple regression\nWrite your own function for performing predictions with Local Regression using one predictor.\nThe input arguments to the function must be\n\n\\(y\\) a vector of observations of the response variable\n\\(x\\) a vector of observations of the predictor\n\\(k\\) the number of neighboring points to include in each local regression and\n\\(x_0\\) a vector of values for which a prediction is going to be made\n\nThe function shall return\n\n\\(pred\\) a vector of predicted values, and\n\\(se\\) a vector of standard deviations of the expected value of each predicted value"
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html#apply-the-function-on-the-air-pollution-data-set",
+    "href": "pages/E1_linear_regression.html#apply-the-function-on-the-air-pollution-data-set",
+    "title": "Exercise Linear Regression",
+    "section": "Apply the function on the Air pollution data set",
+    "text": "Apply the function on the Air pollution data set\nLoad the data set pollution_cleaneddata.csv with meta data pollution_metadata.txt.\nPredict Total age-adjusted mortality rate per 100,000 (MORT) for an area with 10, 18 and 25 % of families with income &lt; $3000 (POOR)\nProvide predictions with the expected value and the standard error."
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html#submit-lab-report-on-canvas",
+    "href": "pages/E1_linear_regression.html#submit-lab-report-on-canvas",
+    "title": "Exercise Linear Regression",
+    "section": "Submit lab report on Canvas",
+    "text": "Submit lab report on Canvas\nUpload the code for the function together with the three predictions in the assignment Exercise: Linear Regression on Canvas.\nWrite your name and date in the beginning of code and, if applicable, the name of your collaborator.\nThe exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest."
+  },
+  {
+    "objectID": "pages/E1_linear_regression.html#curiosa",
+    "href": "pages/E1_linear_regression.html#curiosa",
+    "title": "Exercise Linear Regression",
+    "section": "Curiosa",
+    "text": "Curiosa\nLocal regression is an example of a memory-based method which means that it does not have a fitted model and instead uses the training data to recompute the local fit every time we make a prediction.\nThe number of neighboring points can be chosen by cross-validation."
+  },
+  {
+    "objectID": "pages/E2_generalised_linear_regression.html",
+    "href": "pages/E2_generalised_linear_regression.html",
+    "title": "Exercise Generalised Linear Regression",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each hand in individually, but write in the beginning of the text file whom you have been working with."
+  },
+  {
+    "objectID": "pages/E2_generalised_linear_regression.html#format",
+    "href": "pages/E2_generalised_linear_regression.html#format",
+    "title": "Exercise Generalised Linear Regression",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each hand in individually, but write in the beginning of the text file whom you have been working with."
+  },
+  {
+    "objectID": "pages/E2_generalised_linear_regression.html#grades",
+    "href": "pages/E2_generalised_linear_regression.html#grades",
+    "title": "Exercise Generalised Linear Regression",
+    "section": "Grades",
+    "text": "Grades\nPass or Fail"
+  },
+  {
+    "objectID": "pages/E2_generalised_linear_regression.html#programming-language",
+    "href": "pages/E2_generalised_linear_regression.html#programming-language",
+    "title": "Exercise Generalised Linear Regression",
+    "section": "Programming language",
+    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python."
+  },
+  {
+    "objectID": "pages/E2_generalised_linear_regression.html#poisson-regression",
+    "href": "pages/E2_generalised_linear_regression.html#poisson-regression",
+    "title": "Exercise Generalised Linear Regression",
+    "section": "Poisson regression",
+    "text": "Poisson regression\nThe data file bird_count.csv contains bird counts from one site from the years 1999 to 2012.\nFormulate a model for Poisson regression with year as predictor.\nWrite your own code to estimate the parameters using maximum likelihood. You are not allowed to use ready available functions.\nUse the model with the point estimates of the parameters to generate a three samples of data (hypothetical observations) from the time period.\nSave the samples as a csv file, with a column indicating which sample it is."
+  },
+  {
+    "objectID": "pages/E2_generalised_linear_regression.html#submit-lab-report-on-canvas",
+    "href": "pages/E2_generalised_linear_regression.html#submit-lab-report-on-canvas",
+    "title": "Exercise Generalised Linear Regression",
+    "section": "Submit lab report on Canvas",
+    "text": "Submit lab report on Canvas\nUpload the csv file with the samples and the code to estimate the model and generate samples in the assignment Exercise: Generalised Linear Models on Canvas.\nWrite your name and date in the beginning of code and, if applicable, the name of your collaborator.\nThe exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest."
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html",
+    "href": "pages/E4_resampling_methods.html",
+    "title": "Exercise Model selection",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#format",
+    "href": "pages/E4_resampling_methods.html#format",
+    "title": "Exercise Model selection",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#time-needed",
+    "href": "pages/E4_resampling_methods.html#time-needed",
+    "title": "Exercise Model selection",
+    "section": "Time needed",
+    "text": "Time needed\n2 hours"
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#grades",
+    "href": "pages/E4_resampling_methods.html#grades",
+    "title": "Exercise Model selection",
+    "section": "Grades",
+    "text": "Grades\nPass or Fail"
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#programming-language",
+    "href": "pages/E4_resampling_methods.html#programming-language",
+    "title": "Exercise Model selection",
+    "section": "Programming language",
+    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python. Create a report using Jupyter Notebook notebook or Quarto."
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#cross-validation",
+    "href": "pages/E4_resampling_methods.html#cross-validation",
+    "title": "Exercise Model selection",
+    "section": "Cross validation",
+    "text": "Cross validation\nWe are going to work with the air pollution data set ´pollution_cleaneddata.csv´ and use resampling methods to evaluate the predictive performance of alternative model choices.\n\nLoad the data ´pollution_cleaneddata.csv´\nSpecify a polynomial regression model with degree \\(p\\) that predicts mortality as a function of the average July temperature in degrees F.\n\n\\[y_i = \\beta_0 + \\beta_1x_{i}+ \\beta_2x_{i}^2 + \\ldots + \\beta_px_{i}^p+\\varepsilon_i\\]"
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#validation-set-approach",
+    "href": "pages/E4_resampling_methods.html#validation-set-approach",
+    "title": "Exercise Model selection",
+    "section": "Validation set approach",
+    "text": "Validation set approach\n\nSet a seed for the random number generator.\nSplit data into two equal sized sets, one for training and one for testing.\nFor polynomial models with degree 1 up to 4, derive the mean square error of prediction for the training and testing data sets, respectively.\n\nPresent the results in a plot with polynomial degree on the x-axis and Mean Square Error on the y-axis (example provided below).\n\nJudging from the graph you just generated, which degree of the polynomial would you recommend if the goal is to have a small variance of new predictions.\nRepeat the procedure ten times but with other random seeds. Do you get similar results for other seeds?"
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#k-fold-cross-validation",
+    "href": "pages/E4_resampling_methods.html#k-fold-cross-validation",
+    "title": "Exercise Model selection",
+    "section": "K-fold cross-validation",
+    "text": "K-fold cross-validation\n\nSelect a polynomial degree, e.g. \\(p=2\\). Estimate the variance of predictions using the K-fold cross-validation approach where you hold out \\(K=3\\) sets.\nRepeat the procedure ten times but with other random seeds. Do you get similar results for other seeds?"
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#the-bootstrap",
+    "href": "pages/E4_resampling_methods.html#the-bootstrap",
+    "title": "Exercise Model selection",
+    "section": "The Bootstrap",
+    "text": "The Bootstrap\nUse the bootstrap to estimate the standard error of the slope of the line in the Poisson regression of the birds over time\n\nLoad the data set ‘bird_count.csv’\n\n\n\n\n\n\n\nRetrieve the Poisson model fitted with maximum likelihood that you did earlier in the course.\n\nLet \\(Y|x\\) be the counted number of birds at year \\(x\\)\n\\[Y|x_i \\sim Po(\\lambda(x_i))\\]\nThe \\(log\\) of the intensity is a linear model with an intercept \\(\\beta_0\\) and a slope \\(\\beta_1\\) parameter for year as the predictor \\(x\\)\n\\[log(\\lambda(x_i)) = \\beta_0 + \\beta_1x_i\\] (@) Use the bootstrap to approximate the standard error of the estimate of the slope parameter.\n\n\n\nCall:\nglm(formula = count ~ yr, family = poisson, data = df)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept) 67.17921   46.70014   1.439    0.150\nyr          -0.03244    0.02329  -1.393    0.164\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 21.069  on 12  degrees of freedom\nResidual deviance: 19.128  on 11  degrees of freedom\nAIC: 73.365\n\nNumber of Fisher Scoring iterations: 4\n\n\n\n\n\n\n\nWhen taking the standard deviation of the bootstrap sample of the slope parameter I get 0.034212."
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#submit-lab-report-on-canvas",
+    "href": "pages/E4_resampling_methods.html#submit-lab-report-on-canvas",
+    "title": "Exercise Model selection",
+    "section": "Submit lab report on Canvas",
+    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupiter Notebook on Google Colab (or installed on your own computer)\nR in Quarto on posit.cloud (or with R and RStudio installed on your computer)\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nSave your report as pdf\nUpload the report in the assignment Exercise: Resampling on Canvas."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html",
+    "href": "pages/L1_intro_supervised_learning.html",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "",
+    "text": "ISL: 1, 2.1, 2.2, 4.1"
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#supervised-learning---general-form",
+    "href": "pages/L1_intro_supervised_learning.html#supervised-learning---general-form",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Supervised learning - general form",
+    "text": "Supervised learning - general form\nConsider \\[y = f(x) + \\varepsilon\\] \\(y\\) is observed response from the response (or dependent) random variable \\(Y\\)\n\\(x=(x_1,\\ldots,x_p)\\) is a vector of observations of \\(p\\) different predictors (or independent variables) \\(X=(X_1,\\ldots,X_p)\\)\n\\(\\varepsilon\\) is a random error term where we usually assume that the expected value is zero and does not depend on the predictors, i.e. \\(E(\\varepsilon) = 0\\)\n\\(f\\) is an unknown function representing the systematic information that \\(X\\) provides about \\(Y\\)\nStatistical learning consists of a set of approaches for estimating the function \\(f\\) for the purpose of predictive or parametric inference."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#predictive-inference",
+    "href": "pages/L1_intro_supervised_learning.html#predictive-inference",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Predictive inference",
+    "text": "Predictive inference\nThe goal is to make predictions.\nThe quantity of interest is a prediction of \\(Y\\), \\(\\hat{Y}\\), for the predictors \\(X\\), the estimate of the function \\(f\\) with the argument \\(X\\) is \\(\\hat{Y}\\)\n\\[\\hat{Y} = \\hat{f}(X)\\]\nAssume that the estimated function \\(\\hat{f}\\) and the predictors \\(X\\) is fixed. Then the only source of variation comes from the random errors \\(\\varepsilon\\).\nThe variance of a prediction is\n\\[V(\\hat{Y}) = E\\left( (\\hat{Y}-Y)^2 \\right) = \\underbrace{\\left( \\hat{f}(X)-f(X)\\right)^2}_{Reducible\\ error} + \\underbrace{V(\\varepsilon)}_{Irreducible\\ error}\\]\n\n\n\n\n\n\nShow it!\n\n\n\nProve the equality!\n\\[E\\left( (Y-\\hat{Y})^2 \\right) = E\\left( f(X) + \\varepsilon -\\hat{f}(X)\\right) = \\left( f(X)-\\hat{f}(X)\\right)^2 + V(\\varepsilon)\\]\n\n\nSupervised learning offers techniques for estimating the function \\(f\\) with the aim of minimising the reducible error."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#parametric-inference",
+    "href": "pages/L1_intro_supervised_learning.html#parametric-inference",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Parametric inference",
+    "text": "Parametric inference\nThe goal is to understand the association between \\(Y\\) and \\(X_1,\\ldots,X_p\\), e.g.\n\nWhich predictors have a strong association with \\(Y\\)?\nWhat relationship describes this association (increasing/decreasing, linear/nonlinear)?\n\nIn parametric inference, the quantity of interest can be a parameter within a function, or a function among a set of candidate functions.\n\n\n\n\n\n\nNote\n\n\n\nThe ISL book uses:\nPrediction - Statistical learning is applied to build a model for making predictions.\nInference - Statistical learning is applied to learn something about the world.\nI use predictive inference vs parametric inference because inference is required for both goals.\nAccording to the Cambridge dictionary, inference is a guess that you make or an opinion that you form based on the information that you have."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#training-data",
+    "href": "pages/L1_intro_supervised_learning.html#training-data",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Training data",
+    "text": "Training data\nWe learn about the unknown function \\(f\\) from our training data: where \\(x_{ij}\\) is the observed value of predictor \\(j\\) for the \\(i\\)th observation, \\(i=1,\\ldots,n\\) and \\(j=1,\\ldots,p\\), and \\(y_i\\) is the observed response value for the \\(i\\)th observation."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#notations",
+    "href": "pages/L1_intro_supervised_learning.html#notations",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Notations",
+    "text": "Notations\nFor a vector, I write \\(x_i = (x_{i1},\\ldots,x_{ip})\\)\n\\(x_i\\) is an observation of \\(X\\).\n\\(X\\) is usually treated as a fixed variable (the alternative would be to treat it as a random variable), or a random variable with negligible error.\n\\(y_i|x_i\\) is an observation of the random variable \\(Y|X\\).\nIt is common to drop the conditioning notation (assuming it is understood by the reader), and write \\(Y\\) instead of \\(Y|X\\) and \\(y_i\\) instead of \\(y_i|x_i\\)"
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#objective",
+    "href": "pages/L1_intro_supervised_learning.html#objective",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Objective",
+    "text": "Objective\nFind a function \\(\\hat{f}\\) such that \\(Y\\approx \\hat{f}(X)\\) for any observation \\((X,Y)\\)"
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#residual-sum-of-squares",
+    "href": "pages/L1_intro_supervised_learning.html#residual-sum-of-squares",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Residual Sum of Squares",
+    "text": "Residual Sum of Squares\nThe variance of predictions of observed data \\((y_1,x_1),\\ldots,(y_i,x_i)\\), where \\(i=1,\\ldots,n\\) can be estimated from the Residual Sum of Squares\n\\[RSS = \\sum_{i=1}^{n} \\left(y_i-\\hat{f}(x_i)\\right)^2 = \\sum_{i=1}^{n} e_i^2\\]\n\n\n\n\n\n\nNote\n\n\n\nNote that the RSS must be divided by a suitable factor to become an estimate of the prediction variance. What is a suitable factor depends on the degrees of freedom associated with the algorithm used."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#predictive-variance",
+    "href": "pages/L1_intro_supervised_learning.html#predictive-variance",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Predictive variance",
+    "text": "Predictive variance\nThe variance of the difference between the actual value \\(Y|x_0\\) and the prediction at point \\(x_0\\), i.e. the predictive (or prediction) error, is\n\\[V\\left(\\hat{f}(x_0)-Y|x_0\\right):=E\\left( (\\hat{f}(x_0)-Y|x_0)^2\\right) = \\underbrace{V\\left(\\hat{f}(x_0)\\right)}_A + \\underbrace{\\left( \\hat{f}(x_0)-f(x_0) \\right)^2 }_B+ \\underbrace{V(\\varepsilon)}_C \\]\nA is the variance of the estimated function. It indicates how much the estimated function would vary if we had selected a different training data set.\nB is the squared bias of the estimated function. It indicates if there is any systematic error in the prediction at point \\(x_0\\)\nC is the variance of the random error and has an expected value of zero."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#bias-variance-trade-off",
+    "href": "pages/L1_intro_supervised_learning.html#bias-variance-trade-off",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Bias-Variance trade-off",
+    "text": "Bias-Variance trade-off\nIn statistical learning, one must find a balance between low predictive variance and low biases. This trade-off is well illustrated by Figure 2.9 in ISL.\n\n\n\nFigure 2.9 from ISL"
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#sensitivity-and-specificity",
+    "href": "pages/L1_intro_supervised_learning.html#sensitivity-and-specificity",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Sensitivity and specificity",
+    "text": "Sensitivity and specificity\nAssume a binary classification model, where the true states are \\(Y\\in \\{True,False\\}\\) and the predicted states are \\(\\hat{f} \\in \\{+,-\\}\\). The two types of errors can be summarised in a confusion matrix:\n\n\n\n\nFALSE\nTRUE\n\n\n\n\n-\nTN\nFN\n\n\n+\nFP\nTP\n\n\n\n\nErroneous predictions FP: frequency of False Positives\n\nFN: frequency of False Negatives\n\nCorrect predictions TN: frequency of True Negatives\n\nTP: frequency of True Positives\nLet \\(n\\) be the total number of observations in the data set. Useful performance metrics:\n\nAccuracy is \\(\\frac{TN+TP}{n}\\)\n\nIf we want to distinguish and find a balance between the two types of errors we can use:\n\nSensitivity is \\(\\frac{TP}{TP + FN}\\)\nSpecificity is \\(\\frac{TN}{TN + FP}\\)"
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#receiver-operating-characteristic-roc-curve",
+    "href": "pages/L1_intro_supervised_learning.html#receiver-operating-characteristic-roc-curve",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Receiver Operating Characteristic (ROC) curve",
+    "text": "Receiver Operating Characteristic (ROC) curve\nA classification model makes the classification by comparing a scoring variable \\(S(X)\\) to a threshold, \\(t\\). The ROC-methodology can help modellers to choose a threshold taking into account a trade-off between two types of errors, or to compare classifiers without choosing a threshold.\n\nFor each choice of \\(t\\) derive specificity and sensitivity.\nThe ROC-curve is sensitivity against 1-specificity over different values on the threshold.\n\nHere we exemplify the ROC methodology with the data set Binary Classification Prediction for type of Breast Cancer downloaded from Kaggle. The response variable diagnosis describes a cancer as Malignant or Benign. We illustrate using the mean radius and the mean compactness as predictors, one per classifier.\n\nMean radius as predictor\n\n\n\nSetting levels: control = B, case = M\n\n\nSetting direction: controls &lt; cases\n\n\n  threshold specificity sensitivity\n1      -Inf 0.000000000           1\n2    7.3360 0.002801120           1\n3    7.7100 0.005602241           1\n4    7.7445 0.008403361           1\n5    7.9780 0.011204482           1\n6    8.2075 0.014005602           1\n\n\n\nMean compactness as predictor\n\n\n\nSetting levels: control = B, case = M\n\n\nSetting direction: controls &lt; cases\n\n\n  threshold specificity sensitivity\n1      -Inf 0.000000000           1\n2  0.021410 0.002801120           1\n3  0.024970 0.005602241           1\n4  0.026625 0.008403361           1\n5  0.028955 0.011204482           1\n6  0.031640 0.014005602           1\n\n\n\nROC plot with both classifiers\n\n\n\n\n\n\n\nA model above the 50:50 line is better than tossing a coin.\nThe closer to the upper left, the better classification model.\nThe measure Area Under the Curve (AUC) offers a way to compare the performance of classifiers without selecting a value on the cutoff."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#parametric-vs-non-parametric-approaches",
+    "href": "pages/L1_intro_supervised_learning.html#parametric-vs-non-parametric-approaches",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Parametric vs non-parametric approaches",
+    "text": "Parametric vs non-parametric approaches\nModels for statistical learning can be\n\nparametric, where prediction boils down to estimating parameters within a defined model structure, or\nnon-parametric, where the model predicts by an algorithm responding to training data, without any estimation of specific parameters.\n\n\nIt is useful to discuss the advantages and disadvantages of the two approaches."
+  },
+  {
+    "objectID": "pages/L1_intro_supervised_learning.html#comparison-to-unsupervised-learning",
+    "href": "pages/L1_intro_supervised_learning.html#comparison-to-unsupervised-learning",
+    "title": "Lecture Introduction to statistical and supervised learning",
+    "section": "Comparison to unsupervised learning",
+    "text": "Comparison to unsupervised learning\nIn principle, unsupervised learning has\n\nNo response variable\nOnly a multivariate data set of variables\n\nThe goals of unsupervised learning can be to\n\nFind patterns in data\nReduce dimensions of data"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html",
+    "href": "pages/L2_generalised_linear_models.html",
+    "title": "Lecture Generalised Linear Models",
+    "section": "",
+    "text": "ISL: 4.2, 4.3, 4.6\nTo learn more about maximum likelihood, generalised linear models and Bayesian inference, I recommend to consult\nExtra material on maximum likelihood from Taboga, Marco (2021). “Maximum likelihood estimation”, Lectures on probability theory and mathematical statistics. Kindle Direct Publishing. Online appendix.\nExtra easy reading introducing GLM (although code is provided in R, the explanatory text is good) Quebec Centre for Biodiversity Science Workshop Generalised linear models"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#categorical-independent-variables-or-predictors",
+    "href": "pages/L2_generalised_linear_models.html#categorical-independent-variables-or-predictors",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Categorical independent variables or predictors",
+    "text": "Categorical independent variables or predictors\nA categorical predictor can be treated as a factor (or dummy variable)\n\\[X_1 = \\left\\{ \\begin{array}{lr}\n        1 & \\text{if category A}\\\\\n        0 & \\text{if category not A}\n        \\end{array}\\right.\\]\nA categorical predictor generates one regression model per level of the variable\n\\[\\beta_0+\\beta_1x_{1} = \\left\\{ \\begin{array}{lr}\n        \\beta_0+\\beta_1 & \\text{if } x_1=1\\\\\n        \\beta_0 & \\text{if } x_1=0\n        \\end{array}\\right.\\]"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#interaction-effects",
+    "href": "pages/L2_generalised_linear_models.html#interaction-effects",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Interaction effects",
+    "text": "Interaction effects\nAn interaction between two independent variables can be modelled by adding a new variable which describes their interaction.\n\\[\\beta_0+\\beta_1x_{i1}+\\beta_2x_{i2}+\\beta_{12}x_{i1}x_{i2}\\]\n\nInterpreting the effect of an interaction must be done with care. As a general advice do it my comparing nested models, i.e. a model with (full model) and without (reduced model) the interaction term, instead of testing if the interaction term is different from zero in the full model."
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#the-basic-linear-model",
+    "href": "pages/L2_generalised_linear_models.html#the-basic-linear-model",
+    "title": "Lecture Generalised Linear Models",
+    "section": "The basic linear model",
+    "text": "The basic linear model\nThe model\n\\[y_i=\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}+\\varepsilon_i\\]\nwhere \\(\\varepsilon_i\\sim N(0,\\sigma^2)\\)\ncan alternatively be written as\n\\[Y|x_i\\sim N(\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip},\\sigma)\\]\nor\n\\[Y|x_i\\sim N(\\mu(x_i|\\beta_0,\\beta_1,\\ldots,\\beta_p),\\sigma)\\]\nwhere \\(\\mu(x_i|\\beta_0,\\beta_1,\\ldots,\\beta_p):=E(Y|x_i,\\beta_0,\\beta_1,\\ldots,\\beta_p)\\) is the expected value of \\(Y\\) for \\(x=x_i\\) and parameters \\(\\beta_0,\\ldots,\\beta_p\\).\nIn this model, the response variable \\(Y\\) is continuous and the model error is normally distributed with equal variance \\(\\sigma^2\\).\n\nFor notation, I sometimes lump all parameters into one \\(\\theta=(\\beta_0,\\beta_1,\\ldots,\\beta_p,\\sigma)\\).\n\n\n\n\n\n\n\nNote\n\n\n\nFor certain statistical tests, one has to assume that errors/residuals are independent, i.e. that observations \\((y_i,x_i)\\) are independent of each other."
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#from-normal-to-any-distribution-family-for-the-response-variable",
+    "href": "pages/L2_generalised_linear_models.html#from-normal-to-any-distribution-family-for-the-response-variable",
+    "title": "Lecture Generalised Linear Models",
+    "section": "From normal to any distribution family for the response variable",
+    "text": "From normal to any distribution family for the response variable\nWhat if the response variable is\n\ncategorical, e.g. succeed/fail or gene expressions, or\ndiscrete, e.g. a count of the number of individuals,\nor some other continuous distribution?"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#logistic-regression",
+    "href": "pages/L2_generalised_linear_models.html#logistic-regression",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Logistic regression",
+    "text": "Logistic regression\nConsider a response variable with two categories, success or failure.\n\\[Y = \\left\\{ \\begin{array}{lr}\n        1 & \\text{if success}\\\\\n        0 & \\text{if failure}\n        \\end{array}\\right.\\]\nThe probability model for the response variable for a given value on the predictor can be a Bernoulli distribution\n\\[Y|x_i \\sim Be(p(x_i))\\] where the logarithm of the odds-ratio (logodds or logit) of the probability-parameter in the Bernoulli-distribution can be written as a linear function of the predictors\n\\[log\\left(\\frac{p(x_i)}{1-p(x_i)}\\right) = \\underbrace{\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}}_{linear \\ term}\\]\nThis relationship can be transformed into\n\\[\\frac{p(x_i)}{1-p(x_i)} = e^{\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}}\\] and finally into an expression where the probability-parameter is a logistic function of the linear term:\n\\[p(x_i)=\\frac{e^{\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}}}{1+e^{\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}}}\\]\nNote that \\(E(Y|x_i)=p(x_i)\\)\n\nA link function is a function that transforms the linear term into the expected value for the response variable\n\nThis model for binary response is therefore known as logistic regression."
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#glm-binomial-response-variable",
+    "href": "pages/L2_generalised_linear_models.html#glm-binomial-response-variable",
+    "title": "Lecture Generalised Linear Models",
+    "section": "GLM Binomial response variable",
+    "text": "GLM Binomial response variable\nLet the \\(i\\)th observation be the number of successful trials among \\(n_i\\) independent trials. The response variable can be modelled by a Binomial distribution\n\\[Y|x_i\\sim Bin(n_i,p(x_i))\\]\nThe expected value of the proportion of successes is \\(E(Y|x_i)=p(x_i)\\)\nA Binomial GLM is created by transforming the expected value with the logit link function as before into the linear model.\n\\[ logit(p(x_i)) = log(p(x_i) / (1 - p(x_i))) = \\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}\\]\n\nA logistic regression is a special case of Binomial GLM when there is only one trial per observation, i.e. n_i = 1."
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#glm-poisson-response-variable",
+    "href": "pages/L2_generalised_linear_models.html#glm-poisson-response-variable",
+    "title": "Lecture Generalised Linear Models",
+    "section": "GLM Poisson response variable",
+    "text": "GLM Poisson response variable\nConsider a discrete response variable that is a count where the outcome space consists of natural numbers starting from 0, i.e. \\(0, 1, 2, \\ldots\\) with no upper bound.\nA Poisson distribution is a suitable probability distribution of this type of response variable if the counts come from an even process where events occur with a fixed intensity, \\(\\lambda\\), events are independent, and events cannot occur at the same time.\nLet the expected value of the response \\(Y\\) be a function of the linear model of predictors\n\\[\\lambda(x_i)=e^{\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}}\\]\nWhen we log the expected value we get\n\\[log(\\lambda(x_i))=\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}\\] A Poisson GLM has log as the link function \\[Y|x_i\\sim Po(\\lambda(x_i))\\]"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#likelihood-function-for-the-logistic-regression",
+    "href": "pages/L2_generalised_linear_models.html#likelihood-function-for-the-logistic-regression",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Likelihood function for the logistic regression",
+    "text": "Likelihood function for the logistic regression\nThe likelihood function for logistic regression is\n\\[l(y|\\beta_0,\\beta_1,\\ldots,\\beta_p,x) = \\prod_{i=1}^n \\left[ p(x_i)I\\{y_i=1\\}+(1-p(x_i))I\\{y_i=0\\}\\right]\\]\nwhere \\(I\\{\\text{logical expression}\\}\\) is an identify function taking the value 1 if the logical expression is true and 0 otherwise.\nAlternative way of writing it\n\\[l(y|\\beta_0,\\beta_1,\\ldots,\\beta_p,x) = \\prod_{i=1}^n  p(x_i)^{y_i}(1-p(x_i))^{1-y_i}\\]\nThe product of values close to zero is a very small number. Instead, the likelihood is handled on the log scale, as the log likelihood\n\\[log \\ l(y|\\beta_0,\\beta_1,\\ldots,\\beta_p,x) = \\sum_{i=1}^n y_i log(p(x_i))+(1-y_i)log(1-p(x_i))\\]"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#likelihood-function-for-the-binomial-glm",
+    "href": "pages/L2_generalised_linear_models.html#likelihood-function-for-the-binomial-glm",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Likelihood function for the Binomial GLM",
+    "text": "Likelihood function for the Binomial GLM\n\\[l(y|\\beta_0,\\beta_1,\\ldots,\\beta_p,x) = \\prod_{i=1}^n  \\frac{n_i!}{y_i!(n_i-y_i)!}p(x_i)^{y_i}(1-p(x_i))^{n_i-y_i}\\]\n\n\n\n\n\n\nShow it!\n\n\n\nDerive the expression for the log likelihood for the Binomal GLM"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#likelihood-function-for-the-poisson-glm",
+    "href": "pages/L2_generalised_linear_models.html#likelihood-function-for-the-poisson-glm",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Likelihood function for the Poisson GLM",
+    "text": "Likelihood function for the Poisson GLM\n\\[l(y|\\beta_0,\\beta_1,\\ldots,\\beta_p,x) = \\prod_{i=1}^n \\frac{e^{-\\lambda(x_i)}\\lambda(x_i)^{y_i}}{y_i!}\\]\nwhere \\(log(\\lambda(x_i))=\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}\\).\nThe log likelihood for the Poisson GLM is\n\\[\\begin{split} & \\\\ log\\ l(y|\\beta_0,\\beta_1,\\ldots,\\beta_p,x) =  \\sum_{i=1}^n\\left[ -\\lambda(x_i) + y_ilog(\\lambda(x_i)) - log(y_i!)\\right]= & \\\\ \\sum_{i=1}^n\\left[ -e^{\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}} + y_i(\\beta_0+\\beta_1x_{i1}+\\ldots+\\beta_px_{ip}) - log(y_i!)\\right] \\end{split}\\]"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#bayesian-estimation",
+    "href": "pages/L2_generalised_linear_models.html#bayesian-estimation",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Bayesian estimation",
+    "text": "Bayesian estimation\n\nTreat parameters as uncertain and unknown and express their uncertainty before including information from data using probability distributions (so called prior distribution)\nThink of the likelihood as a model to sample from the observations given values on parameters (sampling distribution)\nUpdate probability distributions for the parameters using Bayes rule\n\n\\[f(\\theta|y) = \\frac{l(y|\\theta)f(\\theta)}{f(y)} = \\frac{l(y|\\theta)f(\\theta)}{\\int_{-\\infty}^{\\infty} l(y|\\theta)f(\\theta)d\\theta}\\]\n\\(f(\\theta|y)\\) is the posterior distribution for the parameters.\nSince the denominator \\(f(y)\\) is a constant, Bayes rule can be written as\n\\[f(\\theta|y) \\propto l(y|\\theta)f(\\theta)\\]\n\nPrior\nA prior is a probability distribution specified for the parameters. The parameters of a prior are referred to as hyper-parameters, to distinguish them from parameters of the statistical model).\nAn example. Let \\(p=1\\) in a linear regression model. The prior for the slope parameter \\(\\beta_1\\) is set to be\n\\[\\beta_1\\sim N(0,10)\\] Here 0 and 10 are the values on hyper-parameters.\nAn alternative way to specify it is to write\n\\[\\beta_1\\sim N(\\mu_{\\beta_1},\\sigma_{\\beta_1}^2)\\] where \\(\\mu_{\\beta_1}=0\\) and \\(\\sigma_{\\beta_1}^2=10\\).\n\n\n\nBayesian updating\nSolving the equation for Bayes rule analytically quickly gets cumbersome. There are alternatives.\n\nConjugate Bayesian models\n\nSimple statistical models have conjugate properties, where the posterior and prior are from the same family of distributions and updating is done by deriving new hyper-parameters for the posterior as a function of the hyper-parameters for the prior and summary statistics from data. [Wiki page on conjugate] priors(https://en.wikipedia.org/wiki/Conjugate_prior)\n\n\n\n\n\n\nThe Beta-Binomial model\n\n\n\nThe Beta-Binomial model is a good illustration of a Bayesian model with a conjugate prior.\nPrior: \\(p\\sim Beta(\\alpha,\\beta)\\)\nLikelihood: \\(Y\\sim Bin(n,p)\\)\nPosterior: \\(p|y\\sim Beta(y+\\alpha,n-y+\\beta)\\)\n\n\n\nApproximate Bayesian inference\n\n\nThere is no time to go through Approximate methods in this course.\n\nBayesian estimation can alternative be peformed by approximation of the posterior, examples of this are Variational Bayesian methods and Integrated Nested Laplace Approximation (INLA), or Approximate Bayesian Computation.\n\nMarkov Chain Monte Carlo (MCMC) sampling\n\nThe simplest MCMC sampling is Bayesian updating performed by sampling from the posterior using Metropolis algorithm.\n\n\n\n\n\n\nMetropolis algorithm\n\n\n\n\nStart with an arbitrary initial value of the parameter, and denote it \\(\\theta_{current}\\)\nRandomly generate a proposed jump, \\(\\Delta\\theta \\sim N(0,\\sigma^2)\\) and derive the proposed parameter as \\(\\theta_{proposed} = \\theta_{current}+\\Delta\\theta\\).\nCompute the probability of moving to the proposed value as \\[\\begin{split} & \\\\ p_{move}=min\\left(1,\\frac{f(\\theta_{proposed}|y)}{f(\\theta_{current}|y)}\\right) =& \\\\min\\left(1,\\frac{l(y|\\theta_{proposed})f(\\theta_{proposed})}{l(y|\\theta_{current})f(\\theta_{current})}\\right) \\end{split}\\]\nAccept the proposed parameter value if a random value sampled from a [0,1] uniform distribution is less than \\(p_{move}\\)\n\nRepeat steps 1 to 3 until a sufficiently representative sample of the posterior has been generated.\nThrow away a burn-in period of the sampling and keep the part where the algorithm has converged.\n\n\nThe Metropolis algorithm (is a type of importance sampling) which can be combined with ways to generate proposals make the sampling more efficient, including Gibbs sampling and Hamiltonian Markov Chain (HMC).\nIt is useful to be able to program an MCMC. There has throughout the years been a range of software and platforms to support MCMC-sampling, such as BUGS, JAGS and stan (the latter being the most used today).\n\n\nA demonstration of Bayesian updating using MCMC sampling\n\n\nRows: 60 Columns: 16\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\ndbl (16): PREC, JANT, JULT, OVR65, POPN, EDUC, HOUS, DENS, NONW, WWDRK, POOR...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nTrace plot showing how the convergence of the chains.\n\n\nNOTE: Stopping adaptation\n\n\n\n\n\nIllustration of sampling of \\(\\beta_1\\) from one of the chains.\n\n\nWarning: No renderer available. Please install the gifski, av, or magick package to\ncreate animated output\n\n\nNULL\n\n\nTraceplot for \\(\\beta_1\\) showing convergence of the MCMC-chains.\n\n\n\n\n\nA scatter plot of the sampling \\(\\beta_0\\) and \\(\\beta_1\\) from one chain.\n\n\nWarning: No renderer available. Please install the gifski, av, or magick package to\ncreate animated output\n\n\nNULL\n\n\nA scatter plot of the sampling of \\(\\beta_0\\) and \\(\\beta_1\\) from one chain with density curves.\n\n\n\n\n\n\n\nTwo versions of Bayesian inference\nThe use and perception of prior divide Bayesian community of modellers into two groups. Those that would like their model to be\n\nRobust from choice of prior - “prior should not matter or at least not damage anything”\n\nand those with the view that\n\nPrior contains useful information - “prior can matter and can be used to capture expert knowledge”"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#maximum-likelihood-estimation",
+    "href": "pages/L2_generalised_linear_models.html#maximum-likelihood-estimation",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Maximum likelihood estimation",
+    "text": "Maximum likelihood estimation\n\nTreat parameters as unknown for which there is a true value.\nThink of the likelihood as a function of the parameters, where observations are fixed, e.g. \\(l(\\theta)\\)\nFind the parameter values that maximises the log of the likelihood function, i.e. that makes the data as likely as possible.\n\n\\[\\hat{\\theta} = \\underset{\\theta}{\\mathrm{argmax}} \\ log \\ l(\\theta)\\]"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#parameters-and-variables",
+    "href": "pages/L2_generalised_linear_models.html#parameters-and-variables",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Parameters and variables",
+    "text": "Parameters and variables\nVariables are quantities taking different values. A variable can describe\n\nthe state of a dynamic system\nvariability within a statistical population\n\nA parameter is a quantity defined within a model. A parameter has a true fixed value, but it is usually unknown to us.\n\nIn Bayesian inference, uncertainty about a parameter is modelled by a probability distribution. It is therefore, technically modelled as random variable."
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#parametric-inference---understanding-associations",
+    "href": "pages/L2_generalised_linear_models.html#parametric-inference---understanding-associations",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Parametric inference - understanding associations",
+    "text": "Parametric inference - understanding associations\nIs there an influence from dependent variable \\(x_1\\)?\nSee if \\(\\beta_1\\) is different from 0?"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#bayesian-estimation-of-parameters",
+    "href": "pages/L2_generalised_linear_models.html#bayesian-estimation-of-parameters",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Bayesian estimation of parameters",
+    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.577552 0.85224455 0.0049204362   0.0050475024\nbeta1   6.133896 0.20749727 0.0011979861   0.0012098001\nsigma   6.603346 0.05014351 0.0002895037   0.0002985137\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.726313 6.543289 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#maximum-likelihood-estimation-of-parameters",
+    "href": "pages/L2_generalised_linear_models.html#maximum-likelihood-estimation-of-parameters",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Maximum likelihood estimation of parameters",
+    "text": "Maximum likelihood estimation of parameters\nHow to get uncertainty estimates when using maximum likelihood to estimate parameters?\nOne approach is to look at the profile likelihood function.\nLet \\(\\theta_0\\) be the true parameter value. The ratio of the likelihoods \\(\\frac{L(\\hat{\\theta})}{L(\\theta_0)}\\) should be close to 1.\nWilk’s theorem states that the difference in the log likelihoods is \\(\\chi2\\)-distributed with one degrees of freedom:\n\\[2\\left( log\\ l(\\hat{\\theta}) - log\\ l(\\theta_0)\\right) \\sim \\chi2(1)\\]\nAn approximate \\((1-\\alpha)\\)% confidence region for parameter (vector) \\(\\theta\\) is the set of values satisfying\n\\[\\left[ \\theta: 2 \\left( log\\ l(\\hat{\\theta}) - log\\ l(\\theta_0)\\right) \\leq \\chi2_{\\alpha}(1)\\right]\\] where \\(\\chi2_{\\alpha}(1)\\) is a quantile with \\(\\alpha\\) probability above the value.\nThis can be expanded to a region for \\(k\\) parameters, for which the degrees of freedom is \\(k\\).\nDensity function for a normal distribution\n\\[f(x) = \\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\\]\n\\[\\begin{split}  log\\ l(\\beta_0,\\beta_1,\\sigma) = log\\ \\left( \\frac{1}{\\sqrt{(2\\pi \\sigma^2)^n}}e^{-\\frac{\\sum_{i=1}^n (y_i-\\beta_0-\\beta_1x_{i1})^2}{2\\sigma^2}}\\right) =  & \\\\ -\\frac{n}{2}log(2\\pi) - \\frac{n}{2}log(\\sigma^2)- \\frac{1}{2\\sigma^2}\\sum_{i=1}^n (y_i-\\beta_0-\\beta_1x_{i1})^2\\end{split}\\]\n\n\n\n\n\n\n95%th confidence interval\n\n\n\n[1] 3.361809 8.939698"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#with-and-without-parameter-uncertainty",
+    "href": "pages/L2_generalised_linear_models.html#with-and-without-parameter-uncertainty",
+    "title": "Lecture Generalised Linear Models",
+    "section": "With and without parameter uncertainty",
+    "text": "With and without parameter uncertainty\nPredictions of new observations of the response variable can be made with or without consideration of uncertainty in parameters.\n\nWith uncertainty about a parameter can be provided by\n\nthe posterior probability distribution \\(f(\\theta|data)\\) (when using Bayesian estimation). The resulting distribution for a new observation is the predictive posterior \\(f(y_0|data)=\\int f(y_0|\\theta)f(\\theta|data)d\\theta\\)\na confidence region \\(LB&lt;\\theta&lt;UB\\) (when using maximum likelihood estimation)\n\nPropagation of uncertainty expressed by probability distribution to the prediction can be made by Monte Carlo simulation.\nPropagating bounds on intervals representing uncertainty about parameters is NOT recommended since there is no guarantee that the bounds of the prediction has the same meaning, probability, or level of confidence as the bounds for the parameters. Therefore, confidence regions are often transformed into probability distributions before propagation. An alternative is to use bootstrap to generate samples of the quantity of interest (I will go through bootstrap in the resampling lecture).\n\n\nWithout parameter uncertainty\nA point estimate \\(\\hat{\\theta}\\) is a single value for the estimate of parameter \\(\\theta\\), which can be derived as\n\nthe posterior mean \\(E(\\theta|data)\\) (when using Bayesian estimation)\nthe maximum likelihood estimate \\(\\hat{\\theta}\\) (when using maximum likelihood estimation)"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#predicting-from-a-logistic-regression",
+    "href": "pages/L2_generalised_linear_models.html#predicting-from-a-logistic-regression",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Predicting from a logistic regression",
+    "text": "Predicting from a logistic regression\nHere, I describe making predictions given a point estimate of each parameter.\n\\[\\hat{p}(x_0) = \\frac{e^{\\hat{\\beta}_0+\\hat{\\beta}_1x_{01}+\\ldots+\\hat{\\beta}_px_{0p}}}{1+e^{\\hat{\\beta}_0+\\hat{\\beta}_1x_{01}+\\ldots+\\hat{\\beta}_px_{0p}}}\\]\n\\[\\hat{y}|x_0 \\sim Be(\\hat{p}(x_0))\\]\n\n\n\n\n\n\nNote\n\n\n\nWe can sample from a Bernoulli distribution using the quantile method:\n\nDraw a value \\(t\\) from a [0,1] uniform distribution\nLet \\(\\hat{y}|x_0=1\\) if \\(t \\leq \\hat{p}(x_0)\\) and zero otherwise.\n\n\nNote that this is not the same as making a classification (compare to the ROC-methodology in lecture 1)"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#predicting-from-a-glm-binomial",
+    "href": "pages/L2_generalised_linear_models.html#predicting-from-a-glm-binomial",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Predicting from a GLM Binomial",
+    "text": "Predicting from a GLM Binomial\nThe same probability as for logistic regression but where a prediction is generated by\n\\[\\hat{y}|x_0 \\sim Bin(n_i,\\hat{p}(x_i))\\]"
+  },
+  {
+    "objectID": "pages/L2_generalised_linear_models.html#predicting-from-a-glm-poisson",
+    "href": "pages/L2_generalised_linear_models.html#predicting-from-a-glm-poisson",
+    "title": "Lecture Generalised Linear Models",
+    "section": "Predicting from a GLM Poisson",
+    "text": "Predicting from a GLM Poisson\n\\[\\hat{\\lambda}(x_0)=e^{\\hat{\\beta}_0+\\hat{\\beta}_1x_{01}+\\ldots+\\hat{\\beta}_px_{0p}}\\]\n\\[\\hat{y}|x_0 \\sim Po(\\hat{\\lambda}(x_0))\\]"
+  },
+  {
+    "objectID": "pages/L4_resampling_methods.html",
+    "href": "pages/L4_resampling_methods.html",
+    "title": "Lecture Resampling methods",
+    "section": "",
+    "text": "ISL: 5.1 and 5.2"
+  },
+  {
+    "objectID": "pages/L4_resampling_methods.html#validation-set",
+    "href": "pages/L4_resampling_methods.html#validation-set",
+    "title": "Lecture Resampling methods",
+    "section": "Validation set",
+    "text": "Validation set\nSplit data into a training set and a validation (or hold-out or test) set. Fit the model using the training set. Make predictions for the validation set and estimate the variance of a prediction as the Mean Square Error from the comparison between the predictions and observed values.\n\\[\\hat{V}(\\hat{f}(x_0)) = MSE_{test} = \\frac{\\sum_{i \\in \\text{test}} (y_i-\\hat{y}_i)^2}{n_{test}}\\]\nIn general \\(MSE_{test} &gt; MSE_{train}\\)\nA drawback with this method is that the model is trained on a smaller data set and the variance of predictions is derived from fewer values.\nThe estimated variance can change considerably for different splits into training and validation sets."
+  },
+  {
+    "objectID": "pages/L4_resampling_methods.html#leave-one-out",
+    "href": "pages/L4_resampling_methods.html#leave-one-out",
+    "title": "Lecture Resampling methods",
+    "section": "Leave-One-Out",
+    "text": "Leave-One-Out\nHold out one observation \\(j\\) from the data and fit the model on the remaining \\(n-1\\) observations, and a prediction is made on the excluded observation, \\(\\hat{y}_j\\). The squared error for the hold-out observation is \\(MSE_j = (y_j-\\hat{y}_j)^2\\).\nThis can be repeated for all observations, where one is held out at a time.\nWe can estimate the variance of prediction for a data point not included in the training data set by taking the average of the errors from hold-out models,\n\\[\\hat{V}(\\hat{f}(x_0)) = \\frac{\\sum_{i = 1}^n MSE_i}{n}\\]\nLOOCV is less biased compared to the validation set approach.\nAn advantage is that it generates the same estimate of the variance in predictions."
+  },
+  {
+    "objectID": "pages/L4_resampling_methods.html#k-fold-cross-validation",
+    "href": "pages/L4_resampling_methods.html#k-fold-cross-validation",
+    "title": "Lecture Resampling methods",
+    "section": "K-fold cross validation",
+    "text": "K-fold cross validation\nThe K-fold cross-validation approach is to split data into \\(K\\) sets with equal sizes. Let the first set be the validation set, fit a model to the remaining data, and estimate the variance in predictions based on the hold-out set.\n\\[MSE_k = \\frac{\\sum_{i \\in \\text{set } k} (y_i-\\hat{y}_i)^2}{n_{k}}\\]\nRepeat for all \\(K\\) sets. The average of the resulting \\(K\\) estimates of the error is a good estimate of the variance of a new prediction\n\\[\\hat{V}(\\hat{f}(x_0)) = \\frac{\\sum_{k = 1}^K MSE_k}{K}\\]\nThe Leave-K-Out has a computational advantage over Leave-One-Out."
+  }
+]
