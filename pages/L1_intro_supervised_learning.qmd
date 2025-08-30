@@ -69,7 +69,7 @@ $$V(\hat{Y}) = E\left( (\hat{Y}-Y)^2 \right) = \underbrace{\left( \hat{f}(X)-f(X
 ::: {.callout-note title="Show it!"}
 Prove the equality!
 
-$$E\left( (Y-\hat{Y})^2 \right) = E\left( f(X) + \varepsilon -\hat{f}(X)\right) = \left( f(X)-\hat{f}(X)\right)^2 + V(\varepsilon)$$
+$$E\left( (Y-\hat{Y})^2 \right) = E\left( (f(X) + \varepsilon -\hat{f}(X))^2 \right) = \left( f(X)-\hat{f}(X)\right)^2 + V(\varepsilon)$$
 :::
 
 Supervised learning offers techniques for estimating the function $f$ with the aim of minimising the reducible error.
