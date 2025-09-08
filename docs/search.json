@@ -147,228 +147,74 @@
     "text": "Spline regression\nFit a line in each region of the predictor space defined by knots, requiring continuity of each knot."
   },
   {
-    "objectID": "pages/E5_model_selection.html",
-    "href": "pages/E5_model_selection.html",
-    "title": "Exercise Model selection and Shrinkage",
+    "objectID": "pages/E4_resampling_methods.html",
+    "href": "pages/E4_resampling_methods.html",
+    "title": "Exercise Model selection",
     "section": "",
-    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write at the beginning of the file who you have been working with."
+    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
   },
   {
-    "objectID": "pages/E5_model_selection.html#format",
-    "href": "pages/E5_model_selection.html#format",
-    "title": "Exercise Model selection and Shrinkage",
+    "objectID": "pages/E4_resampling_methods.html#format",
+    "href": "pages/E4_resampling_methods.html#format",
+    "title": "Exercise Model selection",
     "section": "",
-    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write at the beginning of the file who you have been working with."
+    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
   },
   {
-    "objectID": "pages/E5_model_selection.html#time-needed",
-    "href": "pages/E5_model_selection.html#time-needed",
-    "title": "Exercise Model selection and Shrinkage",
+    "objectID": "pages/E4_resampling_methods.html#time-needed",
+    "href": "pages/E4_resampling_methods.html#time-needed",
+    "title": "Exercise Model selection",
     "section": "Time needed",
     "text": "Time needed\n4 hours"
   },
   {
-    "objectID": "pages/E5_model_selection.html#grades",
-    "href": "pages/E5_model_selection.html#grades",
-    "title": "Exercise Model selection and Shrinkage",
+    "objectID": "pages/E4_resampling_methods.html#grades",
+    "href": "pages/E4_resampling_methods.html#grades",
+    "title": "Exercise Model selection",
     "section": "Grades",
     "text": "Grades\nPass or Fail"
   },
   {
-    "objectID": "pages/E5_model_selection.html#programming-language",
-    "href": "pages/E5_model_selection.html#programming-language",
-    "title": "Exercise Model selection and Shrinkage",
+    "objectID": "pages/E4_resampling_methods.html#programming-language",
+    "href": "pages/E4_resampling_methods.html#programming-language",
+    "title": "Exercise Model selection",
     "section": "Programming language",
     "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python.\nCreate a report using Jupyter Notebook or Quarto."
   },
   {
-    "objectID": "pages/E5_model_selection.html#model-selection-competition",
-    "href": "pages/E5_model_selection.html#model-selection-competition",
-    "title": "Exercise Model selection and Shrinkage",
-    "section": "Model selection competition",
-    "text": "Model selection competition\nYou will be given a data set, with a test data set. Your task is to build a predictive model. We the evaluate the models predictability using the test data set."
+    "objectID": "pages/E4_resampling_methods.html#cross-validation",
+    "href": "pages/E4_resampling_methods.html#cross-validation",
+    "title": "Exercise Model selection",
+    "section": "Cross validation",
+    "text": "Cross validation\nWe are going to work with the air pollution data set ´pollution_cleaneddata.csv´ and use resampling methods to evaluate the predictive performance of alternative model choices.\n\nLoad the data ´pollution_cleaneddata.csv´\nSpecify a polynomial regression model with degree \\(p\\) that predicts mortality as a function of the average July temperature in degrees F.\n\n\\[y_i = \\beta_0 + \\beta_1x_{i}+ \\beta_2x_{i}^2 + \\ldots + \\beta_px_{i}^p+\\varepsilon_i\\]"
   },
   {
-    "objectID": "pages/E5_model_selection.html#submit-lab-report-on-canvas",
-    "href": "pages/E5_model_selection.html#submit-lab-report-on-canvas",
-    "title": "Exercise Model selection and Shrinkage",
+    "objectID": "pages/E4_resampling_methods.html#validation-set-approach",
+    "href": "pages/E4_resampling_methods.html#validation-set-approach",
+    "title": "Exercise Model selection",
+    "section": "Validation set approach",
+    "text": "Validation set approach\n\nSet a seed for the random number generator.\nSplit data into two equal sized sets, one for training and one for testing.\nFor polynomial models with degree 1 up to 4, derive the mean square error of prediction for the training and testing data sets, respectively.\n\nPresent the results in a plot with polynomial degree on the x-axis and Mean Square Error on the y-axis (example provided below).\n\nJudging from the graph you just generated, which degree of the polynomial would you recommend if the goal is to have a small variance of new predictions.\nRepeat the procedure ten times but with other random seeds. Do you get similar results for other seeds?"
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#k-fold-cross-validation",
+    "href": "pages/E4_resampling_methods.html#k-fold-cross-validation",
+    "title": "Exercise Model selection",
+    "section": "K-fold cross-validation",
+    "text": "K-fold cross-validation\n\nSelect a polynomial degree, e.g. \\(p=2\\). Estimate the variance of predictions using the K-fold cross-validation approach where you hold out \\(K=3\\) sets.\nRepeat the procedure ten times but with other random seeds. Do you get similar results for other seeds? If so, why?"
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#the-bootstrap",
+    "href": "pages/E4_resampling_methods.html#the-bootstrap",
+    "title": "Exercise Model selection",
+    "section": "The Bootstrap",
+    "text": "The Bootstrap\nUse the bootstrap to estimate the standard error of the slope of the line in the Poisson regression of the birds over time\n\nLoad the data set ‘bird_count.csv’\n\n\n\n\n\n\n\n\n\n\n\nRetrieve the Poisson model fitted with maximum likelihood that you did earlier in the course.\n\nLet \\(Y|x\\) be the counted number of birds at year \\(x\\)\n\\[Y|x_i \\sim Po(\\lambda(x_i))\\]\nThe \\(log\\) of the intensity is a linear model with an intercept \\(\\beta_0\\) and a slope \\(\\beta_1\\) parameter for year as the predictor \\(x\\)\n\\[log(\\lambda(x_i)) = \\beta_0 + \\beta_1x_i\\] (@) Use the bootstrap to approximate the standard error of the estimate of the slope parameter.\n\n\n\nCall:\nglm(formula = count ~ yr, family = poisson, data = df)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept) 67.17921   46.70014   1.439    0.150\nyr          -0.03244    0.02329  -1.393    0.164\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 21.069  on 12  degrees of freedom\nResidual deviance: 19.128  on 11  degrees of freedom\nAIC: 73.365\n\nNumber of Fisher Scoring iterations: 4\n\n\n\n\n\n\n\n\n\n\n\nWhen taking the standard deviation of the bootstrap sample of the slope parameter I get 0.034212. What do you get?"
+  },
+  {
+    "objectID": "pages/E4_resampling_methods.html#submit-lab-report-on-canvas",
+    "href": "pages/E4_resampling_methods.html#submit-lab-report-on-canvas",
+    "title": "Exercise Model selection",
     "section": "Submit lab report on Canvas",
-    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupyter Notebook on Google Colab (or installed on your own computer)\nR in Quarto on posit.cloud (or with R and RStudio installed on your computer)\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nUpload the report as the jypiter notebook, quarto or rmd file. This is to allow me to rerun the code on my computer.\nUpload the report in the assignment Exercise: Model selection and shrinkage on Canvas."
-  },
-  {
-    "objectID": "pages/E3_hierarchical models and testing.html",
-    "href": "pages/E3_hierarchical models and testing.html",
-    "title": "Exercise Hierarchical models and testing",
-    "section": "",
-    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
-  },
-  {
-    "objectID": "pages/E3_hierarchical models and testing.html#format",
-    "href": "pages/E3_hierarchical models and testing.html#format",
-    "title": "Exercise Hierarchical models and testing",
-    "section": "",
-    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
-  },
-  {
-    "objectID": "pages/E3_hierarchical models and testing.html#time-needed",
-    "href": "pages/E3_hierarchical models and testing.html#time-needed",
-    "title": "Exercise Hierarchical models and testing",
-    "section": "Time needed",
-    "text": "Time needed\nThis exercise/computer lab is expected to not take more than eight hours to complete."
-  },
-  {
-    "objectID": "pages/E3_hierarchical models and testing.html#peer-review",
-    "href": "pages/E3_hierarchical models and testing.html#peer-review",
-    "title": "Exercise Hierarchical models and testing",
-    "section": "Peer-review",
-    "text": "Peer-review\nYou are to peer-review another student report. The purpose of this part is that you are to practice reading code made by someone else and practice giving constructive and helpful comments on code.\nLimit your peer-review to comments on these four points:\n\nthe choice and justification of the model\nthe method for estimation and its implementation\nthe method for testing and the reliability of the results\nthe readability of the report\n\nWhich report to review is assigned by Ullrika. One report can receive several reviewers. You cannot do a review, until you submitted your own report."
-  },
-  {
-    "objectID": "pages/E3_hierarchical models and testing.html#grades",
-    "href": "pages/E3_hierarchical models and testing.html#grades",
-    "title": "Exercise Hierarchical models and testing",
-    "section": "Grades",
-    "text": "Grades\nPass or Fail. To pass, the student must hand in their own report and provide a peer-review on another student report. Both reports must be of acceptable quality."
-  },
-  {
-    "objectID": "pages/E3_hierarchical models and testing.html#programming-language",
-    "href": "pages/E3_hierarchical models and testing.html#programming-language",
-    "title": "Exercise Hierarchical models and testing",
-    "section": "Programming language",
-    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python."
-  },
-  {
-    "objectID": "pages/E3_hierarchical models and testing.html#problem-evidence-synthesis",
-    "href": "pages/E3_hierarchical models and testing.html#problem-evidence-synthesis",
-    "title": "Exercise Hierarchical models and testing",
-    "section": "Problem: Evidence synthesis",
-    "text": "Problem: Evidence synthesis\nWe are going to use a data set of a collection of randomised case-control studies of the effectiveness of descriptive social norms on hotel customers behavior to reuse their towels.\nRead Scheibehenne et al. (2016) to understand why and how the studies were conducted.\nScheibehenne, B., Jamil, T., & Wagenmakers, E.-J. (2016). Bayesian Evidence Synthesis Can Reconcile Seemingly Inconsistent Results: The Case of Hotel Towel Reuse. Psychological Science, 27(7), 1043-1046. https://journals.sagepub.com/doi/10.1177/0956797616644081\nYou task is to formulate and justify a parametric model for testing the effectiveness of the intervention, estimate the model parameters and test if the intervention has an effect or not.\n\nThe model should use an appropriate family distribution for the response variable, and\nconsider between study heterogeneity.\nEstimate parameters using maximum likelihood or Bayesian inference (choose of one them). Make a summary of the parameter values (no need to express variance of parameter estimates).\nFormulate hypotheses for the test of the effectiveness of the intervention referring to one or several parameters within the model.\nTest using maximum likelihood or Bayesian inference (the same framework you used for the estimation). You can write your own code or use ready available functions in suitable packages."
-  },
-  {
-    "objectID": "pages/E3_hierarchical models and testing.html#submit-lab-report-on-canvas",
-    "href": "pages/E3_hierarchical models and testing.html#submit-lab-report-on-canvas",
-    "title": "Exercise Hierarchical models and testing",
-    "section": "Submit lab report on Canvas",
-    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone else than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupyter Notebook on Google Colab\nR in Quarto on posit.cloud.\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nUpload the report in the assignment Exercise: Hierarchical models and testing on Canvas."
-  },
-  {
-    "objectID": "pages/E1_regression_discussion.html#visualise-data",
-    "href": "pages/E1_regression_discussion.html#visualise-data",
-    "title": "Exercise 1 Linear Regression Discussion",
-    "section": "Visualise data",
-    "text": "Visualise data"
-  },
-  {
-    "objectID": "pages/E1_regression_discussion.html#what-weight-to-choose",
-    "href": "pages/E1_regression_discussion.html#what-weight-to-choose",
-    "title": "Exercise 1 Linear Regression Discussion",
-    "section": "What weight to choose?",
-    "text": "What weight to choose?\nThe function for LOESS that comes with the ISL book use the tricube function to determine weights\n\\[Y = \\left\\{ \\begin{array}{lr}\n        1 & \\text{if success}\\\\\n        0 & \\text{if failure}\n        \\end{array}\\right.\\]\n\\[W(u) = \\left\\{ \\begin{array}{lr}\n1-(1-u^3)^3 & \\text{for } 0&lt;u&lt;1 \\\\\n0 & \\text{otherwise} \\end{array}\\right.\\]\nwhere \\(u\\) is the euclidean distance divided by the maximum distance among the locally selected points."
-  },
-  {
-    "objectID": "pages/E1_regression_discussion.html#predictions-when-using-10-nearest-neighbors",
-    "href": "pages/E1_regression_discussion.html#predictions-when-using-10-nearest-neighbors",
-    "title": "Exercise 1 Linear Regression Discussion",
-    "section": "Predictions when using 10 nearest neighbors",
-    "text": "Predictions when using 10 nearest neighbors\n\n\n\n\n\nx0\ny\nse\n\n\n\n\n10\n908.60\n17.33\n\n\n18\n957.75\n13.77\n\n\n25\n1006.38\n23.62"
-  },
-  {
-    "objectID": "pages/E1_regression_discussion.html#weighted-ols",
-    "href": "pages/E1_regression_discussion.html#weighted-ols",
-    "title": "Exercise 1 Linear Regression Discussion",
-    "section": "Weighted OLS",
-    "text": "Weighted OLS\nThe intercept and slope parameter is estimated by minimising the weighted sum of squares"
-  },
-  {
-    "objectID": "pages/E1_regression_discussion.html#how-to-estimate-prediction-error-from-a-weighted-ols",
-    "href": "pages/E1_regression_discussion.html#how-to-estimate-prediction-error-from-a-weighted-ols",
-    "title": "Exercise 1 Linear Regression Discussion",
-    "section": "How to estimate prediction error from a Weighted OLS",
-    "text": "How to estimate prediction error from a Weighted OLS\nAssume constant variance for the errors. Estimate the variance for the error \\(V(\\varepsilon)\\) from the residual sum of squares RSS, where we divide by the number of data points minus the number of estimated parameters, i.e. \\(k-2\\)\n\\[\\frac{\\sum_{i=1}^{k}(y_i-\\hat{y}_i)^2}{k-2}\\]\nRepetition: We assume the errors have the same variance (homoscedastic), and can therefore estimate the variance of the error from the sum of squares (non-weighted)\n\\[\\hat{\\sigma}^2 = \\frac{\\sum_{i=1}^{k}(y_i-(\\hat{\\beta}_0+\\hat{\\beta}_1x_i))^2}{k-2}\\]\nThe variance for the estimate of the expected value of the reponse given \\(x_0\\) is\n\\[V(\\hat{\\mu}(x_0)) = \\sigma^2 \\left( \\frac{1}{k}  + \\frac{(x_0-\\bar{x})^2}{\\sum_{i=1}^k (x_i-\\bar{x})^2} \\right)\\]\nwhere we plug in the estimated variance to get the standard error for the prediction \\(\\hat{V}(\\hat{\\mu}(x_0))\\)."
-  },
-  {
-    "objectID": "pages/E1_regression_discussion.html#linear-regression-with-matrices",
-    "href": "pages/E1_regression_discussion.html#linear-regression-with-matrices",
-    "title": "Exercise 1 Linear Regression Discussion",
-    "section": "Linear regression with matrices",
-    "text": "Linear regression with matrices\nA matrix specification of the linear regression model (can easily be expanded to \\(p\\) predictors)\n\\[y = X\\beta + e\\]\n\\[Y = \\left( \\begin{array}{c}\n        y_1 \\\\\n        y_2 \\\\\n        \\vdots \\\\\n        y_n\n        \\end{array}\\right)\\]\n\\[X = \\left( \\begin{array}{l,c}\n        1 & x_1 \\\\\n        1 & x_2 \\\\\n        \\vdots & \\vdots \\\\\n        1 & x_n\n        \\end{array}\\right)\\]\n\\[\\beta = \\left( \\begin{array}{c}\n        \\beta_0 \\\\\n        \\beta_1 \\\\\n        \\end{array}\\right)\\]\n\\[e = \\left( \\begin{array}{c}\n        \\varepsilon_1 \\\\\n        \\varepsilon_2 \\\\\n        \\vdots \\\\\n        \\varepsilon_n\n        \\end{array}\\right)\\]\nThe OLS estimate of the parameters are\n\\[\\hat{\\beta} = (X^TX)^{-1}X^Ty\\] The estimate of the variance is\n\\[\\hat{\\sigma}^2 = \\frac{y^Ty-\\hat{\\beta}^TX^Ty}{n-(p+1)}\\] A point prediction of \\(Y\\) for \\(X_0=\\left(1 \\ x_0\\right)\\) (here we have only one predictor, \\(p = 1\\)) is\n\\[\\hat{\\mu}(x_0) = X_0\\hat{\\beta}\\]\nThe variance of the estimated expected value of \\(Y|x_0\\) is\n\\[V(\\hat{\\mu}(x_0)) = \\sigma^2\\left( X_0 (X^TX)^{-1}X_0^T \\right)\\]\n\n\n   [,1]     [,2]     [,3]    \nx0 10       18       25      \ny  892.222  957.6639 1014.919\nse 21.47555 16.66762 28.93332"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Lectures and Exercises",
-    "section": "",
-    "text": "Lecture 1\nIntroduction to supervised learning\nRegression\nExercise 1\n\n\nLecture 2\nGeneralised Linear Models\nExercise 2\n\n\nLecture 3\nHierarchical Models and Testing\nExercise 3\n\n\nLecture 4\nResampling Methods\nExercise 4\n\n\nLecture 5\nModel Selection\nExercise 5"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "MIT Licence\n2025\nUllrika Sahlin Lund University, Sweden"
-  },
-  {
-    "objectID": "pages/E1_regression.html",
-    "href": "pages/E1_regression.html",
-    "title": "Exercise Regression",
-    "section": "",
-    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write in the beginning of the text file whom you have been working with."
-  },
-  {
-    "objectID": "pages/E1_regression.html#format",
-    "href": "pages/E1_regression.html#format",
-    "title": "Exercise Regression",
-    "section": "",
-    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write in the beginning of the text file whom you have been working with."
-  },
-  {
-    "objectID": "pages/E1_regression.html#grades",
-    "href": "pages/E1_regression.html#grades",
-    "title": "Exercise Regression",
-    "section": "Grades",
-    "text": "Grades\nPass or Fail"
-  },
-  {
-    "objectID": "pages/E1_regression.html#programming-language",
-    "href": "pages/E1_regression.html#programming-language",
-    "title": "Exercise Regression",
-    "section": "Programming language",
-    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python.\nTo get started with R, I recommend\n\nuse it via Posit Cloud (no installation needed, just create an account) and create reports (notebooks) using Quarto\nuse it on your desktop by installing R and RStudio on your computer, or\nuse Google Colab. The default in Google Colab is Python. If you want to use R in Google Colab, open a new notebook, go to edit-&gt;Notebook settings, select R as runtime type and save."
-  },
-  {
-    "objectID": "pages/E1_regression.html#material",
-    "href": "pages/E1_regression.html#material",
-    "title": "Exercise Regression",
-    "section": "Material",
-    "text": "Material\nThe data file for this exercise is available on the git repository github.com/luchem/bern02\nURL to the data file"
-  },
-  {
-    "objectID": "pages/E1_regression.html#local-simple-regression",
-    "href": "pages/E1_regression.html#local-simple-regression",
-    "title": "Exercise Regression",
-    "section": "Local simple regression",
-    "text": "Local simple regression\nWrite your own function for performing predictions with Local Regression using one predictor.\nThe input arguments to the function must be\n\n\\(y\\) a vector of observations of the response variable\n\\(x\\) a vector of observations of the predictor\n\\(k\\) the number of neighboring points to include in each local regression and\n\\(x_0\\) a vector of values for which a prediction is going to be made\n\nThe function shall return\n\n\\(pred\\) a vector of predicted values, and\n\\(se\\) a vector of standard deviations of the expected value of each predicted value"
-  },
-  {
-    "objectID": "pages/E1_regression.html#apply-the-function-on-the-air-pollution-data-set",
-    "href": "pages/E1_regression.html#apply-the-function-on-the-air-pollution-data-set",
-    "title": "Exercise Regression",
-    "section": "Apply the function on the Air pollution data set",
-    "text": "Apply the function on the Air pollution data set\nLoad the data set pollution_cleaneddata.csv with meta data pollution_metadata.txt.\nPredict Total age-adjusted mortality rate per 100,000 (MORT) for an area with 10, 18 and 25 % of families with income &lt; $3000 (POOR)\nProvide predictions with the expected value and the standard error."
-  },
-  {
-    "objectID": "pages/E1_regression.html#submit-lab-report-on-canvas",
-    "href": "pages/E1_regression.html#submit-lab-report-on-canvas",
-    "title": "Exercise Regression",
-    "section": "Submit lab report on Canvas",
-    "text": "Submit lab report on Canvas\nUpload the code for the function together with the three predictions in the assignment Exercise: Regression on Canvas.\nWrite your name and date in the beginning of code and, if applicable, the name of your collaborator.\nThe exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest."
-  },
-  {
-    "objectID": "pages/E1_regression.html#curiosa",
-    "href": "pages/E1_regression.html#curiosa",
-    "title": "Exercise Regression",
-    "section": "Curiosa",
-    "text": "Curiosa\nLocal regression is an example of a memory-based method which means that it does not have a fitted model and instead uses the training data to recompute the local fit every time we make a prediction.\nThe number of neighboring points can be chosen by cross-validation."
+    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupiter Notebook on Google Colab (or installed on your own computer)\nR in Quarto on posit.cloud (or with R and RStudio installed on your computer)\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nSave your report as pdf\nSubmit a report. This can be done in two ways:\n\n\nUpload the report in the assignment Exercise: Resampling on Canvas.\nUse your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment Exercise: Resampling on Canvas."
   },
   {
     "objectID": "pages/E2_generalised_linear_regression.html",
@@ -410,77 +256,140 @@
     "href": "pages/E2_generalised_linear_regression.html#submit-lab-report-on-canvas",
     "title": "Exercise Generalised Linear Regression",
     "section": "Submit lab report on Canvas",
-    "text": "Submit lab report on Canvas\nUpload the csv file with the samples and the code to estimate the model and generate samples in the assignment Exercise: Generalised Linear Models on Canvas.\nWrite your name and date in the beginning of code and, if applicable, the name of your collaborator.\nThe exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest."
+    "text": "Submit lab report on Canvas\nThere are two ways to submit the report\n\nUpload the csv file with the samples and the code to estimate the model and generate samples in the assignment Exercise: Generalised Linear Models on Canvas.\nUse your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment Exercise: Generalised Linear Models on Canvas.\n\nWrite your name and date in the beginning of code and, if applicable, the name of your collaborator.\nThe exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest."
   },
   {
-    "objectID": "pages/E4_resampling_methods.html",
-    "href": "pages/E4_resampling_methods.html",
-    "title": "Exercise Model selection",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Lectures and Exercises",
     "section": "",
-    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
+    "text": "Lecture 1\nIntroduction to supervised learning\nRegression\nExercise 1\n\n\nLecture 2\nGeneralised Linear Models\nExercise 2\n\n\nLecture 3\nHierarchical Models and Testing\nExercise 3\n\n\nLecture 4\nResampling Methods\nExercise 4\n\n\nLecture 5\nModel Selection\nExercise 5 to be published"
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#format",
-    "href": "pages/E4_resampling_methods.html#format",
-    "title": "Exercise Model selection",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
+    "text": "MIT Licence\n2025\nUllrika Sahlin Lund University, Sweden"
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#time-needed",
-    "href": "pages/E4_resampling_methods.html#time-needed",
-    "title": "Exercise Model selection",
-    "section": "Time needed",
-    "text": "Time needed\n4 hours"
+    "objectID": "pages/E1_regression.html",
+    "href": "pages/E1_regression.html",
+    "title": "Exercise Regression",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write in the beginning of the text file whom you have been working with."
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#grades",
-    "href": "pages/E4_resampling_methods.html#grades",
-    "title": "Exercise Model selection",
+    "objectID": "pages/E1_regression.html#format",
+    "href": "pages/E1_regression.html#format",
+    "title": "Exercise Regression",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hands in individually, but write in the beginning of the text file whom you have been working with."
+  },
+  {
+    "objectID": "pages/E1_regression.html#grades",
+    "href": "pages/E1_regression.html#grades",
+    "title": "Exercise Regression",
     "section": "Grades",
     "text": "Grades\nPass or Fail"
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#programming-language",
-    "href": "pages/E4_resampling_methods.html#programming-language",
-    "title": "Exercise Model selection",
+    "objectID": "pages/E1_regression.html#programming-language",
+    "href": "pages/E1_regression.html#programming-language",
+    "title": "Exercise Regression",
     "section": "Programming language",
-    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python. Create a report using Jupyter Notebook notebook or Quarto."
+    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python.\nTo get started with R, I recommend\n\nuse it via Posit Cloud (no installation needed, just create an account) and create reports (notebooks) using Quarto. The most robust option.\nuse Google Colab. The default in Google Colab is Python. If you want to use R in Google Colab, open a new notebook, go to edit-&gt;Notebook settings, select R as runtime type and save.\nuse it on your desktop by installing R and RStudio on your computer. I do not have the time to support computer-specific issues that might arise."
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#cross-validation",
-    "href": "pages/E4_resampling_methods.html#cross-validation",
-    "title": "Exercise Model selection",
-    "section": "Cross validation",
-    "text": "Cross validation\nWe are going to work with the air pollution data set ´pollution_cleaneddata.csv´ and use resampling methods to evaluate the predictive performance of alternative model choices.\n\nLoad the data ´pollution_cleaneddata.csv´\nSpecify a polynomial regression model with degree \\(p\\) that predicts mortality as a function of the average July temperature in degrees F.\n\n\\[y_i = \\beta_0 + \\beta_1x_{i}+ \\beta_2x_{i}^2 + \\ldots + \\beta_px_{i}^p+\\varepsilon_i\\]"
+    "objectID": "pages/E1_regression.html#material",
+    "href": "pages/E1_regression.html#material",
+    "title": "Exercise Regression",
+    "section": "Material",
+    "text": "Material\nThe data file for this exercise is available on the git repository github.com/luchem/bern02\nURL to the data file"
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#validation-set-approach",
-    "href": "pages/E4_resampling_methods.html#validation-set-approach",
-    "title": "Exercise Model selection",
-    "section": "Validation set approach",
-    "text": "Validation set approach\n\nSet a seed for the random number generator.\nSplit data into two equal sized sets, one for training and one for testing.\nFor polynomial models with degree 1 up to 4, derive the mean square error of prediction for the training and testing data sets, respectively.\n\nPresent the results in a plot with polynomial degree on the x-axis and Mean Square Error on the y-axis (example provided below).\n\nJudging from the graph you just generated, which degree of the polynomial would you recommend if the goal is to have a small variance of new predictions.\nRepeat the procedure ten times but with other random seeds. Do you get similar results for other seeds?"
+    "objectID": "pages/E1_regression.html#local-simple-regression",
+    "href": "pages/E1_regression.html#local-simple-regression",
+    "title": "Exercise Regression",
+    "section": "Local simple regression",
+    "text": "Local simple regression\nWrite your own function for performing predictions with Local Regression using one predictor.\nThe input arguments to the function must be\n\n\\(y\\) a vector of observations of the response variable\n\\(x\\) a vector of observations of the predictor\n\\(k\\) the number of neighboring points to include in each local regression and\n\\(x_0\\) a vector of values for which a prediction is going to be made\n\nThe function shall return\n\n\\(pred\\) a vector of predicted values, and\n\\(se\\) a vector of standard deviations of the expected value of each predicted value"
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#k-fold-cross-validation",
-    "href": "pages/E4_resampling_methods.html#k-fold-cross-validation",
-    "title": "Exercise Model selection",
-    "section": "K-fold cross-validation",
-    "text": "K-fold cross-validation\n\nSelect a polynomial degree, e.g. \\(p=2\\). Estimate the variance of predictions using the K-fold cross-validation approach where you hold out \\(K=3\\) sets.\nRepeat the procedure ten times but with other random seeds. Do you get similar results for other seeds?"
+    "objectID": "pages/E1_regression.html#apply-the-function-on-the-air-pollution-data-set",
+    "href": "pages/E1_regression.html#apply-the-function-on-the-air-pollution-data-set",
+    "title": "Exercise Regression",
+    "section": "Apply the function on the Air pollution data set",
+    "text": "Apply the function on the Air pollution data set\nLoad the data set pollution_cleaneddata.csv with meta data pollution_metadata.txt.\nPredict Total age-adjusted mortality rate per 100,000 (MORT) for an area with 10, 18 and 25 % of families with income &lt; $3000 (POOR)\nProvide predictions with the expected value and the standard error."
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#the-bootstrap",
-    "href": "pages/E4_resampling_methods.html#the-bootstrap",
-    "title": "Exercise Model selection",
-    "section": "The Bootstrap",
-    "text": "The Bootstrap\nUse the bootstrap to estimate the standard error of the slope of the line in the Poisson regression of the birds over time\n\nLoad the data set ‘bird_count.csv’\n\n\n\n\n\n\n\n\n\n\n\nRetrieve the Poisson model fitted with maximum likelihood that you did earlier in the course.\n\nLet \\(Y|x\\) be the counted number of birds at year \\(x\\)\n\\[Y|x_i \\sim Po(\\lambda(x_i))\\]\nThe \\(log\\) of the intensity is a linear model with an intercept \\(\\beta_0\\) and a slope \\(\\beta_1\\) parameter for year as the predictor \\(x\\)\n\\[log(\\lambda(x_i)) = \\beta_0 + \\beta_1x_i\\] (@) Use the bootstrap to approximate the standard error of the estimate of the slope parameter.\n\n\n\nCall:\nglm(formula = count ~ yr, family = poisson, data = df)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept) 67.17921   46.70014   1.439    0.150\nyr          -0.03244    0.02329  -1.393    0.164\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 21.069  on 12  degrees of freedom\nResidual deviance: 19.128  on 11  degrees of freedom\nAIC: 73.365\n\nNumber of Fisher Scoring iterations: 4\n\n\n\n\n\n\n\n\n\n\n\nWhen taking the standard deviation of the bootstrap sample of the slope parameter I get 0.034212."
+    "objectID": "pages/E1_regression.html#submit-lab-report-on-canvas",
+    "href": "pages/E1_regression.html#submit-lab-report-on-canvas",
+    "title": "Exercise Regression",
+    "section": "Submit lab report on canvas",
+    "text": "Submit lab report on canvas\nThere are two ways to submit the report\n\nUpload the code for the function together with the three predictions in the assignment Exercise: Regression on Canvas.\nCreate a private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment Exercise: Regression on Canvas.\n\nWrite your name and date in the beginning of code and, if applicable, the name of your collaborator.\nThe exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors."
   },
   {
-    "objectID": "pages/E4_resampling_methods.html#submit-lab-report-on-canvas",
-    "href": "pages/E4_resampling_methods.html#submit-lab-report-on-canvas",
-    "title": "Exercise Model selection",
+    "objectID": "pages/E1_regression.html#curiosa",
+    "href": "pages/E1_regression.html#curiosa",
+    "title": "Exercise Regression",
+    "section": "Curiosa",
+    "text": "Curiosa\nLocal regression is an example of a memory-based method which means that it does not have a fitted model and instead uses the training data to recompute the local fit every time we make a prediction.\nThe number of neighboring points can be chosen by cross-validation."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html",
+    "href": "pages/E3_hierarchical models and testing.html",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#format",
+    "href": "pages/E3_hierarchical models and testing.html#format",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "",
+    "text": "Work individually or in pairs. If you work in a pair, each person hand in individually, but write in the beginning of the file you hand in whom you have been working with."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#time-needed",
+    "href": "pages/E3_hierarchical models and testing.html#time-needed",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Time needed",
+    "text": "Time needed\nThe coding part of this exercise is expected to not take more than eight hours to complete.\nThe peer-review is expected to take not more than two hours."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#peer-review",
+    "href": "pages/E3_hierarchical models and testing.html#peer-review",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Peer-review",
+    "text": "Peer-review\nYou are to peer-review another student report. The purpose of this part is that you are to practice reading code made by someone else and practice giving constructive and helpful comments on code.\nLimit your peer-review to comments on these four points:\n\nthe choice and justification of the model\nthe method for estimation and its implementation\nthe method for testing and the reliability of the results\nthe readability of the report\n\nWhich report to review is assigned by Ullrika. One report can receive several reviewers. You cannot do a review, until you have submitted your own report.\nNote that the review is also graded."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#grades",
+    "href": "pages/E3_hierarchical models and testing.html#grades",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Grades",
+    "text": "Grades\nPass or Fail. To pass, the student must hand in their own report and provide a peer-review on another student report. Both reports must be of acceptable quality."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#programming-language",
+    "href": "pages/E3_hierarchical models and testing.html#programming-language",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Programming language",
+    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#problem-evidence-synthesis",
+    "href": "pages/E3_hierarchical models and testing.html#problem-evidence-synthesis",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Problem: Evidence synthesis",
+    "text": "Problem: Evidence synthesis\nWe are going to use a data set of a collection of randomised case-control studies of the effectiveness of descriptive social norms on hotel customers behavior to reuse their towels.\nRead Scheibehenne et al. (2016) to understand why and how the studies were conducted.\nScheibehenne, B., Jamil, T., & Wagenmakers, E.-J. (2016). Bayesian Evidence Synthesis Can Reconcile Seemingly Inconsistent Results: The Case of Hotel Towel Reuse. Psychological Science, 27(7), 1043-1046. https://journals.sagepub.com/doi/10.1177/0956797616644081\nYou task is to formulate and justify a parametric model for testing the effectiveness of the intervention, estimate the model parameters and test if the intervention has an effect or not.\n\nThe model should use an appropriate family distribution for the response variable, and\nconsider between study heterogeneity.\nEstimate parameters using maximum likelihood or Bayesian inference (choose of one them). Make a summary of the parameter values (no need to express variance of parameter estimates).\nFormulate hypotheses for the test of the effectiveness of the intervention referring to one or several parameters within the model.\nTest using maximum likelihood or Bayesian inference (the same framework you used for the estimation). You can write your own code or use ready available functions in suitable packages.\n\n\n\n\n\n\n\nTip\n\n\n\nA lot can be gained by turning the data from short to long format\n\n\n\n\n\n\n\n\nTip\n\n\n\nUser friendly software for Bayesian inference with hierarchical models\n\nin R brms\nin Python bambi"
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#submit-lab-report-on-canvas",
+    "href": "pages/E3_hierarchical models and testing.html#submit-lab-report-on-canvas",
+    "title": "Exercise Hierarchical models and testing",
     "section": "Submit lab report on Canvas",
-    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupiter Notebook on Google Colab (or installed on your own computer)\nR in Quarto on posit.cloud (or with R and RStudio installed on your computer)\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nSave your report as pdf\nUpload the report in the assignment Exercise: Resampling on Canvas."
+    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone else than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupyter Notebook on Google Colab\nR in Quarto on posit.cloud.\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nSubmit the report. There are two ways to submit the report\n\n\nUpload the report in the assignment Exercise: Hierarchical models and testing on Canvas.\nUse your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment Exercise: Hierarchical models and testing on Canvas."
   },
   {
     "objectID": "pages/L1_intro_supervised_learning.html",
@@ -690,7 +599,7 @@
     "href": "pages/L2_generalised_linear_models.html#bayesian-estimation-of-parameters",
     "title": "Lecture Generalised Linear Models",
     "section": "Bayesian estimation of parameters",
-    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.571559 0.85945637 0.0049620737   0.0051314077\nbeta1   6.133381 0.20564815 0.0011873101   0.0011956757\nsigma   6.603168 0.05051048 0.0002916224   0.0002978265\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.732229 6.537743 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
+    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.577136 0.85486123 0.0049355436   0.0049840583\nbeta1   6.132327 0.20772001 0.0011992720   0.0011992822\nsigma   6.603349 0.04986724 0.0002879086   0.0002986977\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.727566 6.541046 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
   },
   {
     "objectID": "pages/L2_generalised_linear_models.html#maximum-likelihood-estimation-of-parameters",

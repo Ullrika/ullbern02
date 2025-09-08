@@ -35,7 +35,11 @@ Save the samples as a csv file, with a column indicating which sample it is.
 
 ## Submit lab report on Canvas
 
-Upload the csv file with the samples and the code to estimate the model and generate samples in the assignment *Exercise: Generalised Linear Models* on Canvas. 
+There are two ways to submit the report 
+
+1. Upload the csv file with the samples and the code to estimate the model and generate samples in the assignment *Exercise: Generalised Linear Models* on Canvas. 
+
+2. Use your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Generalised Linear Models* on Canvas.
 
 Write your name and date in the beginning of code and, if applicable, the name of your collaborator. 
 

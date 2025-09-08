@@ -34,5 +34,7 @@ subtitle: "Computational Science: Reproducible Data Science and Statistical Lear
 
 [Model Selection](pages/L5_model_selection.qmd)
 
-[Exercise 5](pages/E5_model_selection.qmd)
+Exercise 5 to be published
+
+<!-- [Exercise 5](pages/E5_model_selection.qmd) -->
 

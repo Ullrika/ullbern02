@@ -15,7 +15,9 @@ Work individually or in pairs. If you work in a pair, each person hand in indivi
 
 ## Time needed
 
-This exercise/computer lab is expected to **not** take more than eight hours to complete. 
+The coding part of this exercise is expected to **not** take more than eight hours to complete. 
+
+The peer-review is expected to take not more than two hours. 
 
 ## Peer-review
 
@@ -28,7 +30,9 @@ Limit your peer-review to comments on these four points:
 3. the method for testing and the reliability of the results
 4. the readability of the report
 
-Which report to review is assigned by Ullrika. One report can receive several reviewers. You cannot do a review, until you submitted your own report. 
+Which report to review is assigned by Ullrika. One report can receive several reviewers. You cannot do a review, until you have submitted your own report. 
+
+Note that the review is also graded. 
 
 ## Grades
 
@@ -58,6 +62,24 @@ You task is to formulate and justify a parametric model for testing the effectiv
 
 (@) Test using maximum likelihood or Bayesian inference (the same framework you used for the estimation). You can write your own code **or use ready available functions in suitable packages**. 
 
+
+::: callout-tip
+
+A lot can be gained by turning the data from short to long format 
+
+:::
+
+::: callout-tip
+
+User friendly software for Bayesian inference with hierarchical models 
+
+- in R [brms](https://paulbuerkner.com/brms/)
+
+- in Python [bambi](https://bambinos.github.io/bambi/)
+
+:::
+
+
 ## Submit lab report on Canvas
 
 (1) Write your code so that it is clearly documented, and readable for someone else than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
@@ -68,7 +90,11 @@ You task is to formulate and justify a parametric model for testing the effectiv
 
 (2) Write your name and date in the heading of the report and, if applicable, the name of your collaborator. 
 
-(3) Upload the report in the assignment *Exercise: Hierarchical models and testing* on Canvas. 
+(3) Submit the report. There are two ways to submit the report 
+
+ - Upload the report in the assignment *Exercise: Hierarchical models and testing* on Canvas. 
+
+  - Use your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Hierarchical models and testing* on Canvas.
 
 
 <!-- https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf?utm_source=web&utm_medium=web&utm_campaign=better_science -->

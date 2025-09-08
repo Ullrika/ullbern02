@@ -23,11 +23,11 @@ You can use the language you prefer, but I recommend using *R* or *Python*.
 
 To get started with R, I recommend 
 
-- use it via [Posit Cloud](https://login.posit.cloud) (no installation needed, just create an account) and create reports (notebooks) using [Quarto](https://quarto.org/)
-
-- use it on your desktop by [installing R and RStudio](https://posit.co/download/rstudio-desktop/)  on your computer, or
+- use it via [Posit Cloud](https://login.posit.cloud) (no installation needed, just create an account) and create reports (notebooks) using [Quarto](https://quarto.org/). The most robust option. 
 
 - use Google Colab. The default in Google Colab is Python. If you want to use R in Google Colab, open a new notebook, go to edit->Notebook settings, select R as runtime type and save. 
+
+- use it on your desktop by [installing R and RStudio](https://posit.co/download/rstudio-desktop/)  on your computer. I do not have the time to support computer-specific issues that might arise. 
 
 ## Material
 
@@ -64,13 +64,17 @@ Predict *Total age-adjusted mortality rate per 100,000 (MORT)* for an area with 
 
 Provide predictions with the expected value and the standard error. 
 
-## Submit lab report on Canvas
+## Submit lab report on canvas
 
-Upload the code for the function together with the three predictions in the assignment *Exercise: Regression* on Canvas. 
+There are two ways to submit the report 
+
+1. Upload the code for the function together with the three predictions in the assignment *Exercise: Regression* on Canvas. 
+
+2. Create a private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Regression* on Canvas.
 
 Write your name and date in the beginning of code and, if applicable, the name of your collaborator. 
 
-The exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest. 
+The exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors. 
 
 ## Curiosa
 
