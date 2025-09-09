@@ -246,7 +246,7 @@ Local regression is a non-parametric method that fit a local regression at each 
 
 4.  Fit a weighted simple OLS regression by minimising
 
-$$\sum_{i=1}^{n} K_{i0} (y_i-\beta_0-\beta_1x_{i})^2$$
+$$\sum_{i=1}^{k} K_{i0} (y_i-\beta_0-\beta_1x_{i})^2$$
 
 5.  The fitted value at $x_0$ is $$\hat{y}|x_0 = \hat{f}(x_0) = \hat{\beta_0} + \hat{\beta_1}x_0$$
 
