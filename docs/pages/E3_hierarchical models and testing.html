@@ -4759,6 +4759,7 @@ vertical-align: -.125em;
   <li><a href="#programming-language" id="toc-programming-language" class="nav-link" data-scroll-target="#programming-language">Programming language</a></li>
   <li><a href="#problem-evidence-synthesis" id="toc-problem-evidence-synthesis" class="nav-link" data-scroll-target="#problem-evidence-synthesis">Problem: Evidence synthesis</a></li>
   <li><a href="#submit-lab-report-on-canvas" id="toc-submit-lab-report-on-canvas" class="nav-link" data-scroll-target="#submit-lab-report-on-canvas">Submit lab report on Canvas</a></li>
+  <li><a href="#literature-programming" id="toc-literature-programming" class="nav-link" data-scroll-target="#literature-programming">Literature programming</a></li>
   </ul>
 </nav>
     </div>
@@ -4830,9 +4831,7 @@ vertical-align: -.125em;
 <ol class="example" type="1">
 <li><p>The model should use an appropriate family distribution for the response variable, and</p></li>
 <li><p>consider between study heterogeneity.</p></li>
-<li><p>Estimate parameters using maximum likelihood or Bayesian inference (choose of one them). Make a summary of the parameter values (no need to express variance of parameter estimates).</p></li>
-<li><p>Formulate hypotheses for the test of the effectiveness of the intervention referring to one or several parameters within the model.</p></li>
-<li><p>Test using maximum likelihood or Bayesian inference (the same framework you used for the estimation). You can write your own code <strong>or use ready available functions in suitable packages</strong>.</p></li>
+<li><p>Estimate parameters using Bayesian inference (believe me - it is easier). You can write your own code <strong>or use ready available functions in suitable packages</strong> (highly recommended).</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -4840,20 +4839,7 @@ vertical-align: -.125em;
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A lot can be gained by turning the data from short to long format</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
+Software
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4864,16 +4850,40 @@ Tip
 </ul>
 </div>
 </div>
+<ol start="4" class="example" type="1">
+<li><p>Make a summary of the parameter values by the posterior mean and 90% probability interval.</p></li>
+<li><p>Formulate hypotheses for the test of the effectiveness of the intervention referring to one or several parameters within the model.</p></li>
+<li><p>Test the hypothesis using Bayesian inference.</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tips for data wrangling
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Study how data are to be entered into the software of your choice, then make sure data has that format.</p>
+<p>A lot can be gained by turning the data from short to long format. Code snippets to appear here</p>
+</div>
+</div>
 </section>
 <section id="submit-lab-report-on-canvas" class="level2">
 <h2 class="anchored" data-anchor-id="submit-lab-report-on-canvas">Submit lab report on Canvas</h2>
 <ol type="1">
-<li>Write your code so that it is clearly documented, and readable for someone else than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:</li>
+<li>Write your code so that it is clearly documented, and readable for someone else than yourself.</li>
 </ol>
+</section>
+<section id="literature-programming" class="level2 {callout-tip}">
+<h2 class="anchored" data-anchor-id="literature-programming">Literature programming</h2>
+<p>We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:</p>
 <ul>
 <li><p>Python in Jupyter Notebook on Google Colab</p></li>
-<li><p>R in Quarto on posit.cloud.</p></li>
+<li><p>R in Quarto on posit.cloud or Rstudio downloaded to your computer.</p></li>
 </ul>
+</section>
 <ol start="2" type="1">
 <li><p>Write your name and date in the heading of the report and, if applicable, the name of your collaborator.</p></li>
 <li><p>Submit the report. There are two ways to submit the report</p></li>
@@ -4885,7 +4895,6 @@ Tip
 <!-- https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf?utm_source=web&utm_medium=web&utm_campaign=better_science -->
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -139,7 +139,7 @@ Let the $i$th observation be the number of successful trials among $n_i$ indepen
 
 $$Y|x_i\sim Bin(n_i,p(x_i))$$
 
-The expected value of the proportion of successes is $E(Y|x_i)=p(x_i)$
+The expected value of the proportion of successes is $E(Y|x_i)=\frac{n_ip(x_i)}{n_i}=p(x_i)$.
 
 A *Binomial GLM* is created by transforming the expected value with the logit link function as before into the linear model. 
 
@@ -267,7 +267,7 @@ where $\mu_{\beta_1}=0$ and $\sigma_{\beta_1}^2=10$.
 
 ### Bayesian updating 
 
-Solving the equation for Bayes rule analytically quickly gets cumbersome. There are alternatives. 
+Solving the equation for Bayes rule analyticaly quickly gets cumbersome. There are alternatives. 
 
 - Conjugate Bayesian models
 

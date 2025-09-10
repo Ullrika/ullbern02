@@ -56,20 +56,10 @@ You task is to formulate and justify a parametric model for testing the effectiv
 
 (@) consider between study heterogeneity. 
 
-(@) Estimate parameters using maximum likelihood or Bayesian inference (choose of one them). Make a summary of the parameter values (no need to express variance of parameter estimates). 
-
-(@) Formulate hypotheses for the test of the effectiveness of the intervention referring to one or several parameters within the model. 
-
-(@) Test using maximum likelihood or Bayesian inference (the same framework you used for the estimation). You can write your own code **or use ready available functions in suitable packages**. 
-
+(@) Estimate parameters using Bayesian inference (believe me - it is easier). You can write your own code **or use ready available functions in suitable packages** (highly recommended). 
 
 ::: callout-tip
-
-A lot can be gained by turning the data from short to long format 
-
-:::
-
-::: callout-tip
+## Software
 
 User friendly software for Bayesian inference with hierarchical models 
 
@@ -80,13 +70,35 @@ User friendly software for Bayesian inference with hierarchical models
 :::
 
 
+(@) Make a summary of the parameter values by the posterior mean and 90% probability interval. 
+
+(@) Formulate hypotheses for the test of the effectiveness of the intervention referring to one or several parameters within the model. 
+
+(@) Test the hypothesis using Bayesian inference. 
+
+::: callout-tip
+## Tips for data wrangling
+
+Study how data are to be entered into the software of your choice, then make sure data has that format.  
+
+A lot can be gained by turning the data from short to long format. Code snippets to appear here
+
+:::
+
+
 ## Submit lab report on Canvas
 
-(1) Write your code so that it is clearly documented, and readable for someone else than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
+(1) Write your code so that it is clearly documented, and readable for someone else than yourself. 
+
+:::{callout-tip}
+## Literature programming
+
+We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
 
 - Python in Jupyter Notebook on Google Colab 
 
-- R in Quarto on posit.cloud. 
+- R in Quarto on posit.cloud or Rstudio downloaded to your computer. 
+:::
 
 (2) Write your name and date in the heading of the report and, if applicable, the name of your collaborator. 
 
