@@ -4905,7 +4905,7 @@ Tips for data wrangling
 </div>
 <div class="callout-body-container callout-body">
 <p>Study how data are to be entered into the software of your choice, then make sure data has that format.</p>
-<p>A lot can be gained by turning the data from short to long format. Code snippets to appear here</p>
+<p>A lot can be gained by turning the data from short to long format. Example of code snippets are</p>
 <p>In R:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
@@ -4916,6 +4916,35 @@ Tips for data wrangling
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Total=</span>Yes<span class="sc">+</span>No)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In Python:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_file <span class="op">=</span> <span class="st">&quot;towelData.csv&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(data_file, sep<span class="op">=</span><span class="st">&#39;;&#39;</span>, encoding<span class="op">=</span><span class="st">&#39;latin1&#39;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> data.iloc[:, <span class="op">-</span><span class="dv">1</span>] <span class="co"># get the last column with numbers or yes/no</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># count has the number of yes and no for control and social norm groups</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>control_yes <span class="op">=</span> count[::<span class="dv">4</span>].to_numpy() <span class="co"># every 4th starting from 0 - control group + yes</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>control_no <span class="op">=</span> count[<span class="dv">2</span>::<span class="dv">4</span>].to_numpy() <span class="co"># every 4th starting from 2 - control group + no</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>control_total <span class="op">=</span> np.array([y <span class="op">+</span> n <span class="cf">for</span> y, n <span class="kw">in</span> <span class="bu">zip</span>(control_yes, control_no)])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>social_yes <span class="op">=</span> count[<span class="dv">1</span>::<span class="dv">4</span>].to_numpy() <span class="co"># every 4th starting from 1 - social norm group + yes</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>social_no <span class="op">=</span> count[<span class="dv">3</span>::<span class="dv">4</span>].to_numpy() <span class="co"># every 4th starting from 3 - social norm group + no</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>social_total <span class="op">=</span> np.array([y <span class="op">+</span> n <span class="cf">for</span> y, n <span class="kw">in</span> <span class="bu">zip</span>(social_yes, social_no)])</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>study <span class="op">=</span> np.arange(<span class="dv">1</span>,<span class="bu">len</span>(control_yes)<span class="op">+</span><span class="dv">1</span>) <span class="co"># 7 diferent studies</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>control_data <span class="op">=</span> pd.DataFrame({<span class="st">&quot;reuse&quot;</span>: control_yes, <span class="st">&quot;total&quot;</span>: control_total, <span class="st">&quot;group&quot;</span>: <span class="st">&quot;control&quot;</span>, <span class="st">&quot;study&quot;</span>: study})</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>social_data <span class="op">=</span> pd.DataFrame({ <span class="st">&quot;reuse&quot;</span>: social_yes, <span class="st">&quot;total&quot;</span>: social_total, <span class="st">&quot;group&quot;</span>: <span class="st">&quot;social&quot;</span>, <span class="st">&quot;study&quot;</span>: study})</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>combined_data <span class="op">=</span> pd.concat([control_data, social_data], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data types - important for bambi that they are correctly set </span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># can give errors otherwise</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>combined_data[<span class="st">&#39;reuse&#39;</span>] <span class="op">=</span> combined_data[<span class="st">&#39;reuse&#39;</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>combined_data[<span class="st">&#39;total&#39;</span>] <span class="op">=</span> combined_data[<span class="st">&#39;total&#39;</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>combined_data[<span class="st">&#39;group&#39;</span>] <span class="op">=</span> combined_data[<span class="st">&#39;group&#39;</span>].astype(<span class="st">&#39;category&#39;</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>combined_data[<span class="st">&#39;study&#39;</span>] <span class="op">=</span> combined_data[<span class="st">&#39;study&#39;</span>].astype(<span class="st">&#39;category&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 </section>
