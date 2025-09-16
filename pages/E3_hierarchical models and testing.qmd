@@ -65,7 +65,13 @@ User friendly software for Bayesian inference with hierarchical models
 
 - in R [brms](https://paulbuerkner.com/brms/)
 
+More specifically, you can see how to specify [a model with binomial response](https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/counting-and-classification.html#binomial-regression)
+
+There is useful code examples on this information about [Bayesian meta analysis using brms](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/bayesian-ma.html)
+
 - in Python [bambi](https://bambinos.github.io/bambi/)
+
+More specifically, [an hierarhical model with binomial response](https://bambinos.github.io/bambi/notebooks/hierarchical_binomial_bambi.html#hierarchical-model)
 
 :::
 
@@ -82,6 +88,24 @@ User friendly software for Bayesian inference with hierarchical models
 Study how data are to be entered into the software of your choice, then make sure data has that format.  
 
 A lot can be gained by turning the data from short to long format. Code snippets to appear here
+
+In R: 
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(readr)
+library(tidyr)
+library(dplyr)
+towel_data <- read_delim("towelData.csv", delim = ";", show_col_types = FALSE) %>%
+pivot_wider(names_from = Towel.Reuse, values_from = Count) %>%
+  mutate(Total=Yes+No)
+```
+
+In Python: 
+
+
 
 :::
 
