@@ -392,7 +392,7 @@ A 95th confidence interval of the slope parameter based on the profile likelihoo
 
 # Bayesian estimation
 
-Here I will say something more about how a hierarchical model can look like when using Bayesian inference. ¨
+Here I will say something more about how a hierarchical model can look like when using Bayesian inference.
 
 ::: {.callout-note}
 In general, maximum likelihood estimation is simple to implement in functions as it does not require a specification of the prior, nor advanced sampling. This is one reason that there are functions for maximum likelihood but not for Bayesian inference. The [BRMS](https://cran.r-project.org/web/packages/brms/index.html) R-package is today the most complete support for Bayesian statistical regression models which generates model code via functions that look similar to other ways of specifying models in OLS and GLM with maximum likelihood based inference. 
@@ -422,29 +422,43 @@ where $\mu_{\beta_0},\sigma_{\beta_0},\mu_{\beta_1},\sigma_{\beta_1},a_{\tau},b_
 
 ## Directed Acyclic Graph
 
-Draw on the board if there is time 
+Draw on the board
 
 ## Testing in Bayesian inference 
 
 Inference about parameters can be made by summarising the posterior for the quantity of interest. 
 
-Bayesian testing is more about comparing model. A suggested approach is to comparing deviances based on the posterior.  
+### Bayesian p-value 
+
+Sometimes, analysts derive a Bayesian "p-value" which is the posterior probability of the null hypothesis. If this probability is small, then the null hypothesis can be rejected. Note that this is a pragmatic approach adopting frequentist terminology and not part of Bayesian theory. 
+
+For example, we specify the following hypotheses: 
+
+$H_0: \beta \leq 0$ against $H_1: \beta > 0$ 
+
+The Bayesian p-value is then $p=\int_{-\infty}^0 \beta f(\beta|data)d\beta$ where $f(\beta|data)$ denotes the posterior density. When we have a sample from the posterior, $b_1,\ldots, b_n$, we can approximate this probability as the proportion of samples that comply with $H_0$, i.e. $\hat{p} = \frac{1}{n}\sum_{i=1}^{n} I_{b_i\leq 0}$
+
+### Deviance Information Criterion
+
+Bayesian testing can be done by comparing alternative models. A suggested approach is to comparing deviances based on the posterior.  
 
 The deviance information criterion (DIC) can be defined as
 
 $$DIC = D(\bar{\theta})+2p_D$$
 
-where $\bar{\theta}$ is the posterior mean and $p_D$ the effective number of parameters of the model.
+where $\bar{\theta}$ is the posterior mean and $p_D$ the effective number of parameters of the model. Most MCMC samplers offers ways to derive the DIC. 
 
 The DIC for the full and reduced model can be used to see if there is added value in the difference in the two specifications of the model. 
 
-Another approach is to use **Bayes factor** to compare two models, $M_1$ and $M_2$:   
+### Bayes factor
 
-$$BF = \frac{P(data|M_1)}{P(data|M_2)}$$
+Another approach is to use **Bayes factor** to compare two models, $M_0$ and $M_1$:   
+
+$$BF = \frac{P(data|M_1)}{P(data|M_0)}$$
 <!-- =\ldots=\frac{P(M_1|data)P(M_2)}{P(M_2|data)P(M_1)}  -->
 <!-- If the priors are equal, the Bayes factor is the ratio between the posterior for  -->
 
-A Bayes factor much greater than 1 gives high evidence to the model in the nominator, $M_1$.
+A Bayes factor much greater than 1 gives high evidence to the model in the nominator, $M_1$. There are scales to clasify the strengths of evidence for one model compared to another. [Example of scale](https://www.statisticshowto.com/bayes-factor-definition/)
 
 Bayes factor has resemblances with the likelihood ratio statistic, but it has a wider application and does not require that the models to be nested.
 

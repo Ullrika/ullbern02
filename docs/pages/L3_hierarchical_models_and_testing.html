@@ -4920,7 +4920,12 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#bayesian-model-specification" id="toc-bayesian-model-specification" class="nav-link" data-scroll-target="#bayesian-model-specification">Bayesian model specification</a></li>
   <li><a href="#directed-acyclic-graph" id="toc-directed-acyclic-graph" class="nav-link" data-scroll-target="#directed-acyclic-graph">Directed Acyclic Graph</a></li>
-  <li><a href="#testing-in-bayesian-inference" id="toc-testing-in-bayesian-inference" class="nav-link" data-scroll-target="#testing-in-bayesian-inference">Testing in Bayesian inference</a></li>
+  <li><a href="#testing-in-bayesian-inference" id="toc-testing-in-bayesian-inference" class="nav-link" data-scroll-target="#testing-in-bayesian-inference">Testing in Bayesian inference</a>
+  <ul class="collapse">
+  <li><a href="#bayesian-p-value" id="toc-bayesian-p-value" class="nav-link" data-scroll-target="#bayesian-p-value">Bayesian p-value</a></li>
+  <li><a href="#deviance-information-criterion" id="toc-deviance-information-criterion" class="nav-link" data-scroll-target="#deviance-information-criterion">Deviance Information Criterion</a></li>
+  <li><a href="#bayes-factor" id="toc-bayes-factor" class="nav-link" data-scroll-target="#bayes-factor">Bayes factor</a></li>
+  </ul></li>
   <li><a href="#bayesian-vs-frequentist" id="toc-bayesian-vs-frequentist" class="nav-link" data-scroll-target="#bayesian-vs-frequentist">Bayesian vs Frequentist</a></li>
   </ul></li>
   <li><a href="#study-questions" id="toc-study-questions" class="nav-link" data-scroll-target="#study-questions">Study questions</a></li>
@@ -5338,7 +5343,7 @@ Note
 </section>
 <section id="bayesian-estimation" class="level1">
 <h1>Bayesian estimation</h1>
-<p>Here I will say something more about how a hierarchical model can look like when using Bayesian inference. ¨</p>
+<p>Here I will say something more about how a hierarchical model can look like when using Bayesian inference.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5370,20 +5375,33 @@ Note
 </section>
 <section id="directed-acyclic-graph" class="level2">
 <h2 class="anchored" data-anchor-id="directed-acyclic-graph">Directed Acyclic Graph</h2>
-<p>Draw on the board if there is time</p>
+<p>Draw on the board</p>
 </section>
 <section id="testing-in-bayesian-inference" class="level2">
 <h2 class="anchored" data-anchor-id="testing-in-bayesian-inference">Testing in Bayesian inference</h2>
 <p>Inference about parameters can be made by summarising the posterior for the quantity of interest.</p>
-<p>Bayesian testing is more about comparing model. A suggested approach is to comparing deviances based on the posterior.</p>
+<section id="bayesian-p-value" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-p-value">Bayesian p-value</h3>
+<p>Sometimes, analysts derive a Bayesian “p-value” which is the posterior probability of the null hypothesis. If this probability is small, then the null hypothesis can be rejected. Note that this is a pragmatic approach adopting frequentist terminology and not part of Bayesian theory.</p>
+<p>For example, we specify the following hypotheses:</p>
+<p><span class="math inline">\(H_0: \beta \leq 0\)</span> against <span class="math inline">\(H_1: \beta &gt; 0\)</span></p>
+<p>The Bayesian p-value is then <span class="math inline">\(p=\int_{-\infty}^0 \beta f(\beta|data)d\beta\)</span> where <span class="math inline">\(f(\beta|data)\)</span> denotes the posterior density. When we have a sample from the posterior, <span class="math inline">\(b_1,\ldots, b_n\)</span>, we can approximate this probability as the proportion of samples that comply with <span class="math inline">\(H_0\)</span>, i.e. <span class="math inline">\(\hat{p} = \frac{1}{n}\sum_{i=1}^{n} I_{b_i\leq 0}\)</span></p>
+</section>
+<section id="deviance-information-criterion" class="level3">
+<h3 class="anchored" data-anchor-id="deviance-information-criterion">Deviance Information Criterion</h3>
+<p>Bayesian testing can be done by comparing alternative models. A suggested approach is to comparing deviances based on the posterior.</p>
 <p>The deviance information criterion (DIC) can be defined as</p>
 <p><span class="math display">\[DIC = D(\bar{\theta})+2p_D\]</span></p>
-<p>where <span class="math inline">\(\bar{\theta}\)</span> is the posterior mean and <span class="math inline">\(p_D\)</span> the effective number of parameters of the model.</p>
+<p>where <span class="math inline">\(\bar{\theta}\)</span> is the posterior mean and <span class="math inline">\(p_D\)</span> the effective number of parameters of the model. Most MCMC samplers offers ways to derive the DIC.</p>
 <p>The DIC for the full and reduced model can be used to see if there is added value in the difference in the two specifications of the model.</p>
-<p>Another approach is to use <strong>Bayes factor</strong> to compare two models, <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>:</p>
-<p><span class="math display">\[BF = \frac{P(data|M_1)}{P(data|M_2)}\]</span> <!-- =\ldots=\frac{P(M_1|data)P(M_2)}{P(M_2|data)P(M_1)}  --> <!-- If the priors are equal, the Bayes factor is the ratio between the posterior for  --></p>
-<p>A Bayes factor much greater than 1 gives high evidence to the model in the nominator, <span class="math inline">\(M_1\)</span>.</p>
+</section>
+<section id="bayes-factor" class="level3">
+<h3 class="anchored" data-anchor-id="bayes-factor">Bayes factor</h3>
+<p>Another approach is to use <strong>Bayes factor</strong> to compare two models, <span class="math inline">\(M_0\)</span> and <span class="math inline">\(M_1\)</span>:</p>
+<p><span class="math display">\[BF = \frac{P(data|M_1)}{P(data|M_0)}\]</span> <!-- =\ldots=\frac{P(M_1|data)P(M_2)}{P(M_2|data)P(M_1)}  --> <!-- If the priors are equal, the Bayes factor is the ratio between the posterior for  --></p>
+<p>A Bayes factor much greater than 1 gives high evidence to the model in the nominator, <span class="math inline">\(M_1\)</span>. There are scales to clasify the strengths of evidence for one model compared to another. <a href="https://www.statisticshowto.com/bayes-factor-definition/">Example of scale</a></p>
 <p>Bayes factor has resemblances with the likelihood ratio statistic, but it has a wider application and does not require that the models to be nested.</p>
+</section>
 </section>
 <section id="bayesian-vs-frequentist" class="level2">
 <h2 class="anchored" data-anchor-id="bayesian-vs-frequentist">Bayesian vs Frequentist</h2>
