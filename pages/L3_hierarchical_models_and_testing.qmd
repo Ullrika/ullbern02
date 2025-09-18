@@ -382,7 +382,7 @@ I can test using a confidence interval
 ci <- confint(rmod)
 ```
 
-A 95th confidence interval of the slope parameter based on the profile likelihood mehtod is derived to be $CI_{\beta_1}= (`r ci[4,1]`,`r ci[4,2]`)$, i.e. a positive linear association that is statistically different from zero at the 5%'s significance level. 
+A 95th confidence interval of the slope parameter based on the profile likelihood method is derived to be $CI_{\beta_1}= (`r ci[4,1]`,`r ci[4,2]`)$, i.e. a positive linear association that is statistically different from zero at the 5%'s significance level. 
 
 - When my model is estimated with a restricted maximum likelihood, using a likelihood ratio test can be wrong since the likelihoods are conditional on different values of a so called nuisance parameter. 
 
@@ -404,15 +404,15 @@ A Bayesian specification of the model made in "tilde"-format can be
 
 - Likelihood
 
-$$Y_{ij}|\beta_{0},\beta_1,\sigma,\tau \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma^2)$$
+$$Y_{ij}|\beta_{0},\beta_1,\sigma,\tau, u, x \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma^2)$$
 
 
 $$u_j|\tau \sim N(0,\tau)$$
 
 - The prior is derived based on the following marginal distributions
 
-$$\beta_0\sim N(\mu_{\beta_0},\sigma_{\beta_0}^2)$$
-$$\beta_1\sim N(\mu_{\beta_1},\sigma_{\beta_1}^2)$$
+$$\beta_0\sim N(\mu_{\beta_0},\sigma_{\beta_0})$$
+$$\beta_1\sim N(\mu_{\beta_1},\sigma_{\beta_1})$$
 
 $$\tau \sim \Gamma(a_{\tau},b_{\tau})$$
 

@@ -5332,7 +5332,7 @@ Note
 <h3 class="anchored" data-anchor-id="testing-the-fixed-effect-in-the-hierarhical-model">Testing the fixed effect in the hierarhical model</h3>
 <p>I am interested in testing if there is a linear association.</p>
 <p>I can test using a confidence interval</p>
-<p>A 95th confidence interval of the slope parameter based on the profile likelihood mehtod is derived to be <span class="math inline">\(CI_{\beta_1}= (0.1641772,0.2328453)\)</span>, i.e. a positive linear association that is statistically different from zero at the 5%’s significance level.</p>
+<p>A 95th confidence interval of the slope parameter based on the profile likelihood method is derived to be <span class="math inline">\(CI_{\beta_1}= (0.1641772,0.2328453)\)</span>, i.e. a positive linear association that is statistically different from zero at the 5%’s significance level.</p>
 <ul>
 <li><p>When my model is estimated with a restricted maximum likelihood, using a likelihood ratio test can be wrong since the likelihoods are conditional on different values of a so called nuisance parameter.</p></li>
 <li><p>Then I can implement the maximum likelihood without a restriction (which can be problematic for the optimisation), or</p></li>
@@ -5363,12 +5363,12 @@ Note
 <ul>
 <li>Likelihood</li>
 </ul>
-<p><span class="math display">\[Y_{ij}|\beta_{0},\beta_1,\sigma,\tau \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma^2)\]</span></p>
+<p><span class="math display">\[Y_{ij}|\beta_{0},\beta_1,\sigma,\tau, u, x \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma^2)\]</span></p>
 <p><span class="math display">\[u_j|\tau \sim N(0,\tau)\]</span></p>
 <ul>
 <li>The prior is derived based on the following marginal distributions</li>
 </ul>
-<p><span class="math display">\[\beta_0\sim N(\mu_{\beta_0},\sigma_{\beta_0}^2)\]</span> <span class="math display">\[\beta_1\sim N(\mu_{\beta_1},\sigma_{\beta_1}^2)\]</span></p>
+<p><span class="math display">\[\beta_0\sim N(\mu_{\beta_0},\sigma_{\beta_0})\]</span> <span class="math display">\[\beta_1\sim N(\mu_{\beta_1},\sigma_{\beta_1})\]</span></p>
 <p><span class="math display">\[\tau \sim \Gamma(a_{\tau},b_{\tau})\]</span></p>
 <p><span class="math display">\[\sigma \sim \Gamma(a_{\sigma},b_{\sigma})\]</span></p>
 <p>where <span class="math inline">\(\mu_{\beta_0},\sigma_{\beta_0},\mu_{\beta_1},\sigma_{\beta_1},a_{\tau},b_{\tau},a_{\sigma},b_{\sigma}\)</span> are hyper-parameters.</p>
