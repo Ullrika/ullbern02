@@ -149,7 +149,8 @@ combined_data['study'] = combined_data['study'].astype('category')
 (1) Write your code so that it is clearly documented, and readable for someone else than yourself. 
 
 :::{callout-tip}
-## Literature programming
+
+## Literate programming
 
 We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
 
@@ -164,7 +165,23 @@ We recommend integrating sections of code (R or Python) with sections of text us
 
  - Upload the report in the assignment *Exercise: Hierarchical models and testing* on Canvas. 
 
-  - Use your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Hierarchical models and testing* on Canvas.
+  - Use your private git repository for the course. Push your code to git and send a link to the repository in the assignment *Exercise: Hierarchical models and testing* on Canvas. Make sure that the person reviewing your report can see it. 
 
+## Peer review
+
+You are to peer-review another student report. The purpose of this part is that you are to practice reading code and surrounding text made by someone else and practice giving constructive and helpful comments on code. 
+
+Limit your peer-review to comments on these four points: 
+
+1. the choice and justification of the model
+2. the method for estimation and its implementation
+3. the method for testing and the reliability of the results
+4. the readability of the report
+
+You write a report and upload to canvas (preferred option) or type in text into canvas. 
+
+The time you spend on the review should be at maximum three hours
+
+Submit your peer-review on Oct 5 the latest
 
 <!-- https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf?utm_source=web&utm_medium=web&utm_campaign=better_science -->

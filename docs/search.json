@@ -392,11 +392,18 @@
     "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone else than yourself."
   },
   {
-    "objectID": "pages/E3_hierarchical models and testing.html#literature-programming",
-    "href": "pages/E3_hierarchical models and testing.html#literature-programming",
+    "objectID": "pages/E3_hierarchical models and testing.html#literate-programming",
+    "href": "pages/E3_hierarchical models and testing.html#literate-programming",
     "title": "Exercise Hierarchical models and testing",
-    "section": "Literature programming",
-    "text": "Literature programming\nWe recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\nPython in Jupyter Notebook on Google Colab\nR in Quarto on posit.cloud or Rstudio downloaded to your computer."
+    "section": "Literate programming",
+    "text": "Literate programming\nWe recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\nPython in Jupyter Notebook on Google Colab\nR in Quarto on posit.cloud or Rstudio downloaded to your computer."
+  },
+  {
+    "objectID": "pages/E3_hierarchical models and testing.html#peer-review-1",
+    "href": "pages/E3_hierarchical models and testing.html#peer-review-1",
+    "title": "Exercise Hierarchical models and testing",
+    "section": "Peer review",
+    "text": "Peer review\nYou are to peer-review another student report. The purpose of this part is that you are to practice reading code and surrounding text made by someone else and practice giving constructive and helpful comments on code.\nLimit your peer-review to comments on these four points:\n\nthe choice and justification of the model\nthe method for estimation and its implementation\nthe method for testing and the reliability of the results\nthe readability of the report\n\nYou write a report and upload to canvas (preferred option) or type in text into canvas.\nThe time you spend on the review should be at maximum three hours\nSubmit your peer-review on Oct 5 the latest"
   },
   {
     "objectID": "pages/L1_intro_supervised_learning.html",
@@ -606,7 +613,7 @@
     "href": "pages/L2_generalised_linear_models.html#bayesian-estimation-of-parameters",
     "title": "Lecture Generalised Linear Models",
     "section": "Bayesian estimation of parameters",
-    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.572341 0.86123572 0.0049723468   0.0049724935\nbeta1   6.136601 0.20567950 0.0011874911   0.0011875031\nsigma   6.603173 0.05027579 0.0002902674   0.0002965613\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.731146 6.535688 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
+    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.570387 0.85696021 0.0049476621   0.0050923392\nbeta1   6.134054 0.20671403 0.0011934640   0.0011934969\nsigma   6.602816 0.05054541 0.0002918241   0.0002948943\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.723701 6.539543 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
   },
   {
     "objectID": "pages/L2_generalised_linear_models.html#maximum-likelihood-estimation-of-parameters",
