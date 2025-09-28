@@ -5008,27 +5008,11 @@ window.Quarto = {
 <p>Let <span class="math inline">\(Y|x\)</span> be the counted number of birds at year <span class="math inline">\(x\)</span></p>
 <p><span class="math display">\[Y|x_i \sim Po(\lambda(x_i))\]</span></p>
 <p>The <span class="math inline">\(log\)</span> of the intensity is a linear model with an intercept <span class="math inline">\(\beta_0\)</span> and a slope <span class="math inline">\(\beta_1\)</span> parameter for year as the predictor <span class="math inline">\(x\)</span></p>
-<p><span class="math display">\[log(\lambda(x_i)) = \beta_0 + \beta_1x_i\]</span> (@) Use the bootstrap to approximate the standard error of the estimate of the slope parameter.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = count ~ yr, family = poisson, data = df)
-
-Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)
-(Intercept) 67.17921   46.70014   1.439    0.150
-yr          -0.03244    0.02329  -1.393    0.164
-
-(Dispersion parameter for poisson family taken to be 1)
-
-    Null deviance: 21.069  on 12  degrees of freedom
-Residual deviance: 19.128  on 11  degrees of freedom
-AIC: 73.365
-
-Number of Fisher Scoring iterations: 4</code></pre>
-</div>
-</div>
+<p><span class="math display">\[log(\lambda(x_i)) = \beta_0 + \beta_1x_i\]</span></p>
+<p>Using maximum likelihood based on all data, my estimate of the parameter is <span class="math inline">\(\hat{\beta}_1 = -0.03244\)</span>.</p>
+<ol start="12" class="example" type="1">
+<li>Use the bootstrap to approximate the standard error of the estimate of the slope parameter.</li>
+</ol>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -5051,12 +5035,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul>
 <ol start="2" type="1">
 <li><p>Write your name and date in the heading of the report and, if applicable, the name of your collaborator.</p></li>
-<li><p>Save your report as pdf</p></li>
 <li><p>Submit a report. This can be done in two ways:</p></li>
 </ol>
 <ul>
-<li><p>Upload the report in the assignment <em>Exercise: Resampling</em> on Canvas.</p></li>
-<li><p>Use your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment <em>Exercise: Resampling</em> on Canvas.</p></li>
+<li><p>Save the report and code, and upload in the assignment <em>Exercise: Resampling</em> on Canvas.</p></li>
+<li><p>Use your private git repository or colab for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment <em>Exercise: Resampling</em> on Canvas.</p></li>
 </ul>
 
 

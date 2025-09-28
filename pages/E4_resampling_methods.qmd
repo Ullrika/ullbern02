@@ -177,13 +177,18 @@ $$Y|x_i \sim Po(\lambda(x_i))$$
 The $log$ of the intensity is a linear model with an intercept $\beta_0$ and a slope $\beta_1$ parameter for year as the predictor $x$ 
 
 $$log(\lambda(x_i)) = \beta_0 + \beta_1x_i$$
-(@) Use the bootstrap to approximate the standard error of the estimate of the slope parameter.
 
+Using maximum likelihood based on all data, my estimate of the parameter is $\hat{\beta}_1 = -0.03244$. 
 
 ```{r}
+#| output: false
+
 mod_pois <- glm(count ~ yr, data = df, family = poisson)
 summary(mod_pois)
 ```
+
+
+(@) Use the bootstrap to approximate the standard error of the estimate of the slope parameter.
 
 
 ```{r}
@@ -211,11 +216,9 @@ When taking the standard deviation of the bootstrap sample of the slope paramete
 
 (2) Write your name and date in the heading of the report and, if applicable, the name of your collaborator. 
 
-(3) Save your report as pdf
+(3) Submit a report. This can be done in two ways: 
 
-(4) Submit a report. This can be done in two ways: 
+- Save the report and code, and upload in the assignment *Exercise: Resampling* on Canvas. 
 
-- Upload the report in the assignment *Exercise: Resampling* on Canvas. 
-
-- Use your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Resampling* on Canvas.
+- Use your private git repository or colab for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Resampling* on Canvas.
 
