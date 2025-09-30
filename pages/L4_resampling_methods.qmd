@@ -30,7 +30,9 @@ ISL: 5.1 and 5.2
 
 Resampling involves fitting the same statistical method multiple times using different subsets of the training data. 
 
-Here we assume that predictions have the same variance (*homoscedasticity*), i.e. that $V(\hat{f}(x_0))$ is the same for all $x_0$.
+Here we assume that predictions have the same variance (*homoscedasticity*), i.e. that $V(\hat{f}(x_0))$ is the same for all $x_0$. 
+
+In this lecture, I present cross-validation and bootstrapping and ways to estimate variance in predictions or a quantity of interest. I want you to understand the difference between common approaches.  
 
 # Cross-validation 
 
@@ -51,6 +53,12 @@ In general $MSE_{test} > MSE_{train}$
 A drawback with this method is that the model is trained on a smaller data set and the variance of predictions is derived from fewer values. 
 
 The estimated variance can change considerably for different splits into training and validation sets.
+
+:::{callout-note}
+
+Here we assume you have access to all data. A second validation or hold-out set (which in principle can be considered as hidden from the analyst) can be used to test a model after fitting and model selection has been done.  
+
+:::
 
 ## Leave-One-Out
 

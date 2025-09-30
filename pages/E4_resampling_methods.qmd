@@ -73,7 +73,7 @@ labs(title="Polynomial with degree 4")
 
 (@) Split data into two equal sized sets, one for training and one for testing.
 
-(@) For polynomial models with degree 1 up to 4, derive the mean square error of prediction for the training and testing data sets, respectively. 
+(@) For polynomial models with degree 1 up to 4, derive the mean square error of prediction for the training and testing data sets, respectively. **Note: It is ok to use built in functions for polynomial regression.**
 
 Present the results in a plot with polynomial degree on the x-axis and Mean Square Error on the y-axis (example provided below).
 

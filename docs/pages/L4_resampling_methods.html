@@ -4941,6 +4941,7 @@ window.Quarto = {
 <h1>Resampling methods</h1>
 <p>Resampling involves fitting the same statistical method multiple times using different subsets of the training data.</p>
 <p>Here we assume that predictions have the same variance (<em>homoscedasticity</em>), i.e. that <span class="math inline">\(V(\hat{f}(x_0))\)</span> is the same for all <span class="math inline">\(x_0\)</span>.</p>
+<p>In this lecture, I present cross-validation and bootstrapping and ways to estimate variance in predictions or a quantity of interest. I want you to understand the difference between common approaches.</p>
 </section>
 <section id="cross-validation" class="level1">
 <h1>Cross-validation</h1>
@@ -4956,6 +4957,9 @@ window.Quarto = {
 <p>In general <span class="math inline">\(MSE_{test} &gt; MSE_{train}\)</span></p>
 <p>A drawback with this method is that the model is trained on a smaller data set and the variance of predictions is derived from fewer values.</p>
 <p>The estimated variance can change considerably for different splits into training and validation sets.</p>
+<div class="{callout-note}">
+<p>Here we assume you have access to all data. A second validation or hold-out set (which in principle can be considered as hidden from the analyst) can be used to test a model after fitting and model selection has been done.</p>
+</div>
 </section>
 <section id="leave-one-out" class="level2">
 <h2 class="anchored" data-anchor-id="leave-one-out">Leave-One-Out</h2>
