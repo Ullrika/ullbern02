@@ -1,0 +1,78 @@
+---
+title: "Exercise Model selection and Shrinkage"
+subtitle: "BERN02"
+author: "Ullrika Sahlin"
+format: 
+  html:
+    embed-resources: true
+    theme: cosmo
+echo: false
+eval: false
+---
+
+```{r}
+#| warning: false
+#| message: false
+library(readr)
+library(ggplot2)
+library(dplyr)
+```
+
+## Format
+
+Work individually or in pairs. If you work in a pair, each person hands in individually, but write at the beginning of the file who you have been working with. 
+
+## Time needed
+
+3 hours
+
+## Grades
+
+Pass or Fail
+
+## Programming language
+
+You can use the language you prefer, but I recommend using *R* or *Python*. 
+
+Create a report using Jupyter Notebook or Quarto. 
+
+## Model selection competition
+
+You have access to a dataset for ADD DESCRIPTION HERE 
+
+The response variable is kissing index (labeled as "ADD HERE" in the data set). 
+
+The data set contains xxx descriptors 
+
+Your task is to build a model that predict "kissing index" from the descriptors. Use model selection techniques that were brought up in the lecture.  
+
+We have randomly taken out a hold out data set from the original dataset. You have access to the remaining data to build the model. You are to build at least one predictive model, justify your choice of model based on $MSE$ and submit to kaggle.  
+
+You can choose which of the two alternatives you would like to start with. If you have time, then make a model for both of them. 
+
+- Build a predictive model using either best subset selection, forward or backward selection. 
+
+- Build a predictive model using shrinkage methods.
+
+A winner will be selected based on 
+
+1) the justification for the chosen model and 
+
+2) the performance on the hold out data set in kaggle
+
+
+
+```{r}
+## Prepare data
+
+# Download packages for model selection
+library(leaps) #for subset selection
+library(glmnet) #for shrinkage
+```
+
+
+## Submit justification to Canvas
+
+Upload the report in the assignment *Exercise: Model selection and shrinkage* on Canvas. 
+
+

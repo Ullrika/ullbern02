@@ -26,6 +26,15 @@ library(ISLR2)
 
 ISL: 6.1 and 5.2
 
+
+## Overview
+
+
+Model selection a technique to select among many possible models. For parametric statistical inference (where you care about the parameters), model selection can be used to identify the most parsimonious model and then interpret the parameters. For predictive inference, model selection is how you design your algorithm to build the predictive model, which if parametric models are used, includes parameter estimation and a clever way to select models. Shrinkage methods are "selecting models" by penalising high values on parameters. Having a parameter close to zero can be seen as if the predictor x is not included in the model. Shrinkage methods combines parameter estimation with selection. 
+
+
+
+
 ## Best subset selection 
 
 ![](../img/best_subset.jpg)
@@ -67,7 +76,9 @@ Bayesian Information Criterion
 
 $$BIC = \frac{1}{n}(RSS + log(n)d\hat{\sigma}^2)$$
 
-
+I mentioned that some of these performance measures are based on comparison between point predictions and data, whereas there are measures which are based on the likelihood or the predictive posterior distribution. The latter is what you get from Bayesian inference, where several probabilistic measures are being used, such as 
+Leave-one-out cross-validation (LOO) and the widely applicable information criterion (WAIC) (not covered in this course). 
+ 
 
 # The importance of visualising data and the model
 
@@ -81,6 +92,7 @@ In addition, if hypothesis testing is done, one also has to check model assumpti
 
 Here our focus is to build a predictive model, then that is not so important. 
 
+What to visualise? At minimum predictive vs observed - should be a 1-to-1 line. 
 
 ## Model selection
 
