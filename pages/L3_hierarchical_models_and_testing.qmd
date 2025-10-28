@@ -436,7 +436,7 @@ For example, we specify the following hypotheses:
 
 $H_0: \beta \leq 0$ against $H_1: \beta > 0$ 
 
-The Bayesian p-value is then $p=\int_{-\infty}^0 \beta f(\beta|data)d\beta$ where $f(\beta|data)$ denotes the posterior density. When we have a sample from the posterior, $b_1,\ldots, b_n$, we can approximate this probability as the proportion of samples that comply with $H_0$, i.e. $\hat{p} = \frac{1}{n}\sum_{i=1}^{n} I_{b_i\leq 0}$
+The Bayesian p-value is then $p=\int_{-\infty}^0 f(\beta|data)d\beta$ where $f(\beta|data)$ denotes the posterior density. When we have a sample from the posterior, $b_1,\ldots, b_n$, we can approximate this probability as the proportion of samples that comply with $H_0$, i.e. $\hat{p} = \frac{1}{n}\sum_{i=1}^{n} I_{b_i\leq 0}$
 
 ### Deviance Information Criterion
 

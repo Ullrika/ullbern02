@@ -5385,7 +5385,7 @@ Note
 <p>Sometimes, analysts derive a Bayesian “p-value” which is the posterior probability of the null hypothesis. If this probability is small, then the null hypothesis can be rejected. Note that this is a pragmatic approach adopting frequentist terminology and not part of Bayesian theory.</p>
 <p>For example, we specify the following hypotheses:</p>
 <p><span class="math inline">\(H_0: \beta \leq 0\)</span> against <span class="math inline">\(H_1: \beta &gt; 0\)</span></p>
-<p>The Bayesian p-value is then <span class="math inline">\(p=\int_{-\infty}^0 \beta f(\beta|data)d\beta\)</span> where <span class="math inline">\(f(\beta|data)\)</span> denotes the posterior density. When we have a sample from the posterior, <span class="math inline">\(b_1,\ldots, b_n\)</span>, we can approximate this probability as the proportion of samples that comply with <span class="math inline">\(H_0\)</span>, i.e. <span class="math inline">\(\hat{p} = \frac{1}{n}\sum_{i=1}^{n} I_{b_i\leq 0}\)</span></p>
+<p>The Bayesian p-value is then <span class="math inline">\(p=\int_{-\infty}^0 f(\beta|data)d\beta\)</span> where <span class="math inline">\(f(\beta|data)\)</span> denotes the posterior density. When we have a sample from the posterior, <span class="math inline">\(b_1,\ldots, b_n\)</span>, we can approximate this probability as the proportion of samples that comply with <span class="math inline">\(H_0\)</span>, i.e. <span class="math inline">\(\hat{p} = \frac{1}{n}\sum_{i=1}^{n} I_{b_i\leq 0}\)</span></p>
 </section>
 <section id="deviance-information-criterion" class="level3">
 <h3 class="anchored" data-anchor-id="deviance-information-criterion">Deviance Information Criterion</h3>
