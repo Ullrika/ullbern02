@@ -178,10 +178,9 @@ Limit your peer-review to comments on these four points:
 3. the method for testing and the reliability of the results
 4. the readability of the report
 
-You write a report and upload to canvas (preferred option) or type in text into canvas. 
+You write a report (at best structured with these points) and upload a PDF to canvas. 
 
-The time you spend on the review should be at maximum three hours
+The time you spend on the review should be about three hours
 
-Submit your peer-review on Oct 5 the latest
 
 <!-- https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf?utm_source=web&utm_medium=web&utm_campaign=better_science -->

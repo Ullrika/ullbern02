@@ -21,13 +21,15 @@ Pass or Fail
 
 You can use the language you prefer, but I recommend using *R* or *Python*.
 
+Since Python is well introduced for this group of students, I provide recommendations on how to get started with R. 
+
 To get started with R, I recommend 
 
-- use it via [Posit Cloud](https://login.posit.cloud) (no installation needed, just create an account) and create reports (notebooks) using [Quarto](https://quarto.org/). The most robust option. 
-
-- use Google Colab. The default in Google Colab is Python. If you want to use R in Google Colab, open a new notebook, go to edit->Notebook settings, select R as runtime type and save. 
-
 - use it on your desktop by [installing R and RStudio](https://posit.co/download/rstudio-desktop/)  on your computer. I do not have the time to support computer-specific issues that might arise. 
+
+- use it via [Posit Cloud](https://login.posit.cloud) (no installation needed, just create an account) and create reports (notebooks) using [Quarto](https://quarto.org/). 
+
+- use Google Colab. The default in Google Colab is Python. If you want to use R in Google Colab, open a new notebook, go to edit->Notebook settings, select R as runtime type and save.
 
 ## Material
 

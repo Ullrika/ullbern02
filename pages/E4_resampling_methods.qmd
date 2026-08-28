@@ -218,7 +218,7 @@ When taking the standard deviation of the bootstrap sample of the slope paramete
 
 (3) Submit a report. This can be done in two ways: 
 
-- Save the report and code, and upload in the assignment *Exercise: Resampling* on Canvas. 
+- Save the report as PDF and code in runnable format, and upload in the assignment *Exercise: Resampling* on Canvas. 
 
-- Use your private git repository or colab for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Resampling* on Canvas.
+- Use your private git repository or colab for the course and invite Ullrika (git username is Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Resampling* on Canvas.
 
