@@ -56,7 +56,9 @@ Multiple regression - a model with several independent variables, i.e. $p>1$
 
 Here we illustrate regression with an air pollution data set from a paper on ridge regression. Source: McDonald, G.C. and Schwing, R.C. (1973) 'Instabilities of regression estimates relating air pollution to mortality', Technometrics, vol.15, 463-482.
 
-[https://lib.stat.cmu.edu/datasets/pollution](https://lib.stat.cmu.edu/datasets/pollution)
+[https://github.com/luchem/bern02/tree/main/Labs](https://github.com/luchem/bern02/tree/main/Labs)
+
+<!-- [https://lib.stat.cmu.edu/datasets/pollution](https://lib.stat.cmu.edu/datasets/pollution) -->
 
 Variables in order:
 PREC   Average annual precipitation in inches
