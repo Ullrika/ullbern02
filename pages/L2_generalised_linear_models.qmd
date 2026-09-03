@@ -139,7 +139,7 @@ Let the $i$th observation be the number of successful trials among $n_i$ indepen
 
 $$Y|x_i\sim Bin(n_i,p(x_i))$$
 
-The expected value of the proportion of successes is $E(Y|x_i)=\frac{n_ip(x_i)}{n_i}=p(x_i)$.
+The expected value of the proportion of successes is $E(\frac{Y|x_i}{n_i})=\frac{n_ip(x_i)}{n_i}=p(x_i)$.
 
 A *Binomial GLM* is created by transforming the expected value with the logit link function as before into the linear model. 
 
