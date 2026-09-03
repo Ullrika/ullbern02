@@ -70,7 +70,7 @@ The model
 
 $$y_i=\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip}+\varepsilon_i$$
 
-where $\varepsilon_i\sim N(0,\sigma^2)$
+where $\varepsilon_i\sim N(0,\sigma)$
 
 can alternatively be written as
 
@@ -351,7 +351,7 @@ Trace plot showing how the convergence of the chains.
 #| message: false
 #| warning: false
 
-short.iter = 50
+short.iter = 200
 model.samples <- coda.samples(fit_lm1, params, n.iter=short.iter)
 mcmc_trace(model.samples)
 
