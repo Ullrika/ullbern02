@@ -4201,7 +4201,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">Maximum likelihood estimation</a></li>
   <li><a href="#residual-analysis-1" id="toc-residual-analysis-1" class="nav-link" data-scroll-target="#residual-analysis-1">Residual analysis</a></li>
-  <li><a href="#testing-the-fixed-effect-in-the-hierarhical-model" id="toc-testing-the-fixed-effect-in-the-hierarhical-model" class="nav-link" data-scroll-target="#testing-the-fixed-effect-in-the-hierarhical-model">Testing the fixed effect in the hierarhical model</a></li>
+  <li><a href="#testing-the-fixed-effect-in-the-hierarchical-model" id="toc-testing-the-fixed-effect-in-the-hierarchical-model" class="nav-link" data-scroll-target="#testing-the-fixed-effect-in-the-hierarchical-model">Testing the fixed effect in the hierarchical model</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#bayesian-estimation" id="toc-bayesian-estimation" class="nav-link" data-scroll-target="#bayesian-estimation">Bayesian estimation</a>
@@ -4278,10 +4278,10 @@ Note
 <p>Suitable hypotheses to test if there is a linear association are</p>
 <p><span class="math inline">\(H_0: \beta_1=0\)</span> against <span class="math inline">\(H_1:\beta_1\neq 0\)</span></p>
 <p>The first thing we do when constructing a hypothesis test is to fix the probability of making an error of type I <span class="math inline">\(P(\text{rejecting } H_0|H_0 \text{ is true}) = \alpha\)</span>. This so called level of significance <span class="math inline">\(\alpha\)</span> is here chosen to be 5%.</p>
-<p>The probability of making an error of type II <span class="math inline">\(P(\text{not rejecting } H_0|H_0 \text{ is false}) = \beta\)</span> is “1 - the power of the test” and is a function of model parameters, sample variation and sample size. We cannot fix this, but we can design a test that has a small probability of making an error of type II.</p>
+<p>The probability of making an error of type II <span class="math inline">\(P(\text{not rejecting } H_0|H_0 \text{ is false}) = \beta\)</span> is “1 - the power of the test” and is a function of model parameters (including the one we are testing), sample variation and sample size. We cannot fix this, but we can design a test that has acceptable small probabilities of making an error of type II as soon as the true value on the parameter of interest is deviating from the value set out in the null hypothesis.</p>
 <section id="testing-using-a-confidence-interval" class="level3">
 <h3 class="anchored" data-anchor-id="testing-using-a-confidence-interval">Testing using a confidence interval</h3>
-<p>One way to test these hypotheses is to derive a <span class="math inline">\((1-\alpha)\)</span> confidence interval for the quantity of interest <span class="math inline">\(CI_{\beta_1}\)</span>. The null hypothesis is rejected if it the value the parameter takes under <span class="math inline">\(H_0\)</span> is not included in the confidence interval. That is to reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(0 \notin CI_{\beta_1}\)</span></p>
+<p>One way to test these hypotheses is to derive a <span class="math inline">\((1-\alpha)\)</span> confidence interval for the quantity of interest <span class="math inline">\(CI_{\beta_1}\)</span>. The null hypothesis is rejected if it the value the parameter takes under <span class="math inline">\(H_0\)</span> is not included in the confidence interval. For the hypotheses specifid above, that is to reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(0 \notin CI_{\beta_1}\)</span></p>
 </section>
 <section id="testing-with-a-test-statistic-and-p-value" class="level3">
 <h3 class="anchored" data-anchor-id="testing-with-a-test-statistic-and-p-value">Testing with a test statistic (and p-value)</h3>
@@ -4318,6 +4318,19 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 57.21 on 58 degrees of freedom
 Multiple R-squared:  0.1685,    Adjusted R-squared:  0.1542 
 F-statistic: 11.75 on 1 and 58 DF,  p-value: 0.001124</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Only do hypothesis testing when this is needed to answer your research question. If your objective is to develop a predictive model, you are not interested in the values of parameters. You could be interested in selecting a good model - we cover that in a future lecture.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -4636,8 +4649,8 @@ Note
 </div>
 </div>
 </section>
-<section id="testing-the-fixed-effect-in-the-hierarhical-model" class="level3">
-<h3 class="anchored" data-anchor-id="testing-the-fixed-effect-in-the-hierarhical-model">Testing the fixed effect in the hierarhical model</h3>
+<section id="testing-the-fixed-effect-in-the-hierarchical-model" class="level3">
+<h3 class="anchored" data-anchor-id="testing-the-fixed-effect-in-the-hierarchical-model">Testing the fixed effect in the hierarchical model</h3>
 <p>I am interested in testing if there is a linear association.</p>
 <p>I can test using a confidence interval</p>
 <p>A 95th confidence interval of the slope parameter based on the profile likelihood method is derived to be <span class="math inline">\(CI_{\beta_1}= (0.1641772,0.2328453)\)</span>, i.e. a positive linear association that is statistically different from zero at the 5%’s significance level.</p>

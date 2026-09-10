@@ -52,11 +52,11 @@ $H_0: \beta_1=0$ against $H_1:\beta_1\neq 0$
 
 The first thing we do when constructing a hypothesis test is to fix the probability of making an error of type I $P(\text{rejecting } H_0|H_0 \text{ is true}) = \alpha$. This so called level of significance $\alpha$ is here chosen to be 5%. 
 
-The probability of making an error of type II $P(\text{not rejecting } H_0|H_0 \text{ is false}) = \beta$ is "1 - the power of the test" and is a function of model parameters, sample variation and sample size. We cannot fix this, but we can design a test that has a small probability of making an error of type II.
+The probability of making an error of type II $P(\text{not rejecting } H_0|H_0 \text{ is false}) = \beta$ is "1 - the power of the test" and is a function of model parameters (including the one we are  testing), sample variation and sample size. We cannot fix this, but we can design a test that has acceptable small probabilities of making an error of type II as soon as the true value on the parameter of interest is deviating from the value set out in the null hypothesis.
 
 ### Testing using a confidence interval
 
-One way to test these hypotheses is to derive a $(1-\alpha)$ confidence interval for the quantity of interest $CI_{\beta_1}$. The null hypothesis is rejected if it the value the parameter takes under $H_0$ is not included in the confidence interval. That is to reject $H_0$ if $0 \notin CI_{\beta_1}$
+One way to test these hypotheses is to derive a $(1-\alpha)$ confidence interval for the quantity of interest $CI_{\beta_1}$. The null hypothesis is rejected if it the value the parameter takes under $H_0$ is not included in the confidence interval. For the hypotheses specifid above, that is to reject $H_0$ if $0 \notin CI_{\beta_1}$
 
 ### Testing with a test statistic (and p-value)
 
@@ -89,6 +89,12 @@ df_air <- read_csv("../data/pollution_cleaneddata.csv")
 mod_ols <- lm(MORT~POOR,data=df_air)
 summary(mod_ols)
 ```
+
+
+::: {.callout-warning}
+Only do hypothesis testing when this is needed to answer your research question. If your objective is to develop a predictive model, you are not interested in the values of parameters. You could be interested in selecting a good model - we cover that in a future lecture.  
+:::
+
 ::: {.callout-note}
 When there are several independent variables, testing the the coefficients (parameters) individually is not recommended because their parameters can be correlated. To what extent, depends on how correlation there is between the independent variables, but also if there are interaction effects between pairs or combinations of x-variables. In this situation it is better to test by comparing a **full** with a **reduced** model.
 :::
@@ -371,7 +377,7 @@ Now it looks better !
 :::
 
 
-### Testing the fixed effect in the hierarhical model
+### Testing the fixed effect in the hierarchical model
 
 I am interested in testing if there is a linear association. 
 
