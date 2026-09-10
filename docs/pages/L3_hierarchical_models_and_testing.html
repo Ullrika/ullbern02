@@ -4561,7 +4561,7 @@ Warning
 <p>Now we have a model where we divide the variance into variance due to random error for the model and variance due to variation between groups.</p>
 <p>The parameter <span class="math inline">\(\beta_1\)</span> is a <em>fixed effect</em> because the slope is the same for all groups.</p>
 <p>The term <span class="math inline">\(u_j\)</span> is called a <em>random effect</em> because it takes different values for different groups <span class="math inline">\(j = 1,2,3\)</span> (we have three species of penguins).</p>
-<p>We can also assume the <span class="math inline">\(u_j \sim N(0,\tau^2)\)</span></p>
+<p>We can also assume the <span class="math inline">\(u_j \sim N(0,\tau)\)</span></p>
 <p>The variance parameter <span class="math inline">\(\tau^2\)</span> is between-group heterogeneity. Here it denotes the variance in the random intercepts.</p>
 <p>A model with fixed and random effects (a.k.a a <em>linear mixed model</em>) can be estimated by maximum likelihood or Bayesian inference.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -4684,7 +4684,7 @@ Note
 <ul>
 <li>Likelihood</li>
 </ul>
-<p><span class="math display">\[Y_{ij}|\beta_{0},\beta_1,\sigma,\tau, u, x \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma^2)\]</span></p>
+<p><span class="math display">\[Y_{ij}|\beta_{0},\beta_1,\sigma,\tau, u, x \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma)\]</span></p>
 <p><span class="math display">\[u_j|\tau \sim N(0,\tau)\]</span></p>
 <ul>
 <li>The prior is derived based on the following marginal distributions</li>
@@ -4720,8 +4720,21 @@ Note
 <h3 class="anchored" data-anchor-id="bayes-factor">Bayes factor</h3>
 <p>Another approach is to use <strong>Bayes factor</strong> to compare two models, <span class="math inline">\(M_0\)</span> and <span class="math inline">\(M_1\)</span>:</p>
 <p><span class="math display">\[BF = \frac{P(data|M_1)}{P(data|M_0)}\]</span> <!-- =\ldots=\frac{P(M_1|data)P(M_2)}{P(M_2|data)P(M_1)}  --> <!-- If the priors are equal, the Bayes factor is the ratio between the posterior for  --></p>
-<p>A Bayes factor much greater than 1 gives high evidence to the model in the nominator, <span class="math inline">\(M_1\)</span>. There are scales to clasify the strengths of evidence for one model compared to another. <a href="https://www.statisticshowto.com/bayes-factor-definition/">Example of scale</a></p>
+<p>A Bayes factor much greater than 1 gives high evidence to the model in the nominator, <span class="math inline">\(M_1\)</span>. There are scales to classify the strengths of evidence for one model compared to another. <a href="https://www.statisticshowto.com/bayes-factor-definition/">Example of scale</a></p>
 <p>Bayes factor has resemblances with the likelihood ratio statistic, but it has a wider application and does not require that the models to be nested.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bayes factor is not necessarily a Bayesian thing. The way it is presented in ISL and at a lot of places, it is just a ratio between likelihoods. Bayes factor, as p-values, has problems of misuse. Given this, I do not put any emphasis on Bayes factor in my lecture.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="bayesian-vs-frequentist" class="level2">

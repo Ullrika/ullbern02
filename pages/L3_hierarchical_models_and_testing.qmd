@@ -324,7 +324,7 @@ The parameter $\beta_1$ is a *fixed effect* because the slope is the same for al
 
 The term $u_j$ is called a *random effect* because it takes different values for different groups $j = 1,2,3$ (we have three species of penguins). 
 
-We can also assume the $u_j \sim N(0,\tau^2)$
+We can also assume the $u_j \sim N(0,\tau)$
 
 The variance parameter $\tau^2$ is between-group heterogeneity. Here it denotes the variance in the random intercepts.   
 
@@ -410,7 +410,7 @@ A Bayesian specification of the model made in "tilde"-format can be
 
 - Likelihood
 
-$$Y_{ij}|\beta_{0},\beta_1,\sigma,\tau, u, x \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma^2)$$
+$$Y_{ij}|\beta_{0},\beta_1,\sigma,\tau, u, x \sim N(\beta_{0} + u_j + \beta_1 x_{ij},\sigma)$$
 
 
 $$u_j|\tau \sim N(0,\tau)$$
@@ -464,9 +464,13 @@ $$BF = \frac{P(data|M_1)}{P(data|M_0)}$$
 <!-- =\ldots=\frac{P(M_1|data)P(M_2)}{P(M_2|data)P(M_1)}  -->
 <!-- If the priors are equal, the Bayes factor is the ratio between the posterior for  -->
 
-A Bayes factor much greater than 1 gives high evidence to the model in the nominator, $M_1$. There are scales to clasify the strengths of evidence for one model compared to another. [Example of scale](https://www.statisticshowto.com/bayes-factor-definition/)
+A Bayes factor much greater than 1 gives high evidence to the model in the nominator, $M_1$. There are scales to classify the strengths of evidence for one model compared to another. [Example of scale](https://www.statisticshowto.com/bayes-factor-definition/)
 
 Bayes factor has resemblances with the likelihood ratio statistic, but it has a wider application and does not require that the models to be nested.
+
+::: {.callout-warning}
+Bayes factor is not necessarily a Bayesian thing. The way it is presented in ISL and at a lot of places, it is just a ratio between likelihoods. Bayes factor, as p-values, has problems of misuse. Given this, I do not put any emphasis on Bayes factor in my lecture. 
+:::
 
 ## Bayesian vs Frequentist
 
