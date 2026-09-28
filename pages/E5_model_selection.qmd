@@ -38,17 +38,17 @@ Create a report using Jupyter Notebook or Quarto.
 
 ## Model selection competition
 
-You have access to a dataset for ADD DESCRIPTION HERE 
+You have access to a dataset for sleep quality 
 
-The response variable is kissing index (labeled as "ADD HERE" in the data set). 
+The response variable is sleep duration (labeled as "Sleep_Duration" in the data set). 
 
-The data set contains xxx descriptors 
+The data set contains several descriptors 
 
-Your task is to build a model that predict "kissing index" from the descriptors. Use model selection techniques that were brought up in the lecture.  
+Your task is to build a model that predict sleep duration from the descriptors. To pass you have to use at least one model selection techniques that were brought up during the course.  
 
 We have randomly taken out a hold out data set from the original dataset. You have access to the remaining data to build the model. You are to build at least one predictive model, justify your choice of model based on $MSE$ and submit to kaggle.  
 
-You can choose which of the two alternatives you would like to start with. If you have time, then make a model for both of them. 
+Choose at least one of these two options:  
 
 - Build a predictive model using either best subset selection, forward or backward selection. 
 
@@ -59,6 +59,8 @@ A winner will be selected based on
 1) the justification for the chosen model and 
 
 2) the performance on the hold out data set in kaggle
+
+Add you kaggle id in the submission
 
 
 
