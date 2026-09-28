@@ -154,9 +154,9 @@ combined_data['study'] = combined_data['study'].astype('category')
 
 We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
 
-- Python in Jupyter Notebook on Google Colab 
+- Jupyter Notebook for Python
 
-- R in Quarto on posit.cloud or Rstudio downloaded to your computer. 
+- Markdown from Rmarkdown or Quarto for R
 :::
 
 (2) Write your name and date in the heading of the report and, if applicable, the name of your collaborator. 

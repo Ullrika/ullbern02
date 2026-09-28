@@ -210,15 +210,11 @@ When taking the standard deviation of the bootstrap sample of the slope paramete
 
 (1) Write your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example: 
 
-- Python in Jupiter Notebook on Google Colab (or installed on your own computer)
+- Jupiter Notebook for Python
 
-- R in Quarto on posit.cloud (or with R and RStudio installed on your computer)
+- Markdown from Rmarkdown or Quarto for R
 
 (2) Write your name and date in the heading of the report and, if applicable, the name of your collaborator. 
 
-(3) Submit a report. This can be done in two ways: 
-
-- Save the report as PDF and code in runnable format, and upload in the assignment *Exercise: Resampling* on Canvas. 
-
-- Use your private git repository or colab for the course and invite Ullrika (git username is Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Resampling* on Canvas.
+(3) Submit a report by sharing a link in the assignment *Exercise: Resampling* on Canvas to a repository where I can see the code and the results from running the code. If you use a private git, then share it with me. My user git user name is Ullrika.  
 

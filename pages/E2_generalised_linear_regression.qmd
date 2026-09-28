@@ -19,7 +19,7 @@ Pass or Fail
 
 ## Programming language
 
-You can use the language you prefer, but I recommend using *R* or *Python*. 
+You can use the language you prefer, but I recommend using *R* or *Python*.  **ADDED: Write you code in a notebook - use Jypiter for Pyhton and RMarkdown or Quarto which can be generated into a markdown for R.**
 
 ## Poisson regression
 
@@ -37,7 +37,7 @@ Save the samples as a csv file, with a column indicating which sample it is.
 
 There are two ways to submit the report 
 
-1. Upload the csv file with the samples and the code to estimate the model and generate samples in the assignment *Exercise: Generalised Linear Models* on Canvas. 
+1. Upload the csv file with the samples and the code to estimate the model and generate samples in the assignment *Exercise: Generalised Linear Models* on Canvas. **ADDED: During the course that were running 2026 I realised that this was not sustainable, so I asked students to submit via option 2.** 
 
 2. Use your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment *Exercise: Generalised Linear Models* on Canvas.
 

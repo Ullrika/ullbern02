@@ -263,7 +263,7 @@
     "href": "pages/E3_hierarchical models and testing.html#literate-programming",
     "title": "Exercise Hierarchical models and testing",
     "section": "Literate programming",
-    "text": "Literate programming\nWe recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\nPython in Jupyter Notebook on Google Colab\nR in Quarto on posit.cloud or Rstudio downloaded to your computer."
+    "text": "Literate programming\nWe recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\nJupyter Notebook for Python\nMarkdown from Rmarkdown or Quarto for R"
   },
   {
     "objectID": "pages/E3_hierarchical models and testing.html#peer-review-1",
@@ -375,7 +375,7 @@
     "href": "pages/E2_generalised_linear_regression.html#programming-language",
     "title": "Exercise Generalised Linear Regression",
     "section": "Programming language",
-    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python."
+    "text": "Programming language\nYou can use the language you prefer, but I recommend using R or Python. ADDED: Write you code in a notebook - use Jypiter for Pyhton and RMarkdown or Quarto which can be generated into a markdown for R."
   },
   {
     "objectID": "pages/E2_generalised_linear_regression.html#poisson-regression",
@@ -389,7 +389,7 @@
     "href": "pages/E2_generalised_linear_regression.html#submit-lab-report-on-canvas",
     "title": "Exercise Generalised Linear Regression",
     "section": "Submit lab report on Canvas",
-    "text": "Submit lab report on Canvas\nThere are two ways to submit the report\n\nUpload the csv file with the samples and the code to estimate the model and generate samples in the assignment Exercise: Generalised Linear Models on Canvas.\nUse your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment Exercise: Generalised Linear Models on Canvas.\n\nWrite your name and date in the beginning of code and, if applicable, the name of your collaborator.\nThe exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest."
+    "text": "Submit lab report on Canvas\nThere are two ways to submit the report\n\nUpload the csv file with the samples and the code to estimate the model and generate samples in the assignment Exercise: Generalised Linear Models on Canvas. ADDED: During the course that were running 2026 I realised that this was not sustainable, so I asked students to submit via option 2.\nUse your private git repository for the course and invite Ullrika to the git (username Ullrika). Push your code to git and send a link to the repository in the assignment Exercise: Generalised Linear Models on Canvas.\n\nWrite your name and date in the beginning of code and, if applicable, the name of your collaborator.\nThe exercises/computer labs are designed to be carried out the same day as the lecture. We encourage you to do the exercise on the time assigned for it, to get support from tutors, and submit the report on the morning of the next day the latest."
   },
   {
     "objectID": "pages/E4_resampling_methods.html",
@@ -459,7 +459,7 @@
     "href": "pages/E4_resampling_methods.html#submit-lab-report-on-canvas",
     "title": "Exercise Model selection",
     "section": "Submit lab report on Canvas",
-    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nPython in Jupiter Notebook on Google Colab (or installed on your own computer)\nR in Quarto on posit.cloud (or with R and RStudio installed on your computer)\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nSubmit a report. This can be done in two ways:\n\n\nSave the report as PDF and code in runnable format, and upload in the assignment Exercise: Resampling on Canvas.\nUse your private git repository or colab for the course and invite Ullrika (git username is Ullrika). Push your code to git and send a link to the repository in the assignment Exercise: Resampling on Canvas."
+    "text": "Submit lab report on Canvas\n\nWrite your code so that it is clearly documented, and readable for someone other than yourself. We recommend integrating sections of code (R or Python) with sections of text using Markdown language. For example:\n\n\nJupiter Notebook for Python\nMarkdown from Rmarkdown or Quarto for R\n\n\nWrite your name and date in the heading of the report and, if applicable, the name of your collaborator.\nSubmit a report by sharing a link in the assignment Exercise: Resampling on Canvas to a repository where I can see the code and the results from running the code. If you use a private git, then share it with me. My user git user name is Ullrika."
   },
   {
     "objectID": "pages/L1_intro_supervised_learning.html",
@@ -669,7 +669,7 @@
     "href": "pages/L2_generalised_linear_models.html#bayesian-estimation-of-parameters",
     "title": "Lecture Generalised Linear Models",
     "section": "Bayesian estimation of parameters",
-    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.585813 0.86020593 0.0049664013   0.0050063498\nbeta1   6.136097 0.20611363 0.0011899976   0.0011985277\nsigma   6.603069 0.05010699 0.0002892929   0.0002964261\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.733296 6.537347 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
+    "text": "Bayesian estimation of parameters\nFrom the posterior we can derive the summaries about the parameters we would like to have, e.g. a 95% probability interval, a median, an expected value, correlation between intercept \\(\\beta_0\\) and \\(\\beta_1\\), the probability that the slope is greater than 0.\n\nSummary of the posteriors\n\ne.g. posterior means and posterior standard deviations\n\nsummary(model.samples)[[1]]\n\n            Mean         SD     Naive SE Time-series SE\nbeta0 933.573781 0.85266579 0.0049228682   0.0049652908\nbeta1   6.136147 0.20634724 0.0011913464   0.0011931408\nsigma   6.603211 0.05027579 0.0002902674   0.0002938681\n\n\n\nPosterior for \\(\\beta_1\\)\n\n\n\n\n\n\n\n\n\n\nSummary of the posterior for \\(\\beta_1\\):\n\n95% (Bayesian) probability interval (alt credible interval)\n\n\nquantile(posterior[,\"beta1\"],prob=c(0.025,0.975))\n\n    2.5%    97.5% \n5.730840 6.540493 \n\n\n\nProbability \\(\\beta_1 &gt; 0\\) is obviously close to 1\n\n\nmean(posterior[,\"beta1\"]&gt;0)\n\n[1] 1"
   },
   {
     "objectID": "pages/L2_generalised_linear_models.html#maximum-likelihood-estimation-of-parameters",
