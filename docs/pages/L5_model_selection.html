@@ -4184,6 +4184,7 @@ window.Quarto = {
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#best-subset-selection" id="toc-best-subset-selection" class="nav-link" data-scroll-target="#best-subset-selection">Best subset selection</a></li>
   <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics">Performance metrics</a></li>
+  <li><a href="#performance-metrics-that-are-useful-when-you-have-a-predictive-posterior" id="toc-performance-metrics-that-are-useful-when-you-have-a-predictive-posterior" class="nav-link" data-scroll-target="#performance-metrics-that-are-useful-when-you-have-a-predictive-posterior">Performance metrics that are useful when you have a predictive posterior</a></li>
   </ul></li>
   <li><a href="#the-importance-of-visualising-data-and-the-model" id="toc-the-importance-of-visualising-data-and-the-model" class="nav-link" data-scroll-target="#the-importance-of-visualising-data-and-the-model">The importance of visualising data and the model</a>
   <ul class="collapse">
@@ -4257,6 +4258,13 @@ window.Quarto = {
 <p>Bayesian Information Criterion</p>
 <p><span class="math display">\[BIC = \frac{1}{n}(RSS + log(n)d\hat{\sigma}^2)\]</span></p>
 <p>I mentioned that some of these performance measures are based on comparison between point predictions and data, whereas there are measures which are based on the likelihood or the predictive posterior distribution. The latter is what you get from Bayesian inference, where several probabilistic measures are being used, such as Leave-one-out cross-validation (LOO) and the widely applicable information criterion (WAIC) (not covered in this course).</p>
+</section>
+<section id="performance-metrics-that-are-useful-when-you-have-a-predictive-posterior" class="level2">
+<h2 class="anchored" data-anchor-id="performance-metrics-that-are-useful-when-you-have-a-predictive-posterior">Performance metrics that are useful when you have a predictive posterior</h2>
+<p>Bayesian models generate predictions as a full posterior. When predicting data that we use to train the model, we can write the predictive posterior as a probability distribution for the prediction conditional on data on what we are predicting <span class="math inline">\(f(\hat{y}_i|y)\)</span>. The expected log predictive density (elpd) for data point <span class="math inline">\(i\)</span> is defined as</p>
+<p><span class="math display">\[elpd(\hat{y}_i,y) = \sum_{i=1}^n \int f(\hat{y}_i|y)d\hat{y}_i\]</span></p>
+<p>From this we can compute the Widely Applicable Information Criterion (WAIC) or perform Leave-One-Out cross validation.</p>
+<p>Reference: Vehtari, A.; Gelman, A.; Gabry, J. Practical Bayesian model evaluation using leave-one-out cross-validation and WAIC. Statistics and Computing 2017, 27, 1413–1432</p>
 </section>
 </section>
 <section id="the-importance-of-visualising-data-and-the-model" class="level1">

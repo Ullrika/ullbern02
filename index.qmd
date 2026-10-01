@@ -1,8 +1,10 @@
 ---
 title: "Lectures and Exercises"
-subtitle: "Computational Science: Reproducible Data Science and Statistical Learning"
+subtitle: "Computational Science: Reproducible Data Science and Statistical Learning 2024-2026"
 ---
 
+
+Thanks for letting me teach you. After three years I handing over to a new lecturer. 
 
 # Lecture 1
 
