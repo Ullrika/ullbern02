@@ -74,7 +74,7 @@ $$C_p = \frac{1}{n}(RSS+2d\hat{\sigma}^2)$$
 
 Bayesian Information Criterion
 
-$$BIC = \frac{1}{n}(RSS + log(n)d\hat{\sigma}^2)$$
+$$BIC = -2 ln(L) + dln(n)$$
 
 I mentioned that some of these performance measures are based on comparison between point predictions and data, whereas there are measures which are based on the likelihood or the predictive posterior distribution. The latter is what you get from Bayesian inference, where several probabilistic measures are being used, such as 
 Leave-one-out cross-validation (LOO) and the widely applicable information criterion (WAIC) (not covered in this course). 
@@ -83,7 +83,7 @@ Leave-one-out cross-validation (LOO) and the widely applicable information crite
 
 Bayesian models generate predictions as a full posterior. When predicting data that we use to train the model, we can write the predictive posterior as a probability distribution for the prediction conditional on data on what we are predicting $f(\hat{y}_i|y)$. The expected log predictive density (elpd) for data point $i$ is defined as 
 
-$$elpd(\hat{y}_i,y) = \sum_{i=1}^n \int f(\hat{y}_i|y)d\hat{y}_i$$
+$$elpd(\hat{y}_i,y) = \sum_{i=1}^n \int f(\hat{y}_i|y)\log f(\hat{y}_i|y)d\hat{y}_i$$
 
 From this we can compute the Widely Applicable Information Criterion (WAIC) or perform Leave-One-Out cross validation.
 
